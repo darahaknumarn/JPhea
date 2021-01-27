@@ -126,6 +126,7 @@ class ExcelImportService {
                         value = ''
                 }
             }
+            if (map)
             values.add(map)
         }
         return values

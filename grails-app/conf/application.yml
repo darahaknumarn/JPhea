@@ -129,3 +129,9 @@ environments:
                 testOnReturn: false
                 jdbcInterceptors: ConnectionState
                 defaultTransactionIsolation: 2 # TRANSACTION_READ_COMMITTED
+---
+grails:
+    controllers:
+        upload:
+            maxFileSize: 5000000 #5MB
+            maxRequestSize: 5000000
