@@ -1,0 +1,20 @@
+
+<div fxLayout="row">
+      <div fxFlex="50">
+            <app-breadcrumb></app-breadcrumb>
+      </div>
+      <div fxLayout="row" fxLayoutGap="8px" fxFlex="50" fxLayoutAlign="end center">
+ <mat-form-field class="mr-05">
+    <input type="text" autocomplete="off" matInput placeholder="Search by code" [formControl]="searchBox">
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
+  <button mat-flat-button color="primary" [routerLink]="['/project-type/add']" routerLinkActive="router-link-active">
+    <mat-icon>add</mat-icon>
+  </button>
+
+      </div>
+</div>
+
+<div class="ml-05 mr-05 mt-05 pb-1">
+  <app-grid [dataStore]="dataStore" [itemTableColumn]="itemTableColumn" (paginationChanged)="list($event)"></app-grid>
+</div>  

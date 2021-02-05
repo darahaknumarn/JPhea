@@ -1,0 +1,52 @@
+<mat-progress-bar mode="determinate"   class="session-progress"></mat-progress-bar>
+
+<div [perfectScrollbar]="{}" class="height-100vh signup4-wrap" fxLayout="row wrap" fxLayoutAlign="center center">
+  <div class="signup4-container mat-elevation-z4 white" fxLayout="row wrap" fxLayout.xs="column"
+    fxLayoutAlign="start stretch" fxFlex="60" fxFlex.xs="94" fxFlex.sm="80"
+    [@animate]="{value:'*',params:{y:'40px',opacity:'0',delay:'100ms', duration: '400ms'}}">
+   
+    <!-- Left Side content -->
+    <div fxLayout="column" fxLayoutAlign="center center" class="signup4-header" fxFlex="40">
+
+      <div class="" fxLayout="row wrap" fxLayoutAlign="center center">
+        <img width="250px" src="assets/images/company_logo.jpg" alt="">
+      </div>
+
+    </div>
+
+    <!-- Right side content -->
+    <div fxFlex="60" fxLayout="row wrap" fxLayoutAlign="center center">
+      <form [formGroup]="signinForm" class="signup4-form " (ngSubmit)="login()">
+
+
+        <mat-form-field class="full-width" appearance="outline">
+          <mat-label>Username/Email</mat-label>
+          <input matInput formControlName="username" type="text" name="username" placeholder="Username/Email"  autofocus/>
+          <!-- error message -->
+          <mat-error class="form-error-msg"
+            *ngIf="signinForm.controls['username'].hasError('required') && signinForm.controls['username'].touched">
+            Username is required </mat-error>
+        </mat-form-field>
+
+
+        <mat-form-field class="full-width" appearance="outline">
+          <mat-label>Password</mat-label>
+          <input matInput formControlName="password" type="password" name="password" placeholder="********" />
+           <!-- error message -->
+           <mat-error class="form-error-msg"
+           *ngIf="signinForm.controls['password'].hasError('required') && signinForm.controls['password'].touched">
+           Password is required </mat-error>
+
+        </mat-form-field>
+
+        <div fxLayout="row wrap" fxLayoutAlign="end center" style="margin-top: 20px;">
+          <button mat-flat-button color="primary">Sign In</button>
+          <!-- <span class="px-16">or</span>
+          <a class="font-weight-bold mat-color-primary" routerLink="/sessions/signup4">Sign Up</a> -->
+        </div>
+
+       
+      </form>
+    </div>
+  </div>
+</div>

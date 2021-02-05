@@ -1,0 +1,15 @@
+<form [formGroup]="form" (ngSubmit)="printExpanse()">
+      <mat-card-header>
+            <mat-card-title>Print Expanse?</mat-card-title>
+      </mat-card-header>
+      <mat-card-content fxLayout="column">
+            <mat-checkbox formControlName="printExpanse"> Print Expanse Form</mat-checkbox>
+            <mat-checkbox formControlName="printRequestExpanse"> Print Expanse Request Form</mat-checkbox>
+            <mat-checkbox formControlName="printAdvanceVoucher"> Print Advance Voucher Form</mat-checkbox>
+            <mat-checkbox formControlName="printLiquidation"> Print Liquidation Form</mat-checkbox>
+      </mat-card-content>
+      <mat-card-actions fxLayoutAlign="space-between">
+            <button mat-flat-button color="warn" (click)="onNoClick()">No Thanks</button>
+            <button mat-flat-button color="primary" [mat-dialog-close]="form.value" cdkFocusInitial>Print</button>
+      </mat-card-actions>
+</form>

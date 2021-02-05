@@ -1,0 +1,63 @@
+<mat-card>
+      <mat-card-header fxLayout="row" fxLayoutAlign="space-between start">
+            <mat-card-title>Todo List</mat-card-title>
+            <div>
+                  <mat-form-field width="500px" class="mr-1" (change)="service.search($event.value)">
+                        <input matInput placeholder="Search">
+                        <mat-icon matSuffix>search</mat-icon>
+                  </mat-form-field>
+
+            </div>
+
+      </mat-card-header>
+      <mat-card-content>
+
+            <mat-card fxLayout="row " fxLayoutAlign="space-between " *ngFor="let item of service.store">
+                  <div fxLayout="row">
+                        <mat-checkbox [checked]="item.isClosed" matTooltip="Complete this task"
+                              (change)="updateTaskList(item.id, $event.checked)"> </mat-checkbox>
+                        <div class="ml-1" (click)="showFormDetail(item.id)">
+                              {{item.title}}
+                              <mat-card-subtitle>{{item.description | excerpt}}</mat-card-subtitle>
+                        </div>
+
+
+                  </div>
+                  <div>
+                        <span *ngIf="item.dueDate != null " matTooltip="Due date"><span appExpire [date]="item.dueDate"></span>{{item.dueDate | date }}</span>
+                        <button mat-icon-button  matTooltip="Edit">
+                              <mat-icon>edit</mat-icon>
+                        </button>
+                        <mat-form-field class="example-full-width" appearance="fill"
+                              style="width:1px;visibility:hidden;">
+
+                              <input matInput [matDatepicker]="picker" style="width:1px"  (dateInput)="setDueDate('input', $event , item.id)">
+                              <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+                        <button mat-icon-button matTooltip="Set Due Date" (click)="picker.open()">
+                              <mat-icon>event_note</mat-icon>
+                        </button>
+
+
+                        <button mat-icon-button matTooltip="Important" color="warn"
+                              (click)="updateImportant(item.id , item.isImportant)">
+                              <mat-icon>{{item.isImportant ? "star" : "star_outline"}}</mat-icon>
+                        </button>
+                  </div>
+
+
+            </mat-card>
+            <mat-card fxLayout="row " class="mt-1">
+                  <form [formGroup]="form" (ngSubmit)="save()" class="width-100">
+                        <mat-form-field class="width-100">
+                              <input matInput placeholder="Add a task" formControlName="title">
+                        </mat-form-field>
+
+                  </form>
+
+            </mat-card>
+
+
+      </mat-card-content>
+
+</mat-card>

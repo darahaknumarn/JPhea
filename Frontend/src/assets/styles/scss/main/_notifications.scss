@@ -1,0 +1,85 @@
+.navigation-top {
+  .nofication-panel {
+    padding-top: 48px;
+  }
+}
+
+.notification-list {
+  min-width: 240px;
+  width: 350px;
+  margin-bottom: 25px;
+}
+.notification-list .notific-item a {
+  outline: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.notification-list .notific-item .message {
+  font-size: .875rem !important;
+}
+.notification-list .notific-item .time {
+  font-size: .75rem !important;
+  font-size: 1.3rem;
+  font-weight: 400;
+  line-height: 1.8rem;
+  text-transform: none;
+}
+
+.title{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 75ch;
+  font-weight: 510;
+  // margin-bottom: 12px;
+  margin: 7px 0px 0px 0px;
+}
+
+#notification:hover{
+  background: #dbdbdb;
+ 
+}
+.clear-notification{
+    position: absolute;
+    bottom: 0;
+    width: 350px;
+    text-align: center;
+    background-color: #ffffff;
+    z-index: 1;
+    border: 1px solid silver;
+    padding: 5px 0 5px 0;
+}
+
+.clear-notification button{
+  padding: 0;border: none;background: none;color:#385898;
+}
+.btn-notification{
+  padding: 0;border: none;background: none;
+}
+.test {
+ color: #385898;
+}
+.btn-icon{
+  font-size: 12px;
+  margin-left: 5px;
+}
+.bg-read-content{
+  background-color:#edf2fa
+}
+
+.hr-border {
+ margin: auto;
+ border-top:1px solid white;
+}
+.color{
+  color: red;
+}
+mat-list-item a div div.only-show-on-hover {
+  visibility: hidden;
+}
+mat-list-item a:hover div.only-show-on-hover  {
+  visibility: visible;
+}
+
+

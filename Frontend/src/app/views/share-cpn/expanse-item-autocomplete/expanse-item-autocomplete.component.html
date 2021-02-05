@@ -1,0 +1,13 @@
+ <mat-form-field class="example-full-width">
+      <input type="text" placeholder="Expanse Item" aria-label="Number" matInput [formControl]="ctl"
+        [matAutocomplete]="auto">
+      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFn"
+        (optionSelected)="selected($event.option.value)"
+        >
+        <mat-option *ngFor="let option of service.store " [value]="option">
+          {{option.name}} |
+          <small>{{option.expTypeName}}</small>
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+

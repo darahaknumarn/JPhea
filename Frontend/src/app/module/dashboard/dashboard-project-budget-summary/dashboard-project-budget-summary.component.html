@@ -1,0 +1,57 @@
+<mat-card>
+      <div fxLayoutAlign="space-between">
+            <mat-card-title>
+                  Project Summary Top 10
+            </mat-card-title>
+            <div fxLayoutAlign="center center">
+
+                  <mat-button-toggle-group  class="mr-1"  value='everyone' (change)="filterBy($event.value)">
+                        <mat-button-toggle matTooltip="Show only reponsible by me" value="me">
+                              <mat-icon>person</mat-icon> Me
+                        </mat-button-toggle>      
+                        <mat-button-toggle matTooltip="Show everyone"value="everyone">
+                              <mat-icon>groups</mat-icon>
+                        </mat-button-toggle>
+                  </mat-button-toggle-group>
+                  
+
+                  Sort By :
+                  <mat-button-toggle-group (change)="shortBy($event.value)" value="topBalance">
+                        <mat-button-toggle matTooltip="Sort by less balance" value="lessBalance">
+                              <mat-icon>trending_down</mat-icon>
+                        </mat-button-toggle>
+                        <mat-button-toggle matTooltip="Sort by top balance" value="topBalance">
+                              <mat-icon>trending_up</mat-icon>
+                        </mat-button-toggle>
+                  </mat-button-toggle-group>
+
+
+            </div>
+
+      </div>
+
+
+      <table mat-table #table [dataSource]="projectSummaryList">
+            <ng-container matColumnDef="projectName">
+                  <th mat-header-cell *matHeaderCellDef> Project Name </th>
+                  <td mat-cell *matCellDef="let row"> {{row.projectName}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="totalReceived">
+                  <th mat-header-cell *matHeaderCellDef> Total Recieved </th>
+                  <td mat-cell *matCellDef="let row"> {{row.totalReceived  | currency}} </td>
+            </ng-container>
+            <ng-container matColumnDef="totalExpanse">
+                  <th mat-header-cell *matHeaderCellDef> Total Expanse </th>
+                  <td mat-cell *matCellDef="let row"> {{row.totalExpanse  | currency}} </td>
+            </ng-container>
+            <ng-container matColumnDef="balance">
+                  <th mat-header-cell *matHeaderCellDef> Balnce </th>
+                  <td mat-cell *matCellDef="let row"> {{row.balance | currency}} </td>
+            </ng-container>
+
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+</mat-card>

@@ -1,0 +1,254 @@
+<mat-drawer-container autosize class="height-100">
+      <!-- Header -->
+      <div fxLayout="row">
+            <div fxFlex="50">
+                  <app-breadcrumb></app-breadcrumb>
+            </div>
+            <div fxLayout="row" fxLayoutGap="8px" fxFlex="50" fxLayoutAlign="end center">
+
+                  <button mat-flat-button color="primary" (click)="showFmReceive()">
+                        <mat-icon>monetization_on</mat-icon> Receive Fund
+                  </button>
+                  <button mat-flat-button color="primary" (click)="showFmExpanse()">
+                        <mat-icon>credit_card</mat-icon> Expanse
+                  </button>
+                  <button mat-flat-button color="primary" (click)="showFmTransfer()">
+                        <mat-icon>compare_arrows</mat-icon> Transfer
+                  </button>
+                  <button mat-flat-button color="primary" routerLink="/project/update/{{projectId}}"
+                        routerLinkActive="router-link-active">
+                        <mat-icon>edit</mat-icon> Edit
+                  </button>
+                  <button mat-flat-button color="primary" [routerLink]="['/project']"
+                        routerLinkActive="router-link-active">
+                        <mat-icon>arrow_back</mat-icon> Back
+                  </button>
+
+            </div>
+      </div>
+      <!-- End Header -->
+      <!-- container -->
+      <!-- <mat-card> -->
+            <mat-card fxLayout="row">
+                  <div fxFlex="60">
+                        <mat-card-header>
+                              <mat-card-title> {{projectData?.projectName}}</mat-card-title>
+                              <mat-card-subtitle> {{projectData?.description}}</mat-card-subtitle>
+
+                        </mat-card-header>
+                        <div class="ml-1">
+                              Account No : {{projectData?.accountNo}} ( {{projectData?.bankName}} )<br>
+                              Created : {{projectData?.dateCreated | relativeTime }}
+                        </div>
+                        <!-- <div class="mt-16" fxLayout="row">
+
+                              <div>
+                                    <app-profile-image [userProfile]="projectData?.responsibleBy"></app-profile-image>
+                              </div>
+
+                              <mat-card-subtitle>
+                                    <span class="mat-caption">
+
+                                    </span>
+                                    Responsible By :{{projectData?.responsibleBy.firstName}}
+                                    {{projectData?.responsibleBy.lastName}} <br>
+
+                              </mat-card-subtitle>
+                        </div> -->
+
+
+                  </div>
+                  <mat-divider
+                        [vertical]="true">
+                  </mat-divider>
+                  <div fxFlex="40" class="ml-1 mr-1" fxLayout="column" fxLayoutAlign="center center">
+                        <!-- <mat-icon style="color: green;font-size: 36px;">account_balance_wallet</mat-icon><br> -->
+                        <div fxLayout="row" class="width-100" fxLayoutAlign="space-between">
+                              <div fxLayout="row">
+                                    <div>
+                                          <!-- <mat-icon>credit_card</mat-icon><br> -->
+                                          <span class="mat-subheading-1"> Receive </span> <br>
+                                          {{projectData?.totalReceived | currency}}
+                                    </div>
+
+                                    <mat-icon color='primary' class="icon-big">bar_chart</mat-icon>
+
+                              </div>
+                              <!-- <mat-divider [vertical]="true"></mat-divider> -->
+                              <div fxLayout="row">
+                                    <div>
+                                          <span class="mat-subheading-1"> Expanse </span> <br>
+                                          {{projectData?.totalExpanse | currency}}
+                                          ({{ (projectData?.totalExpanse ? projectData.totalExpanse *100/ projectData?.totalReceived  : 0 ) | number : '1.2-2'}}%)
+
+                                    </div>
+                                    <mat-icon color='warn' class="icon-big">bar_chart</mat-icon>
+                              </div>
+                              <!-- <mat-divider [vertical]="true"></mat-divider> -->
+                              <div fxLayout="row">
+                                    <div>
+                                          <span class="mat-subheading-1"> Transfer </span> <br>
+                                          {{projectData?.balanceTransfer | currency}} (
+                                          {{ (projectData?.balanceTransfer ? projectData.balanceTransfer *100/ projectData?.totalReceived  : 0 ) | number : '1.2-2'}}
+                                          %)
+                                    </div>
+
+                                    <mat-icon color='accent' class="icon-big">bar_chart</mat-icon>
+                              </div>
+                        </div>
+                        <br>
+                        <span class="mat-display-2 m-0" matTooltip="Remaining balance">{{projectData?.balance | currency}}</span><br>
+                        
+                        <!-- <span class="mat-title m-0">Balance</span> -->
+                  </div>
+
+            </mat-card>
+            <div fxLayout="row">
+                  <!-- <mat-card fxFlex="33">
+                        <div fxLayout="row">
+                              <div fxFlex='50'>
+                                    <mat-card-title>Total Receive:</mat-card-title>
+                                    <mat-card-subtitle *ngIf="projectData?.lastReceive">
+                                          {{projectData?.lastReceive | relativeTime }}
+                                    </mat-card-subtitle>
+
+                              </div>
+                              <div fxFlex='50'>
+                                    <mat-card-title>
+                                          {{projectData?.totalReceived | currency}}</mat-card-title>
+                              </div>
+
+
+                        </div>
+                        <mat-divider></mat-divider>
+                        <div fxLayout="row">
+                              <div fxFlex='50'>
+                                    <mat-card-title>Total Expanse:</mat-card-title>
+                                    <mat-card-subtitle *ngIf="projectData?.lastExpanse">
+                                          {{projectData?.lastExpanse | relativeTime }}
+                                    </mat-card-subtitle>
+
+                              </div>
+                              <div fxFlex='50'>
+                                    <mat-card-title>{{projectData?.totalExpanse | currency}}
+                                    </mat-card-title>
+                              </div>
+
+
+                        </div>
+                        <mat-divider></mat-divider>
+                        <div fxLayout="row">
+                              <div fxFlex='50'>
+                                    <mat-card-title>Balance Transfer:</mat-card-title>
+                                    <mat-card-subtitle *ngIf="projectData?.lastTransfer">
+                                          {{projectData?.lastTransfer | relativeTime }}
+                                    </mat-card-subtitle>
+
+                              </div>
+                              <div fxFlex='50'>
+                                    <mat-card-title>
+                                          {{projectData?.balanceTransfer | currency}}</mat-card-title>
+                              </div>
+
+
+                        </div>
+
+                  </mat-card> -->
+             
+
+
+                  <!-- <div fxFlex="50">
+                        <mat-card fxLayoutAlign="space-around center">
+                              <canvas baseChart fxFlex="50" [data]="pieChartData" [labels]="pieChartLabels"
+                                    [chartType]="pieChartType" [options]="pieChartOptions" [plugins]="pieChartPlugins"
+                                    [colors]="doughnutChartColors" [legend]="pieChartLegend">
+                              </canvas>
+                        </mat-card>
+                      
+                  </div> -->
+                  <mat-card fxFlex="20" class="height-260px">
+                        <mat-card-header>
+                              <mat-card-title>Responsible By </mat-card-title>
+
+                        </mat-card-header>
+                        <mat-card-content fxLayoutAlign="space-around" fxLayout="row">
+                              
+
+                        </mat-card-content>
+                        <div fxLayoutAlign="space-around center" fxLayout="column">
+                              <div *ngIf="projectData?.responsibleBy?.photo" mat-card-avatar
+                              style="background-image: url('{{projectData?.responsibleBy.photo}}');     background-size: cover;width: 100px;height: 100px;"
+                              matTooltip="{{projectData?.responsibleBy.firstName+' '+projectData?.responsibleBy.lastName}}">
+                        </div>
+
+                        <div *ngIf="!projectData?.responsibleBy?.photo" mat-card-avatar
+                              style="background-image: url('assets/images/img.png');background-size: cover;width: 100px;height: 100px;">
+                        </div>
+                                    <span class="mat-title">
+                                          {{projectData?.responsibleBy.firstName}}
+                                          {{projectData?.responsibleBy.lastName}}
+                                    </span>    
+                                    <span class="mat-caption">
+                                          {{projectData?.responsibleBy.phoneNumber}}
+                                    </span>                                
+                                  
+                        </div>
+
+                  </mat-card>
+                  <mat-card fxFlex="80">
+                        <mat-tab-group>
+                              <mat-tab label="Comment" fxLayoutGap="20px">
+                                    <app-project-comment [projectId]="projectId" ></app-project-comment>
+                              </mat-tab>
+                              <mat-tab label="Financail Transaction"  fxLayoutGap="20px">
+                                    <app-project-finance-transaction [projectId]="projectId"></app-project-finance-transaction>
+                              </mat-tab>
+                              <mat-tab label="Attach File"  fxLayoutGap="20px">
+                                    <table class="default-table " style="width: 100%">
+                                          <thead>
+                                                <tr>
+                                                      <th width="30%">Name</th>
+                                                      <th>Size</th>
+                                                      <th>Actions</th>
+                                                </tr>
+                                          </thead>
+                                          <tbody *ngIf="projectData?.projectFile.length; else tableNoData">
+                                                <tr *ngFor="let item of projectData?.projectFile">
+                                                      <td>{{ item?.name }}</td>
+                                                      <td nowrap>{{ item?.size/1024/1024 | number:'.2' }} MB</td>
+      
+                                                      <td nowrap>
+                                                            <button mat-raise-button mat-raised-button class="mx-4"
+                                                                  matTooltip="Download File" (click)="goToLink(item.fileUrl)">
+                                                                  <mat-icon>cloud_download</mat-icon>
+                                                            </button>
+                                                      </td>
+                                                </tr>
+                                          </tbody>
+                                          <ng-template #tableNoData>
+                                                <p [ngStyle]="{padding: '0 1.2rem'}">No Attach file</p>
+                                          </ng-template>
+                                    </table>
+                              </mat-tab>
+                        </mat-tab-group>
+                  </mat-card>
+                 
+                  
+                 
+            </div>
+      <!-- </mat-card> -->
+      <!-- End container -->
+
+
+      <mat-drawer #drawer mode="over" position="end">
+            <app-project-expanse *ngIf="showExpanse" [curProject]="projectData" [curProjectId]="projectId"
+                  (saved)="closeSideForm()"></app-project-expanse>
+            <app-project-transfer *ngIf="showTransfer" [curProject]="projectData" [curProjectId]="projectId"
+                  (saved)="closeSideForm()"></app-project-transfer>
+            <app-project-receive-fund *ngIf="showReceive" [curProject]="projectData" [curProjectId]="projectId"
+                  (saved)="closeSideForm()"></app-project-receive-fund>
+      </mat-drawer>
+
+
+
+</mat-drawer-container>

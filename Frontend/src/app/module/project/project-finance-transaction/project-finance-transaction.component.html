@@ -1,0 +1,63 @@
+<!-- <mat-card-title> Finance Transaction</mat-card-title> -->
+<div fxLayout="row" fxLayoutAlign="space-around center">
+      <mat-button-toggle-group name="fontStyle" aria-label="Font Style" value="All">
+            <mat-button-toggle value="All" (click)="listFinanaceTransaction()">All</mat-button-toggle>
+            <mat-button-toggle value="Recieve" (click)="listFinanaceTransaction('Receive Fund')">Recieve
+            </mat-button-toggle>
+            <mat-button-toggle value="Expanse" (click)="listFinanaceTransaction('Expanse')">Expanse
+            </mat-button-toggle>
+            <mat-button-toggle value="Transfer Out" (click)="listFinanaceTransaction('Transfer Out')">Transfer Out
+            </mat-button-toggle>
+            <mat-button-toggle value="Transfer In" (click)="listFinanaceTransaction('Transfer In')">Transfer In
+            </mat-button-toggle>
+
+      </mat-button-toggle-group>
+</div>
+<div class="height-300px">
+<div *ngFor="let item of data">
+            <div fxLayout="row">
+                  <div>
+                        <div *ngIf="item.createdBy.photo" mat-card-avatar
+                              style="background-image: url('{{item.createdBy.photo}}');     background-size: cover;width: 50px;height: 50px;"
+                              matTooltip="{{item.createdBy.firstName+' '+item.createdBy.lastName}}">
+                        </div>
+
+                        <div *ngIf="!item.createdBy.photo" mat-card-avatar
+                              style="background-image: url('assets/images/img.png');background-size: cover;width: 50px;height: 50px;">
+                        </div>
+
+                  </div>
+                  <div>
+                        <span> <b> {{item.createdBy.firstName+' '+item.createdBy.lastName}} </b></span> <br>
+
+                        <mat-chip>
+                              {{item.transactionType}} : {{ item.amount | currency }}
+
+                        </mat-chip>
+
+
+
+                        <mat-card-subtitle fxLayout="row">
+                              <div [matTooltip]="item.dateCreated | dateTimeFormat">
+                                    {{item.dateCreated | relativeTime}}
+                              </div>
+                              &nbsp;&nbsp;
+                              <div *ngIf="item.transactionType == 'Expanse'" style="margin: -10px 0px -10px 0px;">
+                                    <button mat-icon-button (click)="openPrintDialog(item.refId)"
+                                          matTooltip="Print Expanse">
+                                          <mat-icon class="fz-1">printer</mat-icon>
+                                    </button>
+
+                              </div>
+
+                        </mat-card-subtitle>
+                  </div>
+                
+            </div>
+           
+
+      </div>
+
+</div>
+
+      

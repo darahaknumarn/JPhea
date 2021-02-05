@@ -1,0 +1,39 @@
+
+<div fxLayout="row">
+      <div fxFlex="50">
+            <app-breadcrumb></app-breadcrumb>
+      </div>
+      <div fxLayout="row" fxLayoutGap="8px" fxFlex="50" fxLayoutAlign="end center">
+
+            <button mat-flat-button color="primary" (click)="print()" matTooltip="Print Report ">
+                  <mat-icon>printer</mat-icon>
+            </button>
+            <button mat-flat-button color="primary" (click)="previewReport()" matTooltip="Preview Report">
+                  <mat-icon>search</mat-icon>
+            </button>
+
+      </div>
+
+</div>
+<mat-card fxLayoutGap="10px">
+
+      <app-project-autocomplete (onSelected)="selectProject($event)" label="From Project"></app-project-autocomplete>
+      <app-project-autocomplete (onSelected)="selectToProject($event)" label="To Project"></app-project-autocomplete>
+
+      <mat-form-field >
+            <mat-label>Enter a date range</mat-label>
+            <mat-date-range-input [rangePicker]="picker" >
+                  <input matStartDate placeholder="Start date"  [(ngModel)]="startDate">
+                  <input matEndDate placeholder="End date"  [(ngModel)]="endDate">
+            </mat-date-range-input>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+      </mat-form-field>
+
+</mat-card>
+<mat-card>
+      <iframe  [innerHTML]="viewContent"  id="iframe" style="border:none">
+
+      </iframe>
+
+</mat-card>

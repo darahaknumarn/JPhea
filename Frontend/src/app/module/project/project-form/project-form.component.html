@@ -1,0 +1,164 @@
+<form [formGroup]="form" (ngSubmit)="save()">
+  <div fxLayout="row">
+    <div fxFlex="50">
+      <app-breadcrumb></app-breadcrumb>
+    </div>
+    <div fxLayout="row" fxLayoutGap="8px" fxFlex="50" fxLayoutAlign="end center">
+      <button mat-raised-button type="button" class="mr-05" *ngIf="!isLoading" routerLink="/project"> Cancel
+      </button>
+      <button-loading [loadingText]="'Saving...'" color="primary" [type]="'submit'" [loading]="isLoading"> Save
+      </button-loading>
+
+    </div>
+  </div>
+  <mat-card>
+    <mat-card-content fxLayout="row"> 
+     
+      <div fxLayout="column wrap" class="order-info" fxFlex="100">
+
+      
+        <div>
+          <mat-form-field fxFlex="67">
+            <input matInput placeholder="Project Name" formControlName="projectName" #name tabIndex="1" required>
+          </mat-form-field>
+        </div>
+       
+
+
+        <div fxLayout="row" fxLayoutGap="20px">
+          <div fxLayout="column" fxFlex='33'>
+            <mat-form-field>
+              <input matInput placeholder="Bank Name" formControlName="bankName"  tabIndex="2">
+            </mat-form-field>
+
+
+            <mat-form-field class="example-full-width">
+              <mat-label> Project Type </mat-label>
+              <input type="text" placeholder="Project Type" aria-label="Number" matInput [formControl]="projectTypeCtl"
+                [matAutocomplete]="auto" tabIndex="4" matTooltip="This is project Type">
+                <mat-hint>This is project type </mat-hint>
+              <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayProjectType"
+                (optionSelected)="selectedProjectType($event.option.value)">
+                <mat-option *ngFor="let option of projectTypeService.store " [value]="option">
+                  {{option.name}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+
+            <mat-form-field>
+              <input matInput placeholder="Reference No" formControlName="refNo" tabIndex="6">
+            </mat-form-field>
+
+            <mat-form-field fxFlex="33">
+              <input tabIndex="8" matInput [matDatepicker]="startDate" placeholder="Start Date" formControlName="startDate">
+              <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
+              <mat-datepicker #startDate></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+              <input tabIndex="10" type="text" placeholder="Project Status" aria-label="Number" matInput
+                [formControl]="projectStatusCtl" [matAutocomplete]="projectStatus">
+              <mat-autocomplete autoActiveFirstOption #projectStatus="matAutocomplete"
+                [displayWith]="displayProjectStatus" (optionSelected)="selectedProjectStatus($event.option.value)">
+                <mat-option *ngFor="let option of projectStatusService.store " [value]="option">
+                  {{option.name}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+
+
+          </div>
+          <div fxLayout="column" fxFlex='33'>
+          
+            <mat-form-field>
+              <mat-label>Bank Account No.</mat-label>
+                <input matInput placeholder="Ex. 000000012456" formControlName="accountNo" required tabIndex="3"  />
+                
+              </mat-form-field>
+            <mat-form-field class="example-full-width">
+              <input type="text" placeholder="Who Responsible ?" matInput formControlName="responsibleBy"
+                [matAutocomplete]="secUser" tabIndex="5">
+              <mat-autocomplete autoActiveFirstOption #secUser="matAutocomplete" [displayWith]="displayUser">
+                <mat-option *ngFor="let option of users " [value]="option">
+                  {{option.firstName}} {{option.lastName}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+
+            <mat-form-field>
+              <input matInput placeholder="Source" formControlName="source" tabIndex="7">
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Complete(%)</mat-label>
+              <input tabIndex="9" matInput type="number" placeholder="From 1 - 100" formControlName="complete">
+            </mat-form-field>
+           
+          </div>
+        
+        </div>
+        <div>
+          <mat-form-field fxFlex='67'> 
+            <textarea tabIndex="11" class="height-160px" matInput placeholder="Note" formControlName="description"></textarea>
+          </mat-form-field>
+        </div>
+      
+
+      </div>
+
+      
+    </mat-card-content>
+    <div>
+      <span class="mat-subheading-1"> Attachment File</span>
+      <div ng2FileDrop [ngClass]="{'dz-file-over': hasBaseDropZoneOver}" (onFileDrop)="uploadFile($event)"
+        (fileOver)="fileOverBase($event)" [uploader]="uploader" class="fileupload-drop-zone mb-24">
+        <mat-icon  style="    color: gray;    font-size: 40px;">cloud_upload</mat-icon><br>
+        <span style="color: gray;">  Drop file here</span>
+         
+        <!-- <input type="file" ng2FileSelect [uploader]="uploader" multiple (onFileSelected)="uploadFile($event)" /> -->
+      </div>
+      <table class="default-table mat-box-shadow mb-24" style="width: 100%">
+        <thead>
+          <tr>
+            <th width="30%">Name</th>
+            <th>Size</th>
+            <th>Progress</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="uploader.queue.length; else tableNoData">
+          <tr *ngFor="let item of uploader.queue">
+            <td>{{ item?.file?.name }}</td>
+            <td nowrap>{{ item?.file?.size/1024/1024 | number:'.2' }} MB</td>
+            <td>
+              <div class="progress" style="margin-bottom: 0;">
+                <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': item.progress + '%' }"></div>
+                <mat-progress-bar class="" color="primary" mode="determinate" [value]="item.progress">
+                </mat-progress-bar>
+              </div>
+            </td>
+            <td class="">
+              <mat-icon *ngIf="item.isSuccess" color="primary">check</mat-icon>
+              <mat-icon *ngIf="item.isCancel" color="accent">cancel</mat-icon>
+              <mat-icon *ngIf="item.isError" color="warn">error</mat-icon>
+            </td>
+            <td nowrap>
+           
+              <button mat-raised-button color="accent" class="mx-4" (click)="item.cancel()"
+                [disabled]="!item.isUploading">Cancel</button>
+    
+              <button mat-raised-button color="warn" class="mx-4" (click)="removeFile(item)">Remove</button>
+              <button  mat-raised-button class="mx-4" matTooltip="Download File" (click)="goToLink(item.formData.fileUrl)" ><mat-icon>cloud_download</mat-icon></button>
+            </td>
+          </tr>
+        </tbody>
+        <ng-template #tableNoData>
+          <p [ngStyle]="{padding: '0 1.2rem'}">Queue is empty</p>
+        </ng-template>
+      </table>
+    </div>
+  </mat-card>
+</form>
+
+
+

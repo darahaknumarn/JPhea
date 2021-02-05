@@ -1,0 +1,97 @@
+<div fxLayout="row">
+  <div fxFlex="50">
+    <app-breadcrumb></app-breadcrumb>
+  </div>
+  <div fxLayout="row" fxLayoutGap="8px" fxFlex="50" fxLayoutAlign="end center">
+    <mat-form-field class="mr-05">
+      <input type="text" autocomplete="off" matInput placeholder="Search by projet name" [formControl]="searchBox">
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+    <button mat-flat-button color="primary" [routerLink]="['/project/add']" routerLinkActive="router-link-active">
+      <mat-icon>add</mat-icon>
+    </button>
+
+  </div>
+</div>
+
+<div class="ml-05 mr-05 mt-05 pb-1">
+
+  <mat-table [dataSource]="dataStore?.data" class="mat-elevation-z4" #table>
+
+    <ng-container matColumnDef="projectName">
+
+      <mat-header-cell *matHeaderCellDef> Project Name </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.projectName}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="balance">
+
+      <mat-header-cell *matHeaderCellDef> Balance</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.balance | currency}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="totalReceived">
+      <mat-header-cell *matHeaderCellDef> Total Received</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.totalReceived | currency}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="totalExpanse">
+      <mat-header-cell *matHeaderCellDef> Total Expanse</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.totalExpanse | currency}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="complete">
+      <mat-header-cell *matHeaderCellDef> Complete(%)</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+
+        <mat-progress-bar mode="buffer" [color]="accent" [value]="element.complete" [bufferValue]="100" class="mr-1">
+        </mat-progress-bar>
+
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="responsibleBy">
+      <mat-header-cell *matHeaderCellDef> Responsible By</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+
+        <div *ngIf="element.responsibleBy?.photo" mat-card-avatar
+          style="background-image: url('{{element.responsibleBy.photo}}');     background-size: cover;width: 50px;height: 50px;"
+          matTooltip="{{element.responsibleBy.firstName+' '+element.responsibleBy.lastName}}">
+        </div>
+
+        <div *ngIf="!element.responsibleBy?.photo" mat-card-avatar
+          style="background-image: url('assets/images/img.png');background-size: cover;width: 50px;height: 50px;">
+        </div>
+        <div class="ml-05">
+          {{element.responsibleBy.firstName+' '+element.responsibleBy.lastName}}
+        </div>
+
+
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="id">
+
+      <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <button mat-icon-button matTooltip="Edit" routerLink="/project/update/{{element.id}}" routerLinkActive="active">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button matTooltip="View Detail" routerLink="/project/view/{{element.id}}"
+          routerLinkActive="active">
+          <mat-icon>remove_red_eye</mat-icon>
+        </button>
+        <button mat-icon-button matTooltip="Delete" (click)="delete(element,element.id)">
+          <mat-icon color="warn">delete</mat-icon>
+        </button>
+      </mat-cell>
+
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+
+  </mat-table>
+  <mat-paginator [length]="dataStore?.total" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+    (page)="loadPagiantion($event)" showFirstLastButtons>
+  </mat-paginator>
+
+</div>
