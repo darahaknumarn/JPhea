@@ -1,12 +1,13 @@
 package demoexcel
 
-import grails.events.annotation.Publisher
-import grails.events.annotation.Subscriber
 import grails.gorm.transactions.Transactional
 import org.apache.poi.xssf.usermodel.XSSFWorkbook
+import org.hibernate.StatelessSession
+import org.hibernate.Transaction
 
 @Transactional
 class ExcelImportService {
+    def sessionFactory
 
     def validateHeader(def domainProperty, String fileHeader) {
 
@@ -79,40 +80,31 @@ class ExcelImportService {
         return obj
     }
 
-    @Publisher
-    def loadDataFromFile(def file){
+
+    def loadDataFromFile(def file) {
 
         def workbook = new XSSFWorkbook(file.getInputStream())
         def sheet = workbook.getSheetAt(0)
+
+        Map fileProperties = [:]
+        fileProperties.orginalFileName = file.getOriginalFilename()
+        fileProperties.sheetName = sheet.sheetName
 
         //column header
         def sheetheader = []
         for (cell in sheet.getRow(0).cellIterator()) {
             sheetheader << cell.stringCellValue
         }
-        def headerFlag = true
-
 
         //column data
         def values = []
-        for (row in sheet.rowIterator()) {
 
-            //annoy row header
-            if (headerFlag) {
-                headerFlag = false
-                continue
-            }
-
+        for (row in sheet.rowIterator().drop(1)) {
 
             def value = ''
             def map = [:]
             for (cell in row.cellIterator()) {
-/*                    if (cell.cellType==0){
-                        value = cell.numericCellValue
-                    }else {
-                        value = cell.stringCellValue
-                    }
-                    map["${excelImportService.validateHeader(DemoExcel.declaredFields, sheetheader[cell.columnIndex] as String)}"] = value*/
+
                 switch (cell.cellType) {
                     case 1:
                         value = cell.stringCellValue
@@ -122,25 +114,100 @@ class ExcelImportService {
                         value = cell.numericCellValue
                         map["${sheetheader[cell.columnIndex]}"] = value
                         break
-                    default:
-                        value = ''
                 }
             }
-            if (map)
-            values.add(map)
+            if (map != [:]) {
+                values.add(map)
+            }
         }
-        return values
+
+        //split data for insert and update to 2 list
+        def listAdminCode = DemoExcel.findAllByAdminCodeInList(values['Admin Code'] as List<Integer>)*.adminCode
+        ArrayList<Map> rawDataForUpdate = new ArrayList<>()
+        ArrayList<Map> rawDataForInsert = new ArrayList<>()
+
+
+        values.each { rawData ->
+
+            //if contains we replace old value
+            if (listAdminCode.contains(rawData['Admin Code'] as Integer)) {
+                rawDataForUpdate.add(rawData)
+
+            } else {
+                rawDataForInsert.add(rawData)
+            }
+        }
+
+
+        //save to Database
+        println "im insert ${rawDataForInsert}"
+        println "im update ${rawDataForUpdate}"
+
+        Map resultOFInsert=[totalInsert: 0, totalFail: 0]
+        Map resultOFUpdate=[totalUpdate: 0, totalFail: 0]
+
+        if (rawDataForInsert){
+            resultOFInsert = InsertRecords(rawDataForInsert)
+        }
+        if (rawDataForUpdate){
+            resultOFUpdate = updateRecords(rawDataForUpdate)
+        }
+
+        Map result = [:]
+        result.fileInfo = fileProperties
+        result.insertInfo = resultOFInsert
+        result.updateInfo = resultOFUpdate
+
+        return result
     }
 
-    @Subscriber
-    void loadDataFromFile(List<Map> mapList){
-        mapList.each { mapData->
-            DemoExcel demoExcel = DemoExcel.findByAdminCode(mapData['Admin Code'] as Integer)
-            if (!demoExcel) {
-                demoExcel = new DemoExcel()
+    def InsertRecords(def values) {
+        Map insertInfo = [totalInsert: 0, totalFail: 0]
+
+        StatelessSession session = sessionFactory.openStatelessSession()
+        Transaction tx = session.beginTransaction()
+
+
+        values.each { mapData ->
+            try {
+
+                session.insert(bindData(new DemoExcel(), mapData))
+                insertInfo.totalInsert++
+
+
+            } catch (IOException e) {
+                insertInfo.totalFail++
+                log.error(e.message)
             }
-            bindData(demoExcel,mapData)
-            demoExcel.save flush: true, failOnError: true
         }
+        tx.commit()
+        session.close()
+
+        return insertInfo
+    }
+
+    def updateRecords(ArrayList<Map> listDataUpdate) {
+        Map updateInfo = [totalUpdate: 0, totalFail: 0]
+
+        StatelessSession session = sessionFactory.openStatelessSession()
+        Transaction tx = session.beginTransaction()
+        def demoExcel = DemoExcel.findAllByAdminCodeInList(listDataUpdate['Admin Code'] as List<Integer>)
+
+
+        for (int i = 0; i < demoExcel.size(); i++) {
+            try {
+                session.update(bindData(demoExcel[i],listDataUpdate[i]))
+                updateInfo.totalUpdate++
+
+            } catch (IOException e) {
+                updateInfo.totalFail++
+                log.error(e.message)
+            }
+        }
+        tx.commit()
+        session.close()
+
+        return updateInfo
+
     }
 }

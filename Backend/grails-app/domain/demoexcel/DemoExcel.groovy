@@ -133,4 +133,8 @@ class DemoExcel {
         omVLANID nullable: true
 
     }
+
+    static mapping = {
+        dynamicUpdate true
+    }
 }
