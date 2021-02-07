@@ -1,6 +1,8 @@
 package demoexcel
 
+import corebackend.simplegenericrestfulcontroller.generic.PaginationCommand
 import grails.gorm.transactions.Transactional
+import grails.transaction.Rollback
 import org.apache.poi.xssf.usermodel.XSSFWorkbook
 import org.hibernate.StatelessSession
 import org.hibernate.Transaction
@@ -80,6 +82,19 @@ class ExcelImportService {
         return obj
     }
 
+    Map mapData(DemoExcel demoExcel){
+        Map map = [:]
+        map.siteOwner = demoExcel.siteOwner
+        map.adminCode = demoExcel.adminCode
+        map.sRANName = demoExcel.sRANName
+        map.bTSNameNoTech = demoExcel.bTSNameNoTech
+        map.siteCategory = demoExcel.siteCategory
+        map.latitude = demoExcel.latitude
+        map.longitude = demoExcel.longitude
+
+        return map
+    }
+
 
     def loadDataFromFile(def file) {
 
@@ -99,6 +114,7 @@ class ExcelImportService {
         //column data
         def values = []
 
+        //exclude row header
         for (row in sheet.rowIterator().drop(1)) {
 
             def value = ''
@@ -122,19 +138,21 @@ class ExcelImportService {
         }
 
         //split data for insert and update to 2 list
-        def listAdminCode = DemoExcel.findAllByAdminCodeInList(values['Admin Code'] as List<Integer>)*.adminCode
         ArrayList<Map> rawDataForUpdate = new ArrayList<>()
         ArrayList<Map> rawDataForInsert = new ArrayList<>()
 
+        def listAdminCode = DemoExcel.findAllByAdminCodeInList(values['Admin Code'] as List<Integer>)*.adminCode
 
-        values.each { rawData ->
+        if (listAdminCode) {
+            values.each { rawData ->
 
-            //if contains we replace old value
-            if (listAdminCode.contains(rawData['Admin Code'] as Integer)) {
-                rawDataForUpdate.add(rawData)
+                //if contains we replace old value
+                if (listAdminCode.contains(rawData['Admin Code'] as Integer)) {
+                    rawDataForUpdate.add(rawData)
 
-            } else {
-                rawDataForInsert.add(rawData)
+                } else {
+                    rawDataForInsert.add(rawData)
+                }
             }
         }
 
@@ -196,7 +214,7 @@ class ExcelImportService {
 
         for (int i = 0; i < demoExcel.size(); i++) {
             try {
-                session.update(bindData(demoExcel[i],listDataUpdate[i]))
+                session.update(bindData(demoExcel[i], listDataUpdate[i]))
                 updateInfo.totalUpdate++
 
             } catch (IOException e) {
@@ -209,5 +227,19 @@ class ExcelImportService {
 
         return updateInfo
 
+    }
+
+    def listData(PaginationCommand pagination,Integer adminCode, String officialSiteName){
+        def resultList = DemoExcel.createCriteria().list (pagination.params) {
+            or {
+                if (adminCode){
+                    eq("adminCode",adminCode)
+                }
+                if (officialSiteName){
+                    ilike("officialSiteName","%${officialSiteName}%")
+                }
+            }
+        }
+        return resultList
     }
 }

@@ -9,10 +9,12 @@ class UrlMappings {
             }
         }
 
-        "/"(view:"/index")
-        "500"(view:'/error')
-        "404"(view:'/notFound')
+//        "/"(view:"/index")
+//        "500"(view:'/error')
+//        "404"(view:'/notFound')
 
-        "/api/upload"(controller: "excelImport", action: "uploadFile")
+        "/api/excel/upload"(controller: "excelImport", action: "uploadFile")
+        "/api/excel/export"(controller: "excelImport", action: "exportFile")
+        "/api/excel"(resources: "excelImport")
     }
 }

@@ -1,5 +1,7 @@
 package demoexcel
 
+import grails.converters.JSON
+
 class DemoExcel {
     Integer adminCode
 
@@ -137,4 +139,21 @@ class DemoExcel {
     static mapping = {
         dynamicUpdate true
     }
+
+    static {
+        JSON.registerObjectMarshaller(this){
+            Map<String,DemoExcel> demoExcel = new LinkedHashMap<>(it.properties)
+            demoExcel.id = it.id
+            demoExcel.siteOwner = it.siteOwner
+            demoExcel.adminCode = it.adminCode
+            demoExcel.sRANName = it.sRANName
+            demoExcel.bTSNameNoTech = it.bTSNameNoTech
+            demoExcel.siteCategory = it.siteCategory
+            demoExcel.latitude = it.latitude
+            demoExcel.longitude = it.longitude
+
+            return demoExcel
+        }
+    }
+
 }

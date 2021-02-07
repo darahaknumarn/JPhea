@@ -1,101 +1,108 @@
+grails:
+  controllers:
+    upload:
+      maxFileSize: 20971520
+      maxRequestSize: 31457280
 ---
 grails:
-    profile: web
-    codegen:
-        defaultPackage: demoexcel
-    gorm:
-        reactor:
-            # Whether to translate GORM events into Reactor events
-            # Disabled by default for performance reasons
-            events: false
+  profile: web
+  codegen:
+    defaultPackage: demoexcel
+  gorm:
+    reactor:
+      # Whether to translate GORM events into Reactor events
+      # Disabled by default for performance reasons
+      events: false
 info:
-    app:
-        name: '@info.app.name@'
-        version: '@info.app.version@'
-        grailsVersion: '@info.app.grailsVersion@'
+  app:
+    name: '@info.app.name@'
+    version: '@info.app.version@'
+    grailsVersion: '@info.app.grailsVersion@'
 spring:
-    main:
-        banner-mode: "off"
-    groovy:
-        template:
-            check-template-location: false
+  main:
+    banner-mode: "off"
+  groovy:
+    template:
+      check-template-location: false
 
 # Spring Actuator Endpoints are Disabled by Default
 endpoints:
-    enabled: false
-    jmx:
-        enabled: true
+  enabled: false
+  jmx:
+    enabled: true
 
 ---
 grails:
-    mime:
-        disable:
-            accept:
-                header:
-                    userAgents:
-                        - Gecko
-                        - WebKit
-                        - Presto
-                        - Trident
-        types:
-            all: '*/*'
-            atom: application/atom+xml
-            css: text/css
-            csv: text/csv
-            form: application/x-www-form-urlencoded
-            html:
-              - text/html
-              - application/xhtml+xml
-            js: text/javascript
-            json:
-              - application/json
-              - text/json
-            multipartForm: multipart/form-data
-            pdf: application/pdf
-            rss: application/rss+xml
-            text: text/plain
-            hal:
-              - application/hal+json
-              - application/hal+xml
-            xml:
-              - text/xml
-              - application/xml
-    urlmapping:
-        cache:
-            maxsize: 1000
-    controllers:
-        defaultScope: singleton
-    converters:
-        encoding: UTF-8
-    views:
-        default:
-            codec: html
-        gsp:
-            encoding: UTF-8
-            htmlcodec: xml
-            codecs:
-                expression: html
-                scriptlets: html
-                taglib: none
-                staticparts: none
+  mime:
+    disable:
+      accept:
+        header:
+          userAgents:
+            - Gecko
+            - WebKit
+            - Presto
+            - Trident
+    types:
+      all: '*/*'
+      atom: application/atom+xml
+      css: text/css
+      csv: text/csv
+      form: application/x-www-form-urlencoded
+      html:
+        - text/html
+        - application/xhtml+xml
+      js: text/javascript
+      json:
+        - application/json
+        - text/json
+      multipartForm: multipart/form-data
+      pdf: application/pdf
+      rss: application/rss+xml
+      text: text/plain
+      hal:
+        - application/hal+json
+        - application/hal+xml
+      xml:
+        - text/xml
+        - application/xml
+  urlmapping:
+    cache:
+      maxsize: 1000
+  controllers:
+    defaultScope: singleton
+  converters:
+    encoding: UTF-8
+  views:
+    default:
+      codec: html
+    gsp:
+      encoding: UTF-8
+      htmlcodec: xml
+      codecs:
+        expression: html
+        scriptlets: html
+        taglib: none
+        staticparts: none
 endpoints:
-    jmx:
-        unique-names: true
+  jmx:
+    unique-names: true
 
 ---
 hibernate:
-    cache:
-        queries: false
-        use_second_level_cache: false
-        use_query_cache: false
+  cache:
+    queries: false
+    use_second_level_cache: false
+    use_query_cache: false
+
+
 dataSource:
     pooled: true
     jmxExport: true
     driverClassName: com.mysql.cj.jdbc.Driver
-    dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+    dialect : org.hibernate.dialect.MySQL5InnoDBDialect
     username: root
     password: '12345'
-    logSql: false
+    logSql: true
     formartSql: false
 
 environments:
@@ -106,11 +113,8 @@ environments:
     test:
         dataSource:
             dbCreate: update
-            url: jdbc:h2:mem:testDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE
-    production:
-        dataSource:
-            dbCreate: none
-            url: jdbc:h2:./prodDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE
+            url: jdbc:mysql://127.0.0.1:3307/demoexcle?useUnicode=yes&characterEncoding=UTF-8
+#            jndiName : java:comp/env/ProBaku
             properties:
                 jmxEnabled: true
                 initialSize: 5
@@ -129,9 +133,201 @@ environments:
                 testOnReturn: false
                 jdbcInterceptors: ConnectionState
                 defaultTransactionIsolation: 2 # TRANSACTION_READ_COMMITTED
+
+    production:
+        dataSource:
+            dbCreate: update
+            url: jdbc:mysql://127.0.0.1:3307/demoexcle?useUnicode=yes&characterEncoding=UTF-8
+#            jndiName : java:comp/env/ProBaku
+            properties:
+                jmxEnabled: true
+                initialSize: 5
+                maxActive: 50
+                minIdle: 5
+                maxIdle: 25
+                maxWait: 10000
+                maxAge: 600000
+                timeBetweenEvictionRunsMillis: 5000
+                minEvictableIdleTimeMillis: 60000
+                validationQuery: SELECT 1
+                validationQueryTimeout: 3
+                validationInterval: 15000
+                testOnBorrow: true
+                testWhileIdle: true
+                testOnReturn: false
+                jdbcInterceptors: ConnectionState
+                defaultTransactionIsolation: 2 # TRANSACTION_READ_COMMITTED
+#--- redis
 ---
 grails:
-    controllers:
-        upload:
-            maxFileSize: 5000000 #5MB
-            maxRequestSize: 5000000
+  redis:
+    port: 6379
+    database: 2
+    timeout: 2000
+    poolConfig:
+      testWhileIdle: true
+      maxTotal: 500
+environments:
+  development:
+    grails:
+      redis:
+        host: "172.30.30.23"
+        password: P@ssw0rd
+  test:
+    grails:
+      redis:
+        host: "172.30.30.23"
+        password: P@ssw0rd
+  production:
+    grails:
+      redis:
+          host: "172.30.30.23"
+          password: P@ssw0rd
+---
+grails:
+    cors:
+        enabled: true
+---
+#environments:
+#    development:
+#        rabbitmq:
+#            connections:
+#              - name: main
+#                host: 172.30.30.23
+#                port: 5672
+#                username: developer
+#                password: P@ssw0rd
+#                virtualHost: tsi.baku
+#    test:
+#        rabbitmq:
+#            connections:
+#              - name: main
+#                host: 172.30.30.12
+#                port: 5672
+#                username: developer
+#                password: P@ssw0rd
+#                virtualHost: tsi.baku
+#    production:
+#        rabbitmq:
+#            connections:
+#              - name: main
+#                host: 10.130.70.214
+#                port: 5672
+#                username: admin
+#                password: P@ssw0rd
+#                virtualHost: tsi.baku
+#---
+#grails:
+#  coreBackend:
+#    emailQueueTopic: 'backendcore.email'
+#---
+#grails:
+#  plugin:
+#    miniosdk:
+#        minio:
+#            bucket: baku
+#environments:
+#    development:
+#        grails:
+#            plugin:
+#                miniosdk:
+#                    accessKey: 4RGM2W221NBIGYFI76VI
+#                    secretKey: aBZo47T77srmqJROLV7jm42z7+j6kJQstVXCUsmk
+#                    endpoint: http://172.30.30.25
+#                    port: 9000
+#    test:
+#        grails:
+#            plugin:
+#                miniosdk:
+#                    accessKey: 4RGM2W221NBIGYFI76VI
+#                    secretKey: aBZo47T77srmqJROLV7jm42z7+j6kJQstVXCUsmk
+#                    endpoint: http://172.30.30.25
+#                    port: 9000
+#    production:
+#        grails:
+#            plugin:
+#                miniosdk:
+#                    accessKey: b87a1ab258
+#                    secretKey: f6c454a45e1750097d96b3a81e0ce009
+#                    endpoint: https://api.cambodiafengshuicenter.com
+#                    port: 9299
+#
+#---
+#environments:
+#    development:
+#        httpReferer:
+#            url: http://localhost
+#    test:
+#        httpReferer:
+#            url: http://103.216.51.86
+#    production:
+#        httpReferer:
+#            url: https://api.cambodiafengshuicenter.com
+#
+#---
+#environments:
+#    test:
+#        grails:
+#            plugin:
+#                sentry:
+#                    dsn: https://ae784945bb87412fac54520aa98ae031:8839da77a16445199857940c0dc5e144@o401444.ingest.sentry.io/5507757
+#---
+#environments:
+#    development:
+#        redeemqrcode:
+#            path: "exportQR/"
+#    test:
+#        redeemqrcode:
+#            path: "/opt/tomcatBaku/assets/exportQR/"
+#    production:
+#        redeemqrcode:
+#            path: "/app/tomcat/assets/exportQR/"
+#
+#---
+#environments:
+#    development:
+#        grails:
+#            config:
+#                locations:
+#                  - file:///home/pandacoder/Documents/Work/ProjectDoc/BakuDoc/encryptionpass.yml
+#    test:
+#        grails:
+#            config:
+#                locations:
+#                  - file:///opt/.appconfig/encryptionpass.yml
+#    production:
+#        grails:
+#            config:
+#                locations:
+#                  - file:///app/.appconfig/encryptionpass.yml
+#---
+#geolocation:
+#    url:  "https://api.db-ip.com/v2/free/"
+#---
+#quartz:
+#    autoStartup: true
+#    jdbcStore: true
+#    scheduler:
+#        instanceName: BakuClusteredQuartz
+#        instanceId: AUTO
+#        skipUpdateCheck: true
+#    threadPool:
+#        class: org.quartz.simpl.SimpleThreadPool
+#        threadCount: 5
+#        threadPriority: 5
+#    jobStore:
+#        misfireThreshold: 60000
+#        class: org.quartz.impl.jdbcjobstore.JobStoreTX
+#        driverDelegateClass: org.quartz.impl.jdbcjobstore.StdJDBCDelegate
+#        useProperties: false
+#        tablePrefix: QRTZ_
+#        isClustered: true
+#        clusterCheckinInterval: 5000
+#    plugin:
+#        shutdownhook:
+#            class: org.quartz.plugins.management.ShutdownHookPlugin
+#            cleanShutdown: true
+#    triggerHistory:
+#        class: org.quartz.plugins.history.LoggingTriggerHistoryPlugin
+#    jobHistory:
+#        class: org.quartz.plugins.history.LoggingJobHistoryPlugin
