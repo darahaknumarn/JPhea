@@ -65,18 +65,10 @@ dependencies {
     compile 'org.apache.poi:poi-ooxml:3.17'
     runtime "mysql:mysql-connector-java:8.0.22"
 
-    compile "corebackend.emailtemplate:email-template-plugin:$coreBackEndEmailTemplateVersion"
-    compile "org.grails.plugins:rabbitmq-native:3.4.6"
-    compile "corebackend.dynamicworkflow:dynamic-workflow-plugin:$dynamicWorkflowVersion"
     compile "com.ecoinsoft:core-backend:$coreBackEndVersion"
     compile 'org.grails.plugins:excel-export:2.1'
     compile group: 'commons-io', name: 'commons-io', version: '2.6'
-    compile 'org.grails.plugins:quartz:2.0.13'
-    compile 'org.grails.plugins:sentry:11.7.25'
-    compile "org.codehaus.gpars:gpars:1.2.1"
-    compile 'org.grails.plugins:qrcode:0.9'
-    compile "com.ecoinsoft:core-notification-plugin:$coreNotificationPluginVeraion"
-    compile 'org.grails.plugins:external-config:1.4.0'
+
 
 
     //------
