@@ -8,30 +8,26 @@ import grails.converters.JSON
 import pl.touk.excel.export.WebXlsxExporter
 
 
-class ExcelImportController extends SimpleGenericRestfulController<DemoExcel> {
+class FileUploadController extends SimpleGenericRestfulController<Site>{
 
-    ExcelImportController(){
-        super(DemoExcel)
+    FileUploadController(){
+        super(Site)
     }
-    def excelImportService
+    def fileUploadService
 
 
     def uploadFile() {
         def file = params.filesName
 
-        println file.getClass()
-        ArrayList<Map> listSummireFileUpload = new ArrayList<>()
+        if (file){
+            String orginalFileName = file.getOriginalFilename()
 
-        file.each {
-            listSummireFileUpload.add(excelImportService.loadDataFromFile(it))
+            List<Map> rawData = fileUploadService.loadDataFromFile(file)
+            Map uploadInfo = fileUploadService.saveToSite(rawData, orginalFileName as String)
+
+            render JSONFormat.respond(uploadInfo) as JSON
 
         }
-        ImportHistory history = new ImportHistory()
-        history.importBy = authenticatedUser.username
-        history.fileName = listSummireFileUpload
-
-
-        render JSONFormat.respond(listSummireFileUpload) as JSON
     }
 
     def exportFile(PaginationCommand pagination){
@@ -39,7 +35,7 @@ class ExcelImportController extends SimpleGenericRestfulController<DemoExcel> {
         Integer adminCode = params.int("adminCode")
         String officialSiteName = params.officialSiteName
 
-        def resultList = excelImportService.listData(pagination,adminCode,officialSiteName)
+        def resultList = fileUploadService.listSite(pagination,adminCode,officialSiteName)
 
         if (resultList) {
             String fileName = "Site Report - ${new Date().format("YYYY-MM-DD")}.xlsx"
@@ -183,17 +179,13 @@ class ExcelImportController extends SimpleGenericRestfulController<DemoExcel> {
 
     @Override
     def index(PaginationCommand pagination){
-        println params.id
-
         Integer adminCode = params.int("adminCode")
+        Integer importHistoryId = params.int("importHistoryId")
         String officialSiteName = params.officialSiteName
+        String hubSite = params.hubSite
 
-        def resultList = excelImportService.listData(pagination,adminCode,officialSiteName)
 
-//        ArrayList<Map> result = new ArrayList<>()
-//        resultList.each {
-//            result.add(excelImportService.mapData(it))
-//        }
+        def resultList = fileUploadService.listSite(pagination,adminCode,officialSiteName,hubSite,importHistoryId)
         render JSONFormat.respond(resultList) as JSON
     }
 
