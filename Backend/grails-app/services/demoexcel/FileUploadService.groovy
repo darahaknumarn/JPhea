@@ -1,16 +1,15 @@
 package demoexcel
 
 import corebackend.simplegenericrestfulcontroller.generic.PaginationCommand
-import grails.gorm.transactions.Rollback
 import grails.gorm.transactions.Transactional
 import org.apache.poi.xssf.usermodel.XSSFWorkbook
 import org.hibernate.StaleStateException
 import org.hibernate.StatelessSession
 import org.hibernate.Transaction
-import org.springframework.transaction.annotation.EnableTransactionManagement
+import org.springframework.transaction.annotation.Propagation
 
-@Transactional
-@Rollback
+
+@Transactional(propagation = Propagation.REQUIRES_NEW)
 class FileUploadService {
     def sessionFactory
     def importHistoryService
@@ -178,7 +177,7 @@ class FileUploadService {
         }
 
         if (rawDataForUpdate) {
-            resultOFInsert = updateRecords(rawDataForUpdate)
+            resultOFUpdate = updateRecords(rawDataForUpdate)
         }
 
         Map result = [:]
@@ -192,55 +191,37 @@ class FileUploadService {
     def InsertRecords(List<Map> values,Integer importId) {
         Map insertInfo = [totalInsert: 0, totalFail: 0]
 
-        StatelessSession session = sessionFactory.openStatelessSession()
-        Transaction tx = session.beginTransaction()
-
-
-        values.each { mapData ->
-            try {
-
+        Site.withStatelessSession {
+            StatelessSession session = sessionFactory.openStatelessSession()
+            Transaction tx = session.beginTransaction()
+            values.each { mapData ->
+                //bindData(new Site(), mapData,importId).save(flush:true)
                 session.insert(bindData(new Site(), mapData,importId))
                 insertInfo.totalInsert++
-
-
-            } catch (StaleStateException e) {
-                insertInfo.totalFail++
-                log.error(e.message)
             }
+            tx.commit()
+            session.close()
         }
-        tx.commit()
-        session.close()
-
         return insertInfo
     }
     def updateRecords(ArrayList<Map> listDataUpdate) {
         Map updateInfo = [totalUpdate: 0, totalFail: 0]
 
-
         def sites = Site.findAllByAdminCodeInList(listDataUpdate['Admin Code'] as List<Integer>)
+        Integer i=0
 
-        StatelessSession session = sessionFactory.openStatelessSession()
-        Transaction tx = session.beginTransaction()
-
-        println "list -- ${listDataUpdate.size()}"
-        println "sites -- ${sites.size()}"
-
-
-        for (int i = 0; i < sites.size(); i++) {
-            try {
-                session.update(bindData(sites[i], listDataUpdate[i],null))
+        Site.withStatelessSession {
+            StatelessSession session = sessionFactory.openStatelessSession()
+            Transaction tx = session.beginTransaction()
+            sites.each {
+                bindData(it,listDataUpdate[i],null)
                 updateInfo.totalUpdate++
-
-            } catch (StaleStateException e) {
-                updateInfo.totalFail++
-                tx.rollback()
-                log.error(e.message)
+                i++
             }
-        }
-        println "am out-- ${tx.getStatus()}  -- ${session.transaction.status}"
 
-        tx.commit()
-        session.close()
+            tx.commit()
+            session.close()
+        }
         return updateInfo
 
     }

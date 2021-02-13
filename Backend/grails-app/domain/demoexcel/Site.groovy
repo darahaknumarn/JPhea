@@ -1,6 +1,14 @@
 package demoexcel
 
+import javax.persistence.GeneratedValue
+import javax.persistence.GenerationType
+import javax.persistence.Id
+
 class Site {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Integer id
+
     Integer adminCode
     String officialSiteName
     String sRANName
@@ -122,6 +130,7 @@ class Site {
 
     static mapping = {
         dynamicUpdate true
+
     }
 
 /*    static {
