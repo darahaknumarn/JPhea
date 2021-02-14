@@ -1,13 +1,11 @@
-package demoexcel
+package jpheabackend
 
-import corebackend.simplegenericrestfulcontroller.generic.PaginationCommand
+import com.hanuman.simplegeneric.PaginationCommand
 import grails.gorm.transactions.Transactional
 import org.apache.poi.xssf.usermodel.XSSFWorkbook
-import org.hibernate.StaleStateException
 import org.hibernate.StatelessSession
 import org.hibernate.Transaction
 import org.springframework.transaction.annotation.Propagation
-
 
 @Transactional(propagation = Propagation.REQUIRES_NEW)
 class FileUploadService {
@@ -39,7 +37,8 @@ class FileUploadService {
 
         return map
     }
-    private static Site bindData(Site obj, Map data,Integer importHistoryId) {
+    private static Map bindData(Map data, Integer importHistoryId) {
+        def obj =[:]
         obj.adminCode = data['Admin Code']
         obj.officialSiteName = data['Official Site Name']
         obj.sRANName = data['SRAN Name']
@@ -192,16 +191,17 @@ class FileUploadService {
         Map insertInfo = [totalInsert: 0, totalFail: 0]
 
         Site.withStatelessSession {
-            StatelessSession session = sessionFactory.openStatelessSession()
-            Transaction tx = session.beginTransaction()
+//            StatelessSession session = sessionFactory.openStatelessSession()
+//            Transaction tx = session.beginTransaction()
             values.each { mapData ->
                 //bindData(new Site(), mapData,importId).save(flush:true)
-                session.insert(bindData(new Site(), mapData,importId))
+                Site.newInstance(bindData(mapData,importId)).save(flush:true)
                 insertInfo.totalInsert++
             }
-            tx.commit()
-            session.close()
+//            tx.commit()
+//            session.close()
         }
+
         return insertInfo
     }
     def updateRecords(ArrayList<Map> listDataUpdate) {
@@ -211,16 +211,15 @@ class FileUploadService {
         Integer i=0
 
         Site.withStatelessSession {
-            StatelessSession session = sessionFactory.openStatelessSession()
-            Transaction tx = session.beginTransaction()
+
             sites.each {
-                bindData(it,listDataUpdate[i],null)
+               it.properties=  bindData(listDataUpdate[i],null)
+                it.save(flush:true)
                 updateInfo.totalUpdate++
                 i++
             }
 
-            tx.commit()
-            session.close()
+
         }
         return updateInfo
 
@@ -230,7 +229,7 @@ class FileUploadService {
 
 
 //######### sub service #########
-    def listSite(PaginationCommand pagination, Integer adminCode, String officialSiteName, String hubSite,Integer importHistoryId){
+    def listSite(PaginationCommand pagination, Integer adminCode, String officialSiteName, String hubSite, Integer importHistoryId){
         def resultList = Site.createCriteria().list (pagination.params) {
             or {
                 if (adminCode){

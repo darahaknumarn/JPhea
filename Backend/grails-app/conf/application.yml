@@ -109,7 +109,7 @@ environments:
     development:
         dataSource:
             dbCreate: update
-            url: jdbc:mysql://178.128.97.84:3306/dev_jphea?useUnicode=yes&characterEncoding=UTF-8
+            url: jdbc:mysql://192.168.1.10:3306/dev_jphea?useUnicode=yes&characterEncoding=UTF-8
     test:
         dataSource:
             dbCreate: update
@@ -171,17 +171,17 @@ environments:
   development:
     grails:
       redis:
-        host: "178.128.97.84"
-        password: V5-yyWDUG7=B[
+        host: "192.168.1.10"
+        password: P@ssw0rd
   test:
     grails:
       redis:
-        host: "178.128.97.84"
+        host: "192.168.1.10"
         password: V5-yyWDUG7=B[
   production:
     grails:
       redis:
-          host: "178.128.97.84"
+          host: "192.168.1.10"
           password: V5-yyWDUG7=B[
 ---
 grails:
