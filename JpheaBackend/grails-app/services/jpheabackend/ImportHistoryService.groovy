@@ -32,5 +32,6 @@ class ImportHistoryService {
         history.totalRecodeUpdate = uploadInfo.updateInfo.totalUpdate as Integer
         history.totalRecodeUpdateFail = uploadInfo.updateInfo.totalFail as Integer
         history.save(flush: true)
+        return history
     }
 }
