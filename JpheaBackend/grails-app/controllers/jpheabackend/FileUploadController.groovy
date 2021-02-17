@@ -4,6 +4,7 @@ import com.hanuman.simplegeneric.JSONFormat
 import com.hanuman.simplegeneric.PaginationCommand
 import com.hanuman.simplegeneric.SimpleGenericRestfulController
 import grails.converters.JSON
+import javafx.scene.control.Pagination
 
 
 class FileUploadController extends SimpleGenericRestfulController<Site> {
@@ -63,5 +64,14 @@ class FileUploadController extends SimpleGenericRestfulController<Site> {
     def show(){
         def demoExcel = queryForResource(params.id)
         render JSONFormat.respond(demoExcel) as JSON
+    }
+
+
+    def getSiteTemplate(PaginationCommand pagination){
+        def resultList = fileUploadService.listSite(pagination,null,null,null,null)
+
+        if (resultList) {
+            fileUploadService.siteTemplate(response,resultList,"Site excel template.xlsx")
+        }
     }
 }

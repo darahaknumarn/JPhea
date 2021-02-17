@@ -18,5 +18,6 @@ class ImportHistory {
         totalInsertRecodeFail nullable: true
         totalRecodeUpdate nullable: true
         totalRecodeUpdateFail nullable: true
+        importBy nullable: true
     }
 }
