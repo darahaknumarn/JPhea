@@ -3,6 +3,7 @@ package jpheabackend
 import com.hanuman.simplegeneric.JSONFormat
 import com.hanuman.simplegeneric.PaginationCommand
 import com.hanuman.simplegeneric.SimpleGenericRestfulController
+import com.hanuman.simplegeneric.StatusCode
 import grails.converters.JSON
 import javafx.scene.control.Pagination
 
@@ -30,21 +31,19 @@ class FileUploadController extends SimpleGenericRestfulController<Site> {
         }
     }
 
-    def exportFile(PaginationCommand pagination){
+    def exportFile(){
 
         Integer adminCode = params.int("adminCode")
-        Integer importHistoryId = params.int("importHistoryId")
         String officialSiteName = params.officialSiteName
         String hubSite = params.hubSite
 
-        def resultList = fileUploadService.listSite(pagination,adminCode,officialSiteName,hubSite,importHistoryId)
+        def resultList = fileUploadService.listSite(adminCode,officialSiteName,hubSite)
 
         if (resultList) {
             String fileName = "Site Report - ${new Date()}.xlsx"
-            fileUploadService.exportExcel(fileName,response,adminCode,importHistoryId,officialSiteName,hubSite,resultList)
-        }
-        else{
-            render JSONFormat.respond(null, "Data filter is ") as JSON
+            fileUploadService.exportExcel(fileName,response,adminCode,null,officialSiteName,hubSite,resultList)
+        }else {
+            render JSONFormat.respond(null,StatusCode.RecordNotFound,StatusCode.RecordNotFound.description) as JSON
         }
     }
 

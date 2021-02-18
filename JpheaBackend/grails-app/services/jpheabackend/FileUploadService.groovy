@@ -101,7 +101,6 @@ class FileUploadService {
         }
         return obj
     }
-//----------------------------------------------------------
 
 
 
@@ -227,9 +226,9 @@ class FileUploadService {
 
     def exportExcel(String fileName,def response,Integer adminCode,Integer importHistoryId,String officialSiteName,String hubSite,def resultList){
 
-            Integer row = 7
-            Integer headerRow = 6
-            Integer no = 1
+        Integer headerRow = 5
+        Integer row = headerRow+1
+        Integer no = 1
 
             WebXlsxExporter exporter = new WebXlsxExporter()
             exporter.with {
@@ -240,8 +239,6 @@ class FileUploadService {
                 putCellValue(2, 1, officialSiteName?:"")
                 putCellValue(3, 0, "hubSite:")
                 putCellValue(3, 1, hubSite?:"")
-                putCellValue(4, 0, "importHistoryId:")
-                putCellValue(4, 1, importHistoryId?:"")
 
 
                 putCellValue(headerRow, 0, "No")
@@ -267,7 +264,7 @@ class FileUploadService {
                 putCellValue(headerRow, 20 ,"Area  Location")
                 putCellValue(headerRow, 21 ,"Priority categories")
                 putCellValue(headerRow, 22 ,"Guard")
-                putCellValue(headerRow, 23 ,"Guard Phnone")
+                putCellValue(headerRow, 23 ,"Guard Phone")
                 putCellValue(headerRow, 24 ,"Tower Type")
                 putCellValue(headerRow, 25 ,"Tower Height")
                 putCellValue(headerRow, 26 ,"Building Height")
@@ -514,6 +511,23 @@ class FileUploadService {
                 }
                 if (importHistoryId){
                     eq("importHistoryId",importHistoryId)
+                }
+            }
+        }
+        return resultList
+    }
+
+    def listSite(Integer adminCode, String officialSiteName, String hubSite){
+        def resultList = Site.createCriteria().list() {
+            or {
+                if (adminCode){
+                    eq("adminCode",adminCode)
+                }
+                if (officialSiteName){
+                    ilike("officialSiteName","%${officialSiteName}%")
+                }
+                if (hubSite){
+                    ilike("hubSite","%${hubSite}%")
                 }
             }
         }
