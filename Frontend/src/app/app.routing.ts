@@ -157,7 +157,7 @@ export const rootRouterConfig: Routes = [
         data: {title: 'Import', breadcrumb: 'Import'},
         canLoad: [CanLoadModule]
       },
-      // Import
+      // Site
       {
         path: 'site',
         loadChildren: () => import('./module/site/site.module').then(m => m.SiteModule),
