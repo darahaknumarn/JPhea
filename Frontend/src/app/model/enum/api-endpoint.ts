@@ -11,6 +11,12 @@ export enum ApiEndpoint {
       Expanse ="/api/expanse" , 
       Todo = "/api/todo" , 
 
+      UploadFileAPI = "/api/excel/upload",
+      ExportFileAPI = "/api/excel/export",
+      ImportAPI = "/api/import",
+      SiteAPI = "/api/excel",
+      FileTemplateAPI = "/api/excel/siteTemplate",
+
       //  report 
       Dashboard = '/api/dashboard'
 }

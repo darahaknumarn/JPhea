@@ -1,0 +1,51 @@
+<div fxLayout="row">
+    <div fxFlex="50">
+      <app-breadcrumb></app-breadcrumb>
+    </div>
+    <div fxLayout="row" fxLayoutGap="8px" fxFlex="50" fxLayoutAlign="end center">
+      <div>
+        <button mat-raised-button color="primary" matTooltip="search" [matMenuTriggerFor]="theMenu">Advance Search</button>
+        <form [formGroup]="form">
+          <mat-menu #theMenu="matMenu" [overlapTrigger]="false">
+            <mat-toolbar-row (click)="$event.stopPropagation(); false;">
+              <mat-form-field class="full-width">
+                <input matInput type="text" placeholder="Admin code" name="code" formControlName="adminCode"/>
+              </mat-form-field>
+            </mat-toolbar-row>
+            
+            <mat-toolbar-row (click)="$event.stopPropagation(); false;">
+              <mat-form-field class="full-width">
+                <input matInput type="text" placeholder="Site name" name="siteName" formControlName="officialSiteName"/>
+              </mat-form-field>
+            </mat-toolbar-row>
+            
+            <mat-toolbar-row (click)="$event.stopPropagation(); false;">
+              <mat-form-field class="full-width">
+                <input matInput type="text" placeholder="Hub name" name="hubName" formControlName="hubSite"/>
+              </mat-form-field>
+            </mat-toolbar-row>
+            <mat-toolbar-row>
+              <button type="button" mat-raised-button color="primary" class="mr-05" (click)="search()"><mat-icon>search</mat-icon>Search</button>
+              <button type="button" mat-raised-button color="warn" (click)="clear()"><mat-icon>clear</mat-icon>Reset</button>
+            </mat-toolbar-row>
+          </mat-menu>
+        </form>  
+      </div>
+
+      <div>
+        <button type="button" mat-raised-button color="primary" matTooltip="import" (click)="file.click()">
+          <mat-icon class="mr-05">cloud_upload</mat-icon> Import
+        </button>
+        <input type="file" accept=".xlsx" style="display: none" (change)="chooseDocument($event)" id="file" #file/>
+      </div>
+      <div class="mr-05">
+        <button type="button" mat-raised-button color="primary" matTooltip="export" (click)="export()"><mat-icon class="mr-05">save_alt</mat-icon>Export</button>
+      </div>
+    </div>
+</div>
+
+<div fxLayout="row wrap" class="ml-05 mr-05">
+    <div fxFlex="100">
+        <app-grid [dataStore]="dataStore" [itemTableColumn]="itemTableColumn" (paginationChanged)="list($event)"></app-grid>
+    </div>
+</div>

@@ -1,0 +1,130 @@
+<div fxLayout="row">
+  <div fxFlex="50">
+    <app-breadcrumb></app-breadcrumb>
+  </div>
+  <div fxLayout="row" fxLayoutGap="8px" fxFlex="50" fxLayoutAlign="end center">
+    <div fxLayout="row" fxLayoutAlign="end center">
+      <div class="upload-btn-wrapper">
+        <button type="button" mat-raised-button color="primary" matTooltip="import" class="mr-05" (click)="file.click()">
+          <mat-icon class="mr-05">cloud_upload</mat-icon> Import
+        </button>
+        <input type="file" accept=".xlsx" style="display: none" (change)="chooseDocument($event)" id="file" #file/>
+      </div>
+  
+      <button mat-raised-button color="primary" matTooltip="list" [routerLink]="['/site']" routerLinkActive="router-link-active" class="mr-05"><mat-icon class="mr-05">list</mat-icon>Site List</button>
+    </div>
+  </div>
+</div>
+
+<mat-card>
+  <div fxLayout="row wrap" class="mb-1">
+    <div fxFlex="100" fxFlex.gt-sm="25" fxFlex.sm="50">
+      <mat-card [ngStyle]="{background: '#222A45'}">
+        <mat-card-title align="center">
+          <h3 class="m-0 font-normal card-title-text text-white" >{{dataHistroy?.totalRecodeUpdate + dataHistroy?.totalRecodeInsert}}</h3>
+        </mat-card-title>
+        <mat-card-content align="center">
+          <small class="text-white">Total Record</small>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <div fxFlex="100" fxFlex.gt-sm="25" fxFlex.sm="50">
+      <mat-card [ngStyle]="{background: '#3F51B5'}">
+        <mat-card-title align="center">
+          <h3 class="m-0 font-normal card-title-text text-white">{{dataHistroy?dataHistroy.totalRecodeUpdate: 0}}</h3>
+        </mat-card-title>
+        <mat-card-content align="center">
+          <small class="text-white">Total Exist Record</small>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <div fxFlex="100" fxFlex.gt-sm="25" fxFlex.sm="50">
+      <mat-card [ngStyle]="{background: '#FF8A48'}">
+        <mat-card-title align="center">
+          <h3 class="m-0 font-normal card-title-text text-white" >{{dataHistroy?dataHistroy.totalRecodeInsert: 0}}</h3>
+        </mat-card-title>
+        <mat-card-content align="center">
+          <small class="text-white">Total New Record</small>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <div fxFlex="100" fxFlex.gt-sm="25" fxFlex.sm="50">
+      <mat-card [ngStyle]="{background: '#FF1515'}">
+        <mat-card-title align="center">
+          <h3 class="m-0 font-normal card-title-text text-white" >{{dataHistroy?.totalInsertRecodeFail + dataHistroy?.totalRecodeUpdateFail}}</h3> 
+        </mat-card-title>
+        <mat-card-content align="center">
+          <small class="text-white">Total Fail Record</small>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+
+  <div class="ml-05 mr-05 mt-05 pb-1">
+    <!-- <div fxFlex="100">
+      <app-grid [dataStore]="dataStore" [itemTableColumn]="itemTableColumn" (paginationChanged)="list($event)"></app-grid>
+    </div> -->
+    <mat-table [dataSource]="dataSource" class="mat-elevation-z4">
+
+    <ng-container matColumnDef="SiteOwner">
+      <mat-header-cell *matHeaderCellDef> Site Owner </mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element?.siteOwner}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="AdminCode">
+      <mat-header-cell *matHeaderCellDef> Admin Code </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element?.adminCode}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="SRANName">
+      <mat-header-cell *matHeaderCellDef> SRAN Name </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element?.sRANName}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="BTSNameNoTect">
+      <mat-header-cell *matHeaderCellDef> BTS Name No Tect </mat-header-cell>
+      <mat-cell *matCellDef="let element">  {{element?.bTSNameNoTech}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="ProductType">
+      <mat-header-cell *matHeaderCellDef> Product Type </mat-header-cell>
+      <mat-cell *matCellDef="let element">  {{element?.productType}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="SiteCategory">
+      <mat-header-cell *matHeaderCellDef> Site Category </mat-header-cell>
+      <mat-cell *matCellDef="let element">  {{element?.siteCategory}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Latitude">
+      <mat-header-cell *matHeaderCellDef> Latitude </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element?.latitude}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Longitude">
+      <mat-header-cell *matHeaderCellDef> Longitude </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element?.longitude}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Action">
+      <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <button matTooltip="view" mat-icon-button routerLink="/import/view/{{element?.id}}"
+          routerLinkActive="router-link-active">
+          <mat-icon>visibility</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  </mat-table>
+
+  <mat-paginator #paginator [length]="totalPage" [pageIndex]="0" [pageSize]="10"
+    [pageSizeOptions]="pageSizeOptions" (page)="getNext($event)" showFirstLastButtons>
+  </mat-paginator>
+  </div>
+</mat-card>

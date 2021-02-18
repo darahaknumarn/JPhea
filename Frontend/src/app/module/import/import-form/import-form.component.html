@@ -1,0 +1,35 @@
+<div fxLayout="row">
+    <div fxFlex="50">
+      <app-breadcrumb></app-breadcrumb>
+    </div>
+</div>  
+  
+<div fxLayout="row wrap" fxLayoutAlign="space-between">
+    <mat-card fxFlex="100%" class="mat-elevation-z4">
+        <mat-card-content>
+            <div fxLayout="row wrap" fxLayoutAlign="center start">
+                <div fxFlex="50">
+                    <mat-card class="backgrond-color-card drag-zone" fileDragDrop (filesChangeEmiter)="chooseDocument($event)">
+                        <div fxLayoutAlign="center">
+                            <mat-icon class="big-icon">cloud_upload</mat-icon>
+                        </div>
+                        <span>
+                            <p align="center">Drag and Drop your excel file here to upload</p> 
+                            <p align="center">or</p>
+                            <div fxLayoutAlign="center" class="upload-btn-wrapper">
+                                <button type="button" mat-raised-button color="primary" matTooltip="Choose file" (click)="file.click()">
+                                    Choose File
+                                </button>
+                                <input type="file" accept=".xlsx" style="display: none" (change)="chooseDocument($event)" id="file" #file/>
+                            </div>
+                        </span>
+                    </mat-card>
+                </div>
+            </div>
+            <div fxLayout="row wrap" fxLayoutAlign="end start" class="order-info">
+                <p class="underline-text" (click)="downloadFile()">Don’t have template ? Click to download. <mat-icon class="mt-05">cloud_download</mat-icon></p>
+            </div>
+        </mat-card-content>
+    </mat-card>    
+</div>
+
