@@ -41,7 +41,7 @@ class FileUploadController extends SimpleGenericRestfulController<Site> {
 
         if (resultList) {
             String fileName = "Site Report - ${new Date()}.xlsx"
-            fileUploadService.exportExcel(fileName,response,adminCode,null,officialSiteName,hubSite,resultList)
+            fileUploadService.exportExcel(fileName,response,adminCode,officialSiteName,hubSite,resultList)
         }else {
             render JSONFormat.respond(null,StatusCode.RecordNotFound,StatusCode.RecordNotFound.description) as JSON
         }
