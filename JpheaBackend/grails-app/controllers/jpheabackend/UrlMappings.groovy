@@ -19,5 +19,9 @@ class UrlMappings {
         //import history
         "/api/import"(resources: "importHistory")
 
+        //Report
+        "/api/excel/report/RptSiteInfo"(controller: "fileUpload", action: "exportRptInfoSiteReport")
+        "/api/excel/report/RptSiteDown"(controller: "fileUpload", action: "exportRptSiteDownReport")
+
     }
 }
