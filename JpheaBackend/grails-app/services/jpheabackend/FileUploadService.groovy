@@ -501,6 +501,7 @@ class FileUploadService {
         Integer headerRow = 8
         Integer row = headerRow+1
         Integer no = 1
+        String totalSite
 
         WebXlsxExporter exporter = new WebXlsxExporter()
         exporter.with {
@@ -508,14 +509,15 @@ class FileUploadService {
             putCellValue(0, 0, "Searching")
             putCellValue(1, 0, "Admin Code") putCellValue(1, 1, adminCode)
             putCellValue(2, 0, "Official Site Name") putCellValue(2, 1,filter.officialSiteName)
-            putCellValue(3, 0, "Admin Code") putCellValue(3, 1, filter?.adminCode)
-            putCellValue(4, 0, "Hub_Site") putCellValue(4, 1, filter?.hubSite)
+            putCellValue(3, 0, "Admin Code") putCellValue(3, 1, filter.adminCode)
+            putCellValue(4, 0, "Hub_Site") putCellValue(4, 1, filter.hubSite)
 
 
             putCellValue(headerRow, 0, "No")
             putCellValue(headerRow, 1, "official Site Name")
             putCellValue(headerRow, 2, "Admin Code")
             putCellValue(headerRow, 3, "Hub_Site")
+
             resultList.each{
                 putCellValue(row, 0, no)
                 putCellValue(row, 1, it.officialSiteName)
@@ -524,8 +526,9 @@ class FileUploadService {
                 no++
                 row++
             }
+            totalSite = "Totals Sites ${no}"
 
-            putCellValue(7, 0, "Total ${no-1} Sites")
+            putCellValue(7, 0, totalSite)
             save(response.outputStream)
         }
     }
