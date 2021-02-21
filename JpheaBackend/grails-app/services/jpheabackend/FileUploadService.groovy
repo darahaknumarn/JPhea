@@ -208,18 +208,21 @@ class FileUploadService {
         mapResult.resultList = sites as List
         println sites*/
 
-        List<Map> resultList = new ArrayList<>()
+
         if (site){
-            Site.findAllByHubSite(site.hubSite).each {
-                Map data = [:]
-                data.officialSiteName = it.officialSiteName
-                data.adminCode = it.adminCode
-                data.hubSite = it.hubSite
-                resultList.add(data)
-            }
-            mapResult.resultList = resultList as List
+            List<Site> siteList = Site.findAllByHubSite(site.hubSite)
+            mapResult.resultList = mapSites(siteList)
         }
         return mapResult
+    }
+
+    def listSiteByHubSites(List<String> hubSitesFilter){
+        List<Site> siteList = Site.findAllByHubSiteInList(hubSitesFilter)
+
+        if (siteList){
+            return mapSites(siteList)
+        }
+        return []
     }
 
 
@@ -526,9 +529,40 @@ class FileUploadService {
                 no++
                 row++
             }
-            totalSite = "Totals Sites ${no}"
+            totalSite = "Total ${no-1} Sites"
 
             putCellValue(7, 0, totalSite)
+            save(response.outputStream)
+        }
+    }
+
+    def exportRPTSiteDown(List<String> hubSites,def resultList,String fileName,def response){
+        Integer headerRow = 7
+        Integer row = headerRow+1
+        Integer no = 1
+        String totalSite
+
+        WebXlsxExporter exporter = new WebXlsxExporter()
+        exporter.with {
+            setResponseHeaders(response, fileName)
+            putCellValue(1, 0, "Searching")
+            putCellValue(2, 0, "Hub_Site") putCellValue(2, 1, hubSites.toString().substring(1,hubSites.toString().length()-1))
+
+            putCellValue(headerRow, 0, "No")
+            putCellValue(headerRow, 1, "official Site Name")
+            putCellValue(headerRow, 2, "Admin Code")
+            putCellValue(headerRow, 3, "Hub_Site")
+
+            resultList.each{
+                putCellValue(row, 0, no)
+                putCellValue(row, 1, it.officialSiteName)
+                putCellValue(row, 2, it.adminCode)
+                putCellValue(row, 3, it.hubSite)
+                no++
+                row++
+            }
+            totalSite = "Total ${no-1} Sites"
+            putCellValue(6, 0, totalSite)
             save(response.outputStream)
         }
     }
@@ -598,5 +632,18 @@ class FileUploadService {
             obj.importHistoryId = importHistoryId
         }
         return obj
+    }
+    private static List<Map> mapSites(List<Site> siteList){
+        List<Map> resultList = new ArrayList<>()
+
+        siteList.each {
+            Map data = [:]
+            data.officialSiteName = it.officialSiteName
+            data.adminCode = it.adminCode
+            data.hubSite = it.hubSite
+            resultList.add(data)
+        }
+
+        return resultList
     }
 }
