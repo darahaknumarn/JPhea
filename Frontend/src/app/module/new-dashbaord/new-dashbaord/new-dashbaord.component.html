@@ -1,0 +1,41 @@
+<mat-card class="p-0" >
+    <div fxLayout="row wrap">
+          <div fxFlex="50" fxFlex.gt-sm="25" fxFlex.sm="50">
+                <div class="text-center pt-1 pb-1 border-right-light">
+                      <mat-icon class="text-green">book</mat-icon>
+                      <!-- <h4 class="m-0 ">{{projectSummary?.totalProject}}</h4> -->
+                      <h4 class="m-0">100.2</h4>
+                      <small class="m-0 ">Total Project</small>
+                </div>
+          </div>
+          <div fxFlex="50" fxFlex.gt-sm="25" fxFlex.sm="50">
+                <div class="text-center pt-1 pb-1 border-right-light">
+                      <mat-icon class="text-blue">monetization_on</mat-icon>
+                      <!-- <h4 class="m-0 ">{{projectSummary?.totalReceived | currency }}</h4> -->
+                      <h4 class="m-0">100.2</h4>
+                      <small class="m-0 ">Total Receive </small>
+                </div>
+          </div>
+          <div fxFlex="50" fxFlex.gt-sm="25" fxFlex.sm="50">
+                <div class="text-center pt-1 pb-1 border-right-light">
+                      <mat-icon class="text-green">credit_card</mat-icon>
+                      <!-- <h4 class="m-0 ">{{projectSummary?.totalExpanse | currency }}</h4> -->
+                      <h4 class="m-0">100.2</h4>
+                      <small class="m-0 ">Total Expanse</small>
+                </div>
+          </div>
+          <div fxFlex="50" fxFlex.gt-sm="25" fxFlex.sm="50">
+                <div class="text-center pt-1 pb-1 border-right-light">
+                      <mat-icon class="text-blue">account_balance_wallet</mat-icon>
+                      <!-- <h4 class="m-0 ">{{projectSummary?.balance | currency }}</h4> -->
+                      <h4 class="m-0">100.2</h4>
+                      <small class="m-0 ">Total Balance</small>
+                </div>
+          </div>
+
+    </div>
+</mat-card>
+
+<div fxLayout="row wrap">
+    <app-leaflet-map-report fxFlex="100"></app-leaflet-map-report>
+</div>
