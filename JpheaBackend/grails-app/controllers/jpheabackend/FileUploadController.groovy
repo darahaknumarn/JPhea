@@ -5,7 +5,6 @@ import com.hanuman.simplegeneric.PaginationCommand
 import com.hanuman.simplegeneric.SimpleGenericRestfulController
 import com.hanuman.simplegeneric.StatusCode
 import grails.converters.JSON
-import javafx.scene.control.Pagination
 
 
 class FileUploadController extends SimpleGenericRestfulController<Site> {

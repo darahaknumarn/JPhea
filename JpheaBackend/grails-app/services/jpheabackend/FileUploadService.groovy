@@ -2,21 +2,9 @@ package jpheabackend
 
 import com.hanuman.simplegeneric.PaginationCommand
 import grails.gorm.transactions.Transactional
-import javafx.scene.input.DataFormat
 import org.apache.poi.xssf.usermodel.XSSFWorkbook
-import org.h2.engine.FunctionAlias
-import org.hibernate.Transaction
-import org.hibernate.criterion.CriteriaSpecification
-import org.hibernate.hql.internal.HolderInstantiator
-import org.hibernate.transform.AliasToBeanConstructorResultTransformer
-import org.hibernate.transform.AliasToBeanResultTransformer
-import org.hibernate.transform.AliasToEntityMapResultTransformer
 import org.springframework.transaction.annotation.Propagation
 import pl.touk.excel.export.WebXlsxExporter
-import sun.util.calendar.BaseCalendar
-
-import javax.xml.crypto.dsig.Transform
-import java.text.SimpleDateFormat
 
 @Transactional(propagation = Propagation.REQUIRES_NEW)
 class FileUploadService {

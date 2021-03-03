@@ -100,23 +100,24 @@ hibernate:
 dataSource:
     pooled: true
     jmxExport: true
-    driverClassName: org.h2.Driver
-    username: sa
-    password: ''
+    driverClassName: com.mysql.cj.jdbc.Driver
+    dialect: org.hibernate.dialect.MySQL5InnoDBDialec
+    username: developer
+    password: 'P@ssw0rd'
 
 environments:
     development:
         dataSource:
-            dbCreate: create-drop
-            url: jdbc:h2:mem:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE
+            dbCreate: update
+            url: jdbc:mysql://192.168.1.10:3306/dev_jphea?useUnicode=yes&characterEncoding=UTF-8
     test:
         dataSource:
             dbCreate: update
-            url: jdbc:h2:mem:testDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE
+            url: jdbc:mysql://192.168.1.10:3306/dev_jphea?useUnicode=yes&characterEncoding=UTF-8
     production:
         dataSource:
-            dbCreate: none
-            url: jdbc:h2:./prodDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE
+            dbCreate: update
+            url: jdbc:mysql://192.168.1.10:3306/dev_jphea?useUnicode=yes&characterEncoding=UTF-8
             properties:
                 jmxEnabled: true
                 initialSize: 5
@@ -136,11 +137,11 @@ environments:
                 jdbcInterceptors: ConnectionState
                 defaultTransactionIsolation: 2 # TRANSACTION_READ_COMMITTED
 ---
-grails:
-    mongodb:
-        host: "192.168.1.10"
-        port: 27017
-        databaseName: "dev_jphea"
+#grails:
+#    mongodb:
+#        host: "192.168.1.10"
+#        port: 27017
+#        databaseName: "dev_jphea"
 ---
 grails:
     controllers:
