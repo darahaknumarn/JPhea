@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { tileLayer, latLng, circle } from 'leaflet';
+import { tileLayer, latLng, circle, MapOptions, LayerGroup, marker} from 'leaflet';
+import { SiteService } from 'app/services/site.service';
 
 @Component({
   selector: 'app-leaflet-map-report',
@@ -8,31 +9,53 @@ import { tileLayer, latLng, circle } from 'leaflet';
 })
 export class LeafletMapReportComponent implements OnInit {
 
-  lat: number = 11.540324
-  lng: number = 104.90128910000001
+  lat: number = 11.562108; 
+  lng: number = 104.888535;
+  mapOptions: MapOptions;
+  listDataMaps: any[] = [];
 
-  mapList: any[] = [{radius: 3000}, {radius: 10000}]
-  constructor() { }
+  constructor( private siteService: SiteService) { }
 
   ngOnInit(): void {
+    this.initializeMapOptions();
+
+    this.siteService.list().subscribe(res => {
+      // add layer for circle
+      this.addLayer(res['data'])
+    })
   }
 
-  options = {
-    layers: [
-      // view map layer
-      tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; OpenStreetMap contributors',
-        detectRetina: true,
-        maxZoom: 18
-      })
-    ],
-    zoom: 6,
-    center: latLng([ this.lat, this.lng ])
+  // Init leaflet map report in cambodia.
+  private initializeMapOptions() {
+    this.mapOptions = {
+      // Init Cambodia
+      center: latLng([ this.lat, this.lng ]),
+      zoom: 6,
+      layers: [
+         // view map layer
+        tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution: '&copy; OpenStreetMap contributors',
+          maxZoom: 18
+        })
+      ],
+    };
   }
 
-  layers = [ 
-    circle([ this.lat, this.lng ], { radius: 5000, color: "red" }).bindPopup("<b>Welcome</b> <br/> Cuty").openPopup(),
-    circle([ 10.594242, 104.164032], { radius: 1000, color: "red" }).bindPopup("<b>Welcome</b> <br/> Kitty").openPopup()
-  ];
-  
+  layers = this.listDataMaps;
+
+  // Add layer of circle in leaflet map report
+  private addLayer( mapInfo: any[] ) {
+    if (!mapInfo) {
+      return;
+    }
+
+    //populate map from map info
+    for (var i in mapInfo) {
+      let info = mapInfo[i];
+      let circles = circle([ info.latitude, info.longitude ], { radius: mapInfo[i].uniRan_SRAN_ID, color: "blue" }).bindPopup(info.siteOwner).openPopup()
+      this.listDataMaps.push(circles)
+    }
+    
+  }
+
 }
