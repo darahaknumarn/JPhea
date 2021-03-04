@@ -82,11 +82,11 @@ class FileUploadController extends SimpleGenericRestfulController<Site> {
 
         def resultList = fileUploadService.listSiteByAdminCode(adminCode)
 
-        if (resultList.filter.adminCode == null) {
-            render JSONFormat.respond(null, StatusCode.RecordNotFound, StatusCode.RecordNotFound.description) as JSON
-            return
-        } else {
+        if (resultList.filter.adminCode != null) {
             fileUploadService.exportRPTInfoSite(adminCode, resultList.filter, resultList.resultList, fileName, response)
+        }
+        else {
+            render JSONFormat.respond(null, StatusCode.RecordNotFound, StatusCode.RecordNotFound.description) as JSON
         }
     }
 
@@ -108,8 +108,6 @@ class FileUploadController extends SimpleGenericRestfulController<Site> {
                 fileUploadService.exportRPTSiteDown(listHubSites, resultList, fileName, response)
             }
         }
-        else {
-            render JSONFormat.respond(null, StatusCode.RecordNotFound, StatusCode.RecordNotFound.description) as JSON
-        }
+        render JSONFormat.respond(null, StatusCode.RecordNotFound, StatusCode.RecordNotFound.description) as JSON
     }
 }

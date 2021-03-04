@@ -9,8 +9,14 @@ class UrlMappings {
             }
         }
 
+        "/api/excel"(resources: "fileUpload")
+        "/api/import"(resources: "ImportHistory")
+
         "/api/excel/upload"(controller: "fileUpload", action: "uploadFile")
         "/api/excel/export"(controller: "fileUpload", action: "exportFile")
-        "/api/excel"(resources: "fileUpload")
+
+        "/api/excel/siteTemplate"(controller: "fileUpload", action: "getSiteTemplate")
+        "/api/excel/report/RptSiteInfo"(controller: "fileUpload", action: "exportRptInfoSiteReport")
+        "/api/excel/report/RptSiteDown"(controller: "fileUpload", action: "exportRptSiteDownReport")
     }
 }
