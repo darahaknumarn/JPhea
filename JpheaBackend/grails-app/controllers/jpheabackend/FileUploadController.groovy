@@ -1,10 +1,11 @@
 package jpheabackend
 
-import com.hanuman.simplegeneric.JSONFormat
-import com.hanuman.simplegeneric.PaginationCommand
-import com.hanuman.simplegeneric.SimpleGenericRestfulController
-import com.hanuman.simplegeneric.StatusCode
+
 import grails.converters.JSON
+import simplegenericrestful.JSONFormat
+import simplegenericrestful.PaginationCommand
+import simplegenericrestful.SimpleGenericRestfulController
+import simplegenericrestful.StatusCode
 
 
 class FileUploadController extends SimpleGenericRestfulController<Site> {

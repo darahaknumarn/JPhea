@@ -1,7 +1,6 @@
 package demoexcel
 
 import grails.gorm.transactions.Transactional
-
 @Transactional
 class ImportHistoryService {
     def springSecurityService
@@ -9,7 +8,7 @@ class ImportHistoryService {
 
     ImportHistory saveDefault(ImportHistory history) {
         history.created = new Date()
-        history.importBy = springSecurityService.principal.username
+        history.importBy ="admin"//TODO  springSecurityService.principal.username
         history.save(flush: true)
     }
 
@@ -32,5 +31,6 @@ class ImportHistoryService {
         history.totalRecodeUpdate = uploadInfo.updateInfo.totalUpdate as Integer
         history.totalRecodeUpdateFail = uploadInfo.updateInfo.totalFail as Integer
         history.save(flush: true)
+        return history
     }
 }

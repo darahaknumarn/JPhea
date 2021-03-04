@@ -23,7 +23,7 @@ apply plugin:"org.grails.grails-gsp"
 repositories {
     mavenLocal()
     maven { url "https://repo.grails.org/grails/core" }
-    maven { url "http://172.30.30.20:8081/repository/corebackend"}
+    maven { url "http://hanuman.team:8081/repository/core-backend"}
 }
 
 dependencies {
@@ -65,7 +65,7 @@ dependencies {
     compile 'org.apache.poi:poi-ooxml:3.17'
     runtime "mysql:mysql-connector-java:8.0.22"
 
-    compile "com.ecoinsoft:core-backend:$coreBackEndVersion"
+    compile 'tech.hanuman:core-backend:1.0.1'
     compile 'org.grails.plugins:excel-export:2.1'
     compile group: 'commons-io', name: 'commons-io', version: '2.6'
 

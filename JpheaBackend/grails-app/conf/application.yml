@@ -117,7 +117,7 @@ environments:
     production:
         dataSource:
             dbCreate: update
-            url: jdbc:mysql://192.168.1.10:3306/dev_jphea?useUnicode=yes&characterEncoding=UTF-8
+            url: jdbc:mysql://127.0.0.1:3306/staging_jphea?useUnicode=yes&characterEncoding=UTF-8
             properties:
                 jmxEnabled: true
                 initialSize: 5
@@ -136,7 +136,7 @@ environments:
                 testOnReturn: false
                 jdbcInterceptors: ConnectionState
                 defaultTransactionIsolation: 2 # TRANSACTION_READ_COMMITTED
----
+#---
 #grails:
 #    mongodb:
 #        host: "192.168.1.10"
@@ -148,3 +148,28 @@ grails:
         upload:
             maxFileSize: 20971520
             maxRequestSize: 31457280
+---
+grails:
+    redis:
+        port: 6379
+        database: 1
+        timeout: 2000
+        poolConfig:
+            testWhileIdle: true
+            maxTotal: 500
+environments:
+    development:
+        grails:
+            redis:
+                host: "192.168.1.10"
+                password: P@ssw0rd
+    test:
+        grails:
+            redis:
+                host: "192.168.1.10"
+                password: V5-yyWDUG7=B[
+    production:
+        grails:
+            redis:
+                host: "127.0.0.1"
+                password: V5-yyWDUG7=B[

@@ -9,8 +9,8 @@ class envImpl implements Environment {
     footerText="Tiger Team ";
     production = false;
 
-    // serverUrl = 'http://localhost:8080';
-    serverUrl = 'http://139.59.100.123:8080';
+    serverUrl = 'http://localhost:8080';
+    // serverUrl = 'http://139.59.100.123:8080';
 
     xApiKey = '1Y7GFfZubS6g0LSzxKfZ';
     dateFormat = 'dd-MM-yyyy';

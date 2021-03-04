@@ -1,9 +1,10 @@
-package jpheabackend
+package demoexcel
 
 
 import grails.converters.JSON
-import simplegenericrestful.JSONFormat
-import simplegenericrestful.SimpleGenericRestfulController
+import hanuman.simplegenericrestfulcontroller.generic.JSONFormat
+import hanuman.simplegenericrestfulcontroller.generic.SimpleGenericRestfulController
+
 
 class ImportHistoryController extends SimpleGenericRestfulController<ImportHistory> {
     ImportHistoryController(){

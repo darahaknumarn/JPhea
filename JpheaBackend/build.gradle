@@ -75,10 +75,11 @@ dependencies {
 
     runtime "mysql:mysql-connector-java:8.0.16"
     compile 'org.grails.plugins:mongodb:7.0.0'
-    compile 'com.hanuman.simplegeneric:com.hanuman.simplegeneric.plugin:1.0.1'
+//    compile 'com.hanuman.simplegeneric:com.hanuman.simplegeneric.plugin:1.0.1'
     compile 'org.grails.plugins:excel-export:2.1'
     compile 'org.apache.poi:poi:3.17'
     compile 'org.apache.poi:poi-ooxml:3.17'
+    compile "com.hanuman:com.hanuman.core-backend:1.0.1"
 }
 
 bootRun {
@@ -115,4 +116,7 @@ tasks.withType(Test) {
 assets {
     minifyJs = true
     minifyCss = true
+}
+grails {
+    pathingJar = true
 }

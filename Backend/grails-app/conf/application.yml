@@ -137,8 +137,9 @@ environments:
     production:
         dataSource:
             dbCreate: update
-#            url: jdbc:mysql://127.0.0.1:3307/demoexcle?useUnicode=yes&characterEncoding=UTF-8
-            jndiName : java:comp/env/ProJphea
+            url: jdbc:mysql://127.0.0.1:3307/staging_jphea?useUnicode=yes&characterEncoding=UTF-8
+#            url: jdbc:mysql://192.168.1.10:3306 /dev_jphea?useUnicode=yes&characterEncoding=UTF-8
+#            jndiName : java:comp/env/ProJphea
             properties:
                 jmxEnabled: true
                 initialSize: 5
@@ -181,7 +182,7 @@ environments:
   production:
     grails:
       redis:
-          host: "192.168.1.10"
+          host: "127.0.0.1"
           password: V5-yyWDUG7=B[
 ---
 grails:

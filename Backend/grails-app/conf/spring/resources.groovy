@@ -1,7 +1,9 @@
-import corebackend.odp.CoordinateValidatorService
-import corebackend.security.CustomLogoutHandlerService
-import corebackend.security.CustomTokenStorageService
-import corebackend.security.SecUserPasswordEncoderListener
+package spring
+
+import hanuman.odp.CoordinateValidatorService
+import hanuman.security.CustomLogoutHandlerService
+import hanuman.security.CustomTokenStorageService
+import hanuman.security.SecUserPasswordEncoderListener
 
 // Place your Spring DSL code here
 beans = {

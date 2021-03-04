@@ -1,10 +1,11 @@
 package jpheabackend
 
-import com.hanuman.simplegeneric.PaginationCommand
+
 import grails.gorm.transactions.Transactional
 import org.apache.poi.xssf.usermodel.XSSFWorkbook
 import org.springframework.transaction.annotation.Propagation
 import pl.touk.excel.export.WebXlsxExporter
+import simplegenericrestful.PaginationCommand
 
 @Transactional(propagation = Propagation.REQUIRES_NEW)
 class FileUploadService {

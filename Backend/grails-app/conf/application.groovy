@@ -1,10 +1,10 @@
 //	stateless chain that allows anonymous access when no token is sent. If however a token is on the request, it will be validated.
 String ANONYMOUS_FILTERS = 'anonymousAuthenticationFilter,restTokenValidationFilter,restExceptionTranslationFilter,filterInvocationInterceptor'
 // Added by the Spring Security Core plugin:
-grails.plugin.springsecurity.userLookup.userDomainClassName = 'corebackend.security.SecUser'
-grails.plugin.springsecurity.userLookup.authorityJoinClassName ='corebackend.security.SecUserRole'
-grails.plugin.springsecurity.authority.className = 'corebackend.security.security.Role'
-grails.plugin.springsecurity.requestMap.className = 'corebackend.security.Requestmap'
+grails.plugin.springsecurity.userLookup.userDomainClassName = 'hanuman.security.SecUser'
+grails.plugin.springsecurity.userLookup.authorityJoinClassName ='hanuman.security.SecUserRole'
+grails.plugin.springsecurity.authority.className = 'hanuman.security.security.Role'
+grails.plugin.springsecurity.requestMap.className = 'hanuman.security.Requestmap'
 grails.plugin.springsecurity.securityConfigType = 'Requestmap'
 
 //JSON credential extraction
@@ -91,21 +91,7 @@ grails {
 
     }
 
-//    mail {
-//        host = "smtp.zoho.com"
-//        port = 465
-//        username = "noreply@ecoinsoft.com"
-//        password = "3c0!Soft2018"
-//        props = ["mail.smtp.auth":"true",
-//                 "mail.smtp.socketFactory.port":"465",
-//                 "mail.smtp.socketFactory.class":"javax.net.ssl.SSLSocketFactory",
-//                 "mail.smtp.socketFactory.fallback":"false"]
-//    }
 }
 
-//grails.mail.default.from = "noreply@ecoinsoft.com"
-//grails.server.port.http = 8090
 
 grails.views.default.codec = "html"
-//grails.views.gsp.encoding = "UTF-8"
-//grails.converters.encoding = "UTF-8"
