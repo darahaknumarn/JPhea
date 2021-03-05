@@ -113,7 +113,7 @@ environments:
     test:
         dataSource:
             dbCreate: update
-            url: jdbc:mysql://178.128.97.84:3306/dev_jphea?useUnicode=yes&characterEncoding=UTF-8
+            url: jdbc:mysql://127.0.0.1:3306/dev_jphea?useUnicode=yes&characterEncoding=UTF-8
 #            jndiName : java:comp/env/ProBaku
             properties:
                 jmxEnabled: true
