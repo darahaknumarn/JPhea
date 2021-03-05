@@ -42,12 +42,15 @@ class FileUploadController extends SimpleGenericRestfulController<Site> {
             String orginalFileName = file.getOriginalFilename()
 
             List<Map> rawData = fileUploadService.loadDataFromFile(file)
-            ImportHistory uploadInfo = fileUploadService.saveToSite(rawData, orginalFileName as String)
-            render JSONFormat.respond(uploadInfo) as JSON
 
-        } else {
-            render JSONFormat.respond(null, "File not found") as JSON
+            if (rawData){
+                ImportHistory uploadInfo = fileUploadService.saveToSite(rawData, orginalFileName as String)
+                render JSONFormat.respond(uploadInfo) as JSON
+                return
+            }
         }
+
+        render JSONFormat.respond(null, "File not found") as JSON
     }
 
     def exportFile() {
@@ -59,7 +62,7 @@ class FileUploadController extends SimpleGenericRestfulController<Site> {
         def resultList = fileUploadService.listSite(adminCode, officialSiteName, hubSite)
 
         if (resultList) {
-            String fileName = "Site Report - ${new Date()}.xlsx"
+            String fileName = "Site Report.xlsx"
             fileUploadService.exportExcel(fileName, response, adminCode, officialSiteName, hubSite, resultList)
         } else {
             render JSONFormat.respond(null, StatusCode.RecordNotFound, StatusCode.RecordNotFound.description) as JSON

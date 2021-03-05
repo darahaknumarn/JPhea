@@ -16,6 +16,11 @@ class FileUploadService {
 
 //######### upload-save service #########
     def loadDataFromFile(def file) {
+
+        if (file.isEmpty()){
+            return []
+        }
+
         FileInputStream fs =file.getInputStream()
         def workbook = new XSSFWorkbook(fs)
         def sheet = workbook.getSheetAt(0)
@@ -295,10 +300,10 @@ class FileUploadService {
             resultList.each {
                 putCellValue(row, 0, no.toString())
 
-                putCellValue(row,1 ,it.adminCode?:"")
-                putCellValue(row,2 ,it.officialSiteName?:"")
-                putCellValue(row,3 ,it.sRANName?:"")
-                putCellValue(row,4 ,it.bTSNameNoTech?:"")
+                putCellValue(row,1 ,it.officialSiteName?:"")
+                putCellValue(row,2 ,it.sRANName?:"")
+                putCellValue(row,3 ,it.bTSNameNoTech?:"")
+                putCellValue(row,4 ,it.adminCode?:"")
                 putCellValue(row,5 ,it.edotcoName?:"")
                 putCellValue(row,6 ,it.productType?:"")
                 putCellValue(row,7 ,it.siteCategory?:"")
@@ -426,10 +431,11 @@ class FileUploadService {
 
             resultList.each {
 
-                putCellValue(row,0 ,it.adminCode?:"")
-                putCellValue(row,1 ,it.officialSiteName?:"")
-                putCellValue(row,2 ,it.sRANName?:"")
-                putCellValue(row,3 ,it.bTSNameNoTech?:"")
+
+                putCellValue(row,0 ,it.officialSiteName?:"")
+                putCellValue(row,1 ,it.sRANName?:"")
+                putCellValue(row,2 ,it.bTSNameNoTech?:"")
+                putCellValue(row,3 ,it.adminCode?:"")
                 putCellValue(row,4 ,it.edotcoName?:"")
                 putCellValue(row,5 ,it.productType?:"")
                 putCellValue(row,6 ,it.siteCategory?:"")
