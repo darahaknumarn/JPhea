@@ -11,9 +11,10 @@ import { routes } from '../new-dashbaord/new-dashbaord.route';
 import { NewDashbaordComponent } from './new-dashbaord/new-dashbaord.component';
 import { LeafletMapReportComponent } from './leaflet-map-report/leaflet-map-report/leaflet-map-report.component';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+import { BubbleChartReportComponent } from './bubble-chart-report/bubble-chart-report/bubble-chart-report.component';
 
 @NgModule({
-  declarations: [NewDashbaordComponent, LeafletMapReportComponent],
+  declarations: [NewDashbaordComponent, LeafletMapReportComponent, BubbleChartReportComponent],
   imports: [
     CommonModule,
     SharedMaterialModule,
