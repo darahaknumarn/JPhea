@@ -69,12 +69,8 @@ class FileUploadController extends SimpleGenericRestfulController<Site> {
         }
     }
 
-    def getSiteTemplate(PaginationCommand pagination) {
-        def resultList = fileUploadService.listSite(pagination, null, null, null, null)
-
-        if (resultList) {
-            fileUploadService.siteTemplate(response, resultList, "Site excel template.xlsx")
-        }
+    def getSiteTemplate() {
+        fileUploadService.siteTemplate(response, "Site excel template.xlsx")
     }
 
 
