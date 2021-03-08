@@ -12,9 +12,12 @@ import { NewDashbaordComponent } from './new-dashbaord/new-dashbaord.component';
 import { LeafletMapReportComponent } from './leaflet-map-report/leaflet-map-report/leaflet-map-report.component';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { BubbleChartReportComponent } from './bubble-chart-report/bubble-chart-report/bubble-chart-report.component';
+import { DonutChartStatusComponent } from './donut-chart/donut-chart-status/donut-chart-status.component';
+import { DonutChartLocationComponent } from './donut-chart/donut-chart-location/donut-chart-location.component';
+import { DonutChartStateComponent } from './donut-chart/donut-chart-state/donut-chart-state.component';
 
 @NgModule({
-  declarations: [NewDashbaordComponent, LeafletMapReportComponent, BubbleChartReportComponent],
+  declarations: [NewDashbaordComponent, LeafletMapReportComponent, BubbleChartReportComponent, DonutChartStatusComponent, DonutChartLocationComponent, DonutChartStateComponent],
   imports: [
     CommonModule,
     SharedMaterialModule,

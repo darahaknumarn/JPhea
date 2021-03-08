@@ -42,7 +42,7 @@ export class BubbleChartReportComponent implements OnInit {
     },
     yAxis: {
       name: "Number of Projects",
-      nameGap: 35,
+      nameGap: 30,
       nameLocation: 'middle',
       splitLine: { show: false },
     },
@@ -51,7 +51,7 @@ export class BubbleChartReportComponent implements OnInit {
         type: 'scatter',
         data: this.data[0],
         symbolSize: function (data) {
-          return Math.sqrt(data[3]) / 5e2;
+          return Math.sqrt(data[2]) / 5e2;
         },
         itemStyle: { shadowBlur: 10, shadowColor: 'rgba(120, 36, 50, 0.5)', shadowOffsetY: 5},
       }

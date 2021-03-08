@@ -37,8 +37,20 @@
 </mat-card>
 
 <mat-card>
-      <div fxLayout="row wrap">
-            <app-bubble-chart-report fxFlex="50"></app-bubble-chart-report>
-            <app-leaflet-map-report fxFlex="100"></app-leaflet-map-report>
+      <div fxLayout="row wrap" fxLayoutAlign="space-between">
+            <div fxFlex="100%" fxFlex.gt-sm="34%"> 
+                  <app-bubble-chart-report></app-bubble-chart-report>
+            </div>
+            <div fxFlex="100%" fxFlex.gt-sm="22%"> 
+                  <app-donut-chart-status></app-donut-chart-status>
+            </div>
+            <div fxFlex="100%" fxFlex.gt-sm="22%"> 
+                  <app-donut-chart-location></app-donut-chart-location>
+            </div>
+            <div fxFlex="100%" fxFlex.gt-sm="22%"> 
+                  <app-donut-chart-state></app-donut-chart-state>
+            </div>
+
+            <app-leaflet-map-report fxFlex="100" class="mb-1"></app-leaflet-map-report>
       </div>
 </mat-card>
