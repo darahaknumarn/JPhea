@@ -12,6 +12,7 @@ class ImportHistory {
 
 
     static constraints = {
+        importBy nullable: true
         fileName nullable: true
         sheetName nullable: true
         totalRecodeInsert nullable: true

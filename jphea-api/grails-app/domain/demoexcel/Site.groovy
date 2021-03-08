@@ -5,8 +5,6 @@ import javax.persistence.GenerationType
 import javax.persistence.Id
 
 class Site {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id
 
     Integer adminCode

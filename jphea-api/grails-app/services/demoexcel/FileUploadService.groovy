@@ -165,13 +165,13 @@ class FileUploadService {
     def listSite(Integer adminCode, String officialSiteName, String hubSite){
         def resultList = Site.createCriteria().list() {
             or {
-                if (adminCode){
+                if (adminCode && adminCode!="null"){
                     eq("adminCode",adminCode)
                 }
-                if (officialSiteName){
+                if (officialSiteName && officialSiteName!="null"){
                     ilike("officialSiteName","%${officialSiteName}%")
                 }
-                if (hubSite){
+                if (hubSite && hubSite!="null"){
                     ilike("hubSite","%${hubSite}%")
                 }
             }
