@@ -362,7 +362,7 @@ class FileUploadService {
         }
     }
 
-    def siteTemplate(def response, def resultList, String fileName){
+    def siteTemplate(def response, String fileName){
 
         Integer headerRow = 0
         Integer row = headerRow+1
@@ -429,8 +429,7 @@ class FileUploadService {
             putCellValue(headerRow, 54 ,"Hub Site")
 
 
-            resultList.each {
-
+            getDefaultSiteTemplateData().each {
 
                 putCellValue(row,0 ,it.officialSiteName?:"")
                 putCellValue(row,1 ,it.sRANName?:"")
@@ -640,5 +639,74 @@ class FileUploadService {
         }
 
         return resultList
+    }
+    private static def getDefaultSiteTemplateData(){
+
+        Map simpleData = [:]
+        simpleData.officialSiteName = "PP338"
+        simpleData.sRANName = "HSoPNH2416CCV"
+        simpleData.bTSNameNoTech = "PNH2416CCV"
+        simpleData.adminCode = "2416"
+        simpleData.edotcoName = "PP338"
+        simpleData.productType = "HUAWEI_SRAN"
+        simpleData.siteCategory = "HUAWEI_SRAN"
+        simpleData.longitude = "104.913"
+        simpleData.latitude = "11.66"
+        simpleData.ibsSite = ""
+        simpleData.criticalSite = ""
+        simpleData.vip = ""
+        simpleData.e_iMacroBBUName = ""
+        simpleData.donnerSite = ""
+        simpleData.e_iMacroRRU = ""
+        simpleData.subcon = "CTL"
+        simpleData.tcu = ""
+        simpleData.netEco = ""
+        simpleData.province = "PHNOM PENH"
+        simpleData.areaLocation = "Urban"
+        simpleData.priorityCategories = "P2"
+        simpleData.guard = "No site guard"
+        simpleData.guardPhnone = ""
+        simpleData.towerType = "SST"
+        simpleData.towerHeight = "12"
+        simpleData.buildingHeight = "8"
+        simpleData.siteType = "RT"
+        simpleData.grid = "yes"
+        simpleData.onAirStatus = "On air"
+        simpleData.siteOwner = "Edotco"
+        simpleData.fiberRingInfo = ""
+        simpleData.uniRan_SRAN_ID = "1871"
+        simpleData.s1UIP = "10.192.161.82"
+        simpleData.gws1UIP = "10.192.161.81"
+        simpleData.s1UVLANID = "2020"
+        simpleData.s1CIP = "10.192.161.82"
+        simpleData.gwS1CIP = "10.192.161.81"
+        simpleData.s1CVLANID = "2020"
+        simpleData.mMEIP_S1C = "10.136.67.230"
+        simpleData._3GID = "537"
+        simpleData._3GIP = "10.192.97.82"
+        simpleData.gw3GIP = "10.192.97.81"
+        simpleData._3GVLANID = "1520"
+        simpleData.rncIP = "10.10.68.67"
+        simpleData.rncName = "PNHRNC09"
+        simpleData._2GID = "263"
+        simpleData._2GIP = "10.192.33.82"
+        simpleData.gw2GIP = "10.192.33.81"
+        simpleData._2GVLANID = "1020"
+        simpleData.bscIP = ""
+        simpleData.bscName = "PNHBSC03"
+        simpleData.omIP = "10.192.225.82"
+        simpleData.gwOMIP = "10.192.225.81"
+        simpleData.omVLANID = "2520"
+        simpleData.hubSite = "3WAY"
+
+        List<Map> result = new ArrayList<>()
+        result.add(simpleData)
+        result.add(simpleData)
+        result.add(simpleData)
+        result.add(simpleData)
+        result.add(simpleData)
+
+        return result
+
     }
 }
