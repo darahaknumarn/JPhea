@@ -1,9 +1,5 @@
 package demoexcel
 
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
-
 class Site {
     Integer id
 
@@ -29,7 +25,7 @@ class Site {
     String areaLocation
     String priorityCategories
     String guard
-    String guardPhnone
+    String guardPhone
     String towerType
     Double towerHeight
     Double buildingHeight
@@ -89,7 +85,7 @@ class Site {
         areaLocation nullable: true
         priorityCategories nullable: true
         guard nullable: true
-        guardPhnone nullable: true
+        guardPhone nullable: true
         towerType nullable: true
         towerHeight nullable: true
         buildingHeight nullable: true
