@@ -15,9 +15,10 @@ import { BubbleChartReportComponent } from './bubble-chart-report/bubble-chart-r
 import { DonutChartStatusComponent } from './donut-chart/donut-chart-status/donut-chart-status.component';
 import { DonutChartLocationComponent } from './donut-chart/donut-chart-location/donut-chart-location.component';
 import { DonutChartStateComponent } from './donut-chart/donut-chart-state/donut-chart-state.component';
+import { DonutChartFinanceComponent } from './donut-chart/donut-chart-finance/donut-chart-finance.component';
 
 @NgModule({
-  declarations: [NewDashbaordComponent, LeafletMapReportComponent, BubbleChartReportComponent, DonutChartStatusComponent, DonutChartLocationComponent, DonutChartStateComponent],
+  declarations: [NewDashbaordComponent, LeafletMapReportComponent, BubbleChartReportComponent, DonutChartStatusComponent, DonutChartLocationComponent, DonutChartStateComponent, DonutChartFinanceComponent],
   imports: [
     CommonModule,
     SharedMaterialModule,

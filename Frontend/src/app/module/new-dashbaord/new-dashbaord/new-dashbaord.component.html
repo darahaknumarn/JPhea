@@ -3,32 +3,32 @@
           <div fxFlex="50" fxFlex.gt-sm="25" fxFlex.sm="50">
                 <div class="text-center pt-1 pb-1 border-right-light">
                       <mat-icon class="text-green">book</mat-icon>
-                      <!-- <h4 class="m-0 ">{{projectSummary?.totalProject}}</h4> -->
-                      <h4 class="m-0">100.2</h4>
+                      <h4 class="m-0 ">{{projectSummary?.totalProject}}</h4>
+                      <!-- <h4 class="m-0">100.2</h4> -->
                       <small class="m-0 ">Total Project</small>
                 </div>
           </div>
           <div fxFlex="50" fxFlex.gt-sm="25" fxFlex.sm="50">
                 <div class="text-center pt-1 pb-1 border-right-light">
                       <mat-icon class="text-blue">monetization_on</mat-icon>
-                      <!-- <h4 class="m-0 ">{{projectSummary?.totalReceived | currency }}</h4> -->
-                      <h4 class="m-0">100.2</h4>
+                      <h4 class="m-0 ">{{projectSummary?.totalReceived | currency }}</h4>
+                      <!-- <h4 class="m-0">100.2</h4> -->
                       <small class="m-0 ">Total Receive </small>
                 </div>
           </div>
           <div fxFlex="50" fxFlex.gt-sm="25" fxFlex.sm="50">
                 <div class="text-center pt-1 pb-1 border-right-light">
                       <mat-icon class="text-green">credit_card</mat-icon>
-                      <!-- <h4 class="m-0 ">{{projectSummary?.totalExpanse | currency }}</h4> -->
-                      <h4 class="m-0">100.2</h4>
+                      <h4 class="m-0 ">{{projectSummary?.totalExpanse | currency }}</h4>
+                      <!-- <h4 class="m-0">100.2</h4> -->
                       <small class="m-0 ">Total Expanse</small>
                 </div>
           </div>
           <div fxFlex="50" fxFlex.gt-sm="25" fxFlex.sm="50">
                 <div class="text-center pt-1 pb-1 border-right-light">
                       <mat-icon class="text-blue">account_balance_wallet</mat-icon>
-                      <!-- <h4 class="m-0 ">{{projectSummary?.balance | currency }}</h4> -->
-                      <h4 class="m-0">100.2</h4>
+                      <h4 class="m-0 ">{{projectSummary?.balance | currency }}</h4>
+                      <!-- <h4 class="m-0">100.2</h4> -->
                       <small class="m-0 ">Total Balance</small>
                 </div>
           </div>
@@ -38,19 +38,27 @@
 
 <mat-card>
       <div fxLayout="row wrap" fxLayoutAlign="space-between">
-            <div fxFlex="100%" fxFlex.gt-sm="34%"> 
+            <div fxFlex="100%" fxFlex.gt-sm="50%"> 
                   <app-bubble-chart-report></app-bubble-chart-report>
             </div>
-            <div fxFlex="100%" fxFlex.gt-sm="22%"> 
+            <div fxFlex="100%" fxFlex.gt-sm="50%"> </div>
+            <mat-divider [inset]="true" class="mb-1 border-right-light"></mat-divider>
+            
+            <app-leaflet-map-report fxFlex="100" class="mb-1"></app-leaflet-map-report>
+            <mat-divider [inset]="true" class="mb-1 border-right-light"></mat-divider>
+
+            <div fxFlex="100%" fxFlex.gt-sm="25%"> 
                   <app-donut-chart-status></app-donut-chart-status>
             </div>
-            <div fxFlex="100%" fxFlex.gt-sm="22%"> 
+            <div fxFlex="100%" fxFlex.gt-sm="25%"> 
                   <app-donut-chart-location></app-donut-chart-location>
             </div>
-            <div fxFlex="100%" fxFlex.gt-sm="22%"> 
+            <div fxFlex="100%" fxFlex.gt-sm="25%"> 
                   <app-donut-chart-state></app-donut-chart-state>
             </div>
-
-            <app-leaflet-map-report fxFlex="100" class="mb-1"></app-leaflet-map-report>
+            <div fxFlex="100%" fxFlex.gt-sm="25%"> 
+                  <app-donut-chart-finance></app-donut-chart-finance>
+            </div>
+            
       </div>
 </mat-card>

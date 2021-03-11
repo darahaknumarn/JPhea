@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DashbordService } from 'app/services/dashbord.service';
 
 @Component({
   selector: 'app-new-dashbaord',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NewDashbaordComponent implements OnInit {
 
-  constructor() { }
+  public projectSummary;
+  constructor(private dashbordService: DashbordService) { }
 
   ngOnInit(): void {
+    this.dashbordService.projectSummary().subscribe(res => {
+      this.projectSummary = res.data[0]
+    });
   }
 
 }

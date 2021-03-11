@@ -2,47 +2,47 @@ import { Component, OnInit } from '@angular/core';
 import { DashbordService } from 'app/services/dashbord.service';
 
 @Component({
-  selector: 'app-donut-chart-state',
-  templateUrl: './donut-chart-state.component.html',
-  styleUrls: ['./donut-chart-state.component.scss']
+  selector: 'app-donut-chart-finance',
+  templateUrl: './donut-chart-finance.component.html',
+  styleUrls: ['./donut-chart-finance.component.scss']
 })
-export class DonutChartStateComponent implements OnInit {
+export class DonutChartFinanceComponent implements OnInit {
 
   isLoading: boolean = false;
-  projectStates: any[] = [];
+  projectFinaces: any[] = [];
   option: any;
   constructor(private dashboardService: DashbordService) { }
 
   ngOnInit(): void {
-    // Get project by state
-    this.getProjectState() 
+    // Get project by finance
+    this.getProjectFinance() 
    }
 
-  private getProjectState() {
+  private getProjectFinance() {
     this.isLoading =true ; 
 
-    this.dashboardService.getProjectByState(true).subscribe(res => {
+    this.dashboardService.getProjectByFinance(true).subscribe(res => {
       if(res['data']) {
         //populate map from map info
         for (var i in res['data']) {
           let info = res['data'][i];  
-          this.projectStates.push({value: Number(info.totalReceived), name: info.stateName})
+          this.projectFinaces.push({value: Number(info.totalReceived), name: info.financingName})
         }
 
         this.isLoading = false;
         
-        // List all project group by state into donut chart.
+        // List all project group by finance into donut chart.
         this.option = {
-          title: { text: 'Project State', left: 'center'},
+          title: { text: 'Project Financing', left: 'center'},
           tooltip: {trigger: 'item'},
           legend: { top: '8%', left: 'center'},
           series: [
             {
-              name: 'State',
+              name: 'Financing',
               type: 'pie',
               radius: ['40%', '60%'],
               selectedMode: 'single',
-              data: this.projectStates,
+              data: this.projectFinaces,
               emphasis: {
                 itemStyle: {
                     shadowBlur: 10,

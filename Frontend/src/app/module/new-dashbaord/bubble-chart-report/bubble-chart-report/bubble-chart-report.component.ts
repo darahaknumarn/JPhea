@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
+import { DashbordService } from 'app/services/dashbord.service';
 
 @Component({
   selector: 'app-bubble-chart-report',
@@ -9,55 +10,67 @@ import { DatePipe } from '@angular/common';
 export class BubbleChartReportComponent implements OnInit {
 
   isLoading = false;
-  constructor(private datePie: DatePipe) { }
+  projectTypies: any[] = [];
+  bubbleChartOptions: any;
+  constructor(private datePie: DatePipe, private dashboardService: DashbordService) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.loadProjectType()
+  }
 
+  sizeFunction(x) {
+    var y = Math.sqrt(x / 5e8) + 0.1;
+    return y * 80;
+  };
 
-  // List all project into bubble chart.
-  private data = [
-    [[28604,77,17096869,'Australia',1990, 'red'],[26424,75.7,57110117,'United Kingdom',1990, 'black'],[37062,30,252847810,'United States',1990, 'bule']],
-  ];
+  private loadProjectType() {
+    this.isLoading = true;
 
-  // Add project's data into bubble chart
-  public bubbleChartOptions = { 
-    title: { text: 'Bubble Chart' },
-    grid: { left: '6%', right: '4%', bottom: '3%', containLabel: true },
-    legend: { enabled: false },
-    tooltip: {
-      formatter: function (param) {
-        return '<div style="border-bottom: 1px solid rgba(255,255,255,.3); font-size: 14px;padding-bottom: 2px;margin-bottom: 2px">'
-          + param.data[3] + " in " + param.data[4]
-          + '</div>'
-          + 'Total Investment' + '：' +  param.data[0] + '<br>'
-          + 'Number of Projects' + '：' + param.data[1] + '<br>';
+    this.dashboardService.getProjectByType(true).subscribe(res => {
+      if (res['data']) {
+        res['data'].forEach(info => {
+          this.projectTypies.push([info.totalReceived, info.projectTypeId, info.projectTypeName])
+        });
+
+        this.isLoading = false;
+        // Add project's data into bubble chart
+        this.bubbleChartOptions = { 
+          title: { text: 'Bubble Chart' },
+          grid: { left: '6%', right: '4%', bottom: '3%', containLabel: true },
+          legend: { enabled: false },
+          tooltip: {
+            formatter: function (param) {
+              return '<div style="border-bottom: 1px solid rgba(255,255,255,.3); font-size: 14px;padding-bottom: 2px;margin-bottom: 2px">'
+                + param.data[2]
+                + '</div>'
+                + 'Total Investment' + '：' +  param.data[0] + '<br>'
+                + 'Number of Projects' + '：' + param.data[1] + '<br>';
+            }
+          },
+          xAxis: {
+            name: 'Total Received', 
+            nameGap: 35,
+            nameLocation: 'middle',
+            splitLine: { show: false },
+            axisLabel: { formatter: '{value}B', interval: 0, rotate: 30 },
+          },
+          yAxis: {
+            name: "Number of Projects",
+            nameGap: 30,
+            nameLocation: 'middle',
+            splitLine: { show: false },
+          },
+          series: [
+            {
+              type: 'scatter',
+              data: this.projectTypies
+            }
+          ],
+          animationDurationUpdate: 1000,
+          animationEasingUpdate: 'quinticInOut'
+        }
       }
-    },
-    xAxis: {
-      name: 'Total Investment', 
-      nameGap: 35,
-      nameLocation: 'middle',
-      splitLine: { show: false },
-      axisLabel: { formatter: '{value}B', interval: 0, rotate: 30 },
-    },
-    yAxis: {
-      name: "Number of Projects",
-      nameGap: 30,
-      nameLocation: 'middle',
-      splitLine: { show: false },
-    },
-    series: [
-      {
-        type: 'scatter',
-        data: this.data[0],
-        symbolSize: function (data) {
-          return Math.sqrt(data[2]) / 5e2;
-        },
-        itemStyle: { shadowBlur: 10, shadowColor: 'rgba(120, 36, 50, 0.5)', shadowOffsetY: 5},
-      }
-    ],
-    animationDurationUpdate: 1000,
-    animationEasingUpdate: 'quinticInOut'
+    });
   }
   
 }
