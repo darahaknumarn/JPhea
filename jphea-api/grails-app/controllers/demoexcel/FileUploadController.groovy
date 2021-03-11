@@ -4,6 +4,7 @@ package demoexcel
 import grails.converters.JSON
 import hanuman.simplegenericrestfulcontroller.generic.JSONFormat
 import hanuman.simplegenericrestfulcontroller.generic.PaginationCommand
+import hanuman.simplegenericrestfulcontroller.generic.RespondDTO
 import hanuman.simplegenericrestfulcontroller.generic.SimpleGenericRestfulController
 import hanuman.simplegenericrestfulcontroller.generic.StatusCode
 
@@ -37,20 +38,28 @@ class FileUploadController extends SimpleGenericRestfulController<Site> {
 //---------------------------------------
     def uploadFile() {
         def file = params.filesName
+        RespondDTO dto = new RespondDTO()
 
         if (file) {
             String orginalFileName = file.getOriginalFilename()
 
-            List<Map> rawData = fileUploadService.loadDataFromFile(file)
+            List<Map> rawData = fileUploadService.loadDataFromFile(file,dto)
 
             if (rawData){
                 ImportHistory uploadInfo = fileUploadService.saveToSite(rawData, orginalFileName as String)
                 render JSONFormat.respond(uploadInfo) as JSON
                 return
             }
+            else
+            {
+                render JSONFormat.respond(null,StatusCode.Invalid, "List of site must be in sheet 1 of File. ${dto.message}") as JSON
+                return
+            }
         }
-
-        render JSONFormat.respond(null, "File not found") as JSON
+        else
+        {
+            render JSONFormat.respond(null, "File not found") as JSON
+        }
     }
 
     def exportFile() {

@@ -177,7 +177,7 @@ environments:
   test:
     grails:
       redis:
-        host: "192.168.1.10"
+        host: "127.0.0.1"
         password: V5-yyWDUG7=B[
   production:
     grails:

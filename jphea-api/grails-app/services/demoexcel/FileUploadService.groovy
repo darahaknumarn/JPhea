@@ -2,6 +2,7 @@ package demoexcel
 
 import grails.gorm.transactions.Transactional
 import hanuman.simplegenericrestfulcontroller.generic.PaginationCommand
+import hanuman.simplegenericrestfulcontroller.generic.RespondDTO
 import org.apache.poi.xssf.usermodel.XSSFWorkbook
 import org.springframework.transaction.annotation.Propagation
 import pl.touk.excel.export.WebXlsxExporter
@@ -15,9 +16,10 @@ class FileUploadService {
 
 
 //######### upload-save service #########
-    def loadDataFromFile(def file) {
+    def loadDataFromFile(def file, RespondDTO dto) {
 
         if (file.isEmpty()){
+            dto.message = "File is empty."
             return []
         }
 
@@ -25,12 +27,37 @@ class FileUploadService {
         def workbook = new XSSFWorkbook(fs)
         def sheet = workbook.getSheetAt(0)
 
+        //check null data
+        if (!sheet.getRow(0)){
+            dto.message = "Site List Header is Invalid."
+            return []
+        }
+
 
         //column header
         def sheetheader = []
         for (cell in sheet.getRow(0).cellIterator()) {
             sheetheader << cell.stringCellValue
         }
+
+
+        //check wrong Header
+        List<String> tempList = new ArrayList<>()
+        List<String> cloneSheetheader = sheetheader.clone()
+        cloneSheetheader.sort()
+        int i = 0
+        listFileHeader().sort().each {
+            if (it!=cloneSheetheader[i]){
+                tempList.add("Colum Header \'${it}\' is not match with \'${cloneSheetheader[i]}\'")
+            }
+            i++
+        }
+
+        if (tempList.size()>0){
+            dto.message = "Header is Invalid ${tempList.toString()}."
+            return []
+        }
+
 
         //column data
         def values = []
@@ -165,13 +192,13 @@ class FileUploadService {
     def listSite(Integer adminCode, String officialSiteName, String hubSite){
         def resultList = Site.createCriteria().list() {
             or {
-                if (adminCode){
+                if (adminCode && adminCode!="null"){
                     eq("adminCode",adminCode)
                 }
-                if (officialSiteName){
+                if (officialSiteName && officialSiteName!="null"){
                     ilike("officialSiteName","%${officialSiteName}%")
                 }
-                if (hubSite){
+                if (hubSite && hubSite!="null"){
                     ilike("hubSite","%${hubSite}%")
                 }
             }
@@ -322,7 +349,7 @@ class FileUploadService {
                 putCellValue(row,20 ,it.areaLocation?:"")
                 putCellValue(row,21 ,it.priorityCategories?:"")
                 putCellValue(row,22 ,it.guard?:"")
-                putCellValue(row,23 ,it.guardPhnone?:"")
+                putCellValue(row,23 ,it.guardPhone?:"")
                 putCellValue(row,24 ,it.towerType?:"")
                 putCellValue(row,25 ,it.towerHeight?:"")
                 putCellValue(row,26 ,it.buildingHeight?:"")
@@ -394,7 +421,7 @@ class FileUploadService {
             putCellValue(headerRow, 19 ,"Area  Location")
             putCellValue(headerRow, 20 ,"Priority categories")
             putCellValue(headerRow, 21 ,"Guard")
-            putCellValue(headerRow, 22 ,"Guard Phnone")
+            putCellValue(headerRow, 22 ,"Guard Phone")
             putCellValue(headerRow, 23 ,"Tower Type")
             putCellValue(headerRow, 24 ,"Tower Height")
             putCellValue(headerRow, 25 ,"Building Height")
@@ -426,7 +453,7 @@ class FileUploadService {
             putCellValue(headerRow, 51 ,"OMIP")
             putCellValue(headerRow, 52 ,"GWOMIP")
             putCellValue(headerRow, 53 ,"OMVLANID")
-            putCellValue(headerRow, 54 ,"Hub Site")
+            putCellValue(headerRow, 54 ,"Hub_Site")
 
 
             getDefaultSiteTemplateData().each {
@@ -453,7 +480,7 @@ class FileUploadService {
                 putCellValue(row,19 ,it.areaLocation?:"")
                 putCellValue(row,20 ,it.priorityCategories?:"")
                 putCellValue(row,21 ,it.guard?:"")
-                putCellValue(row,22 ,it.guardPhnone?:"")
+                putCellValue(row,22 ,it.guardPhone?:"")
                 putCellValue(row,23 ,it.towerType?:"")
                 putCellValue(row,24 ,it.towerHeight?:"")
                 putCellValue(row,25 ,it.buildingHeight?:"")
@@ -588,7 +615,7 @@ class FileUploadService {
         obj.areaLocation = data['Area  Location']
         obj.priorityCategories = data['Priority categories']
         obj.guard = data['Guard']
-        obj.guardPhnone = data['Guard Phnone']
+        obj.guardPhone = data['Guard Phone']
         obj.towerType = data['Tower Type']
         obj.towerHeight = data['Tower Height']
         obj.buildingHeight = data['Building Height']
@@ -665,7 +692,7 @@ class FileUploadService {
         simpleData.areaLocation = "Urban"
         simpleData.priorityCategories = "P2"
         simpleData.guard = "No site guard"
-        simpleData.guardPhnone = ""
+        simpleData.guardPhone = ""
         simpleData.towerType = "SST"
         simpleData.towerHeight = "12"
         simpleData.buildingHeight = "8"
@@ -708,5 +735,64 @@ class FileUploadService {
 
         return result
 
+    }
+    private static List<String> listFileHeader(){
+        return  [
+                "Admin Code",
+                "Official Site Name",
+                "SRAN Name",
+                "BTS Name No Tech",
+                "Edotco Name",
+                "Product Type",
+                "Site Category",
+                "Longitude",
+                "Latitude",
+                "IBS Site",
+                "Critical Site",
+                "VIP",
+                "e/iMacro BBU Name",
+                "Donner Site",
+                "e/iMacro RRU",
+                "Subcon",
+                "TCU",
+                "NetEco",
+                "Province",
+                "Area  Location",
+                "Priority categories",
+                "Guard",
+                "Guard Phone",
+                "Tower Type",
+                "Tower Height",
+                "Building Height",
+                "Site Type",
+                "Grid",
+                "On air Status",
+                "Site Owner",
+                "Fiber Ring Info",
+                "UniRan/SRAN ID",
+                "S1UIP",
+                "GWS1UIP",
+                "S1UVLANID",
+                "S1CIP",
+                "GWS1CIP",
+                "S1CVLANID",
+                "MMEIP(S1C)",
+                "3GID",
+                "3GIP",
+                "GW3GIP",
+                "3GVLANID",
+                "RNCIP",
+                "RNCName",
+                "2GID",
+                "2GIP",
+                "GW2GIP",
+                "2GVLANID",
+                "BSCIP",
+                "BSCName",
+                "OMIP",
+                "GWOMIP",
+                "OMVLANID",
+                "Hub_Site"
+        ]
     }
 }

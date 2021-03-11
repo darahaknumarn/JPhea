@@ -65,7 +65,7 @@ dependencies {
     compile 'org.apache.poi:poi-ooxml:3.17'
     runtime "mysql:mysql-connector-java:8.0.22"
 
-    compile 'tech.hanuman:core-backend:1.0.1'
+    compile "tech.hanuman:core-backend:${coreBackEndVersion}"
     compile 'org.grails.plugins:excel-export:2.1'
     compile group: 'commons-io', name: 'commons-io', version: '2.6'
 
