@@ -42,15 +42,20 @@ class FileUploadService {
 
 
         //check wrong Header
+        List<String> tempList = new ArrayList<>()
         List<String> cloneSheetheader = sheetheader.clone()
         cloneSheetheader.sort()
         int i = 0
-        listFileHeader().sort().find {
+        listFileHeader().sort().each {
             if (it!=cloneSheetheader[i]){
-                dto.message = "Header is Invalid."
-                return []
+                tempList.add("Colum Header \'${it}\' is not match with \'${cloneSheetheader[i]}\'")
             }
             i++
+        }
+
+        if (tempList.size()>0){
+            dto.message = "Header is Invalid ${tempList.toString()}."
+            return []
         }
 
 
@@ -448,7 +453,7 @@ class FileUploadService {
             putCellValue(headerRow, 51 ,"OMIP")
             putCellValue(headerRow, 52 ,"GWOMIP")
             putCellValue(headerRow, 53 ,"OMVLANID")
-            putCellValue(headerRow, 54 ,"Hub Site")
+            putCellValue(headerRow, 54 ,"Hub_Site")
 
 
             getDefaultSiteTemplateData().each {
@@ -787,7 +792,7 @@ class FileUploadService {
                 "OMIP",
                 "GWOMIP",
                 "OMVLANID",
-                "Hub Site"
+                "Hub_Site"
         ]
     }
 }
