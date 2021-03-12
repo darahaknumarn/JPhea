@@ -1,5 +1,7 @@
 package demoexcel
 
+import grails.converters.JSON
+
 class Site {
     Integer id
 
@@ -127,19 +129,15 @@ class Site {
 
     }
 
-/*    static {
-        JSON.registerObjectMarshaller(this){
-            Map<String,Site> site = new LinkedHashMap<>(it.properties)
-            site.id = it.id
-            site.siteOwner = it.siteOwner
-            site.adminCode = it.adminCode
-            site.sRANName = it.sRANName
-            site.bTSNameNoTech = it.bTSNameNoTech
-            site.siteCategory = it.siteCategory
-            site.latitude = it.latitude
-            site.longitude = it.longitude
-
+    static {
+        JSON.registerObjectMarshaller(this){ data ->
+            Map<String,Site> site = new LinkedHashMap<>(data.properties)
+            site.id = data.id
+            site.child = Site.findAllByHubSiteAndHubSiteIsNotNull(data.hubSite).collect {
+                it.id
+                it.properties
+            }
             return site
         }
-    }*/
+    }
 }
