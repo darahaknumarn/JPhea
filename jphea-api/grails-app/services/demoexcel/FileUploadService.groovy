@@ -329,7 +329,7 @@ class FileUploadService {
             putCellValue(headerRow, 52 ,"OMIP")
             putCellValue(headerRow, 53 ,"GWOMIP")
             putCellValue(headerRow, 54 ,"OMVLANID")
-            putCellValue(headerRow, 55 ,"Hub Site")
+            putCellValue(headerRow, 55 ,"Hub_Site")
 
 
             resultList.each {
