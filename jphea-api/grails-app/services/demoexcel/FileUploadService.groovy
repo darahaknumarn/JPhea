@@ -78,6 +78,14 @@ class FileUploadService {
                         value = cell.numericCellValue
                         map["${sheetheader[cell.columnIndex]}"] = value
                         break
+                    default:
+                        if (cell.CELL_TYPE_BLANK && cell.getStringCellValue().trim().isEmpty()){
+                            //do nothing
+                        }else {
+                            value = cell.richStringCellValue
+                            map["${sheetheader[cell.columnIndex]}"] = value
+                        }
+                        break
                 }
             }
             if (map != [:]) {
@@ -532,9 +540,9 @@ class FileUploadService {
             setResponseHeaders(response, fileName)
             putCellValue(0, 0, "Searching")
             putCellValue(1, 0, "Admin Code") putCellValue(1, 1, adminCode)
-            putCellValue(2, 0, "Official Site Name") putCellValue(2, 1,filter.officialSiteName)
-            putCellValue(3, 0, "Admin Code") putCellValue(3, 1, filter.adminCode)
-            putCellValue(4, 0, "Hub_Site") putCellValue(4, 1, filter.hubSite)
+            putCellValue(3, 0, "Official Site Name") putCellValue(3, 1,filter.officialSiteName?:"")
+            putCellValue(4, 0, "Admin Code") putCellValue(4, 1, filter.adminCode?:"")
+            putCellValue(5, 0, "Hub_Site") putCellValue(5, 1, filter.hubSite?:"")
 
 
             putCellValue(headerRow, 0, "No")
@@ -544,9 +552,9 @@ class FileUploadService {
 
             resultList.each{
                 putCellValue(row, 0, no)
-                putCellValue(row, 1, it.officialSiteName)
-                putCellValue(row, 2, it.adminCode)
-                putCellValue(row, 3, it.hubSite)
+                putCellValue(row, 1, it.officialSiteName?:"")
+                putCellValue(row, 2, it.adminCode?:"")
+                putCellValue(row, 3, it.hubSite?:"")
                 no++
                 row++
             }
@@ -576,9 +584,9 @@ class FileUploadService {
 
             resultList.each{
                 putCellValue(row, 0, no)
-                putCellValue(row, 1, it.officialSiteName)
-                putCellValue(row, 2, it.adminCode)
-                putCellValue(row, 3, it.hubSite)
+                putCellValue(row, 1, it.officialSiteName?:"")
+                putCellValue(row, 2, it.adminCode?:"")
+                putCellValue(row, 3, it.hubSite?:"")
                 no++
                 row++
             }
