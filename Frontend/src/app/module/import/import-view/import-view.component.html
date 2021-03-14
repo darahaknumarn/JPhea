@@ -10,8 +10,18 @@
 <mat-card class="btn-action">
     <div fxLayout="row wrap" fxLayoutAlign="space-between">
         <div fxFlex="100" style="line-height: 2.5;">
-            <!-- <mat-card style="line-height: 2.5;"> -->
                 <div fxLayout="row wrap" fxLayoutAlign="space-between">
+                    <div fxFlex="100" fxFlex.gt-sm="33">
+                        <div fxLayout="row wrap" fxLayoutAlign="space-between">
+                            <div fxFlex="100px">
+                                <strong>Official Site Name</strong>
+                            </div>
+                            <div fxFlex>
+                                : <span>{{site?.officialSiteName}}</span>
+                            </div>
+                        </div>
+                    </div>
+
                     <div fxFlex="100" fxFlex.gt-sm="33">
                         <div fxLayout="row wrap" fxLayoutAlign="space-between">
                             <div fxFlex="100px">
@@ -30,17 +40,6 @@
                             </div>
                             <div fxFlex>
                                 : <span>{{site?.hubSite}}</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div fxFlex="100" fxFlex.gt-sm="33">
-                        <div fxLayout="row wrap" fxLayoutAlign="space-between">
-                            <div fxFlex="100px">
-                                <strong>Site Name</strong>
-                            </div>
-                            <div fxFlex>
-                                : <span>{{site?.officialSiteName}}</span>
                             </div>
                         </div>
                     </div>
@@ -256,16 +255,14 @@
                         </div>
                     </div>
                 </div>
-            <!-- </mat-card> -->
         </div>
     </div>
 
-    <div fxLayout="row wrap" class="border mt-1" fxLayoutAlign="space-between start">
-        <div fxFlex="90%">
-            <h4 class="underline-text">HUB SITE</h4>
+    <div fxLayout="row wrap" fxLayoutAlign="space-between start">
+        <div fxFlex="100%">
+            <h5 class="underline-text">HUB SITE</h5>
         </div>
-
-        <div fxFlex="10%" align="right">
+        <!-- <div fxFlex="10%" align="right">
             <button mat-icon-button (click)="toggle()">
                 <div *ngIf="show">
                     <mat-icon class="mt-05">keyboard_arrow_right</mat-icon>
@@ -275,11 +272,11 @@
                     <mat-icon class="mt-05">keyboard_arrow_down</mat-icon>
                 </div>
             </button>
-        </div>
+        </div> -->
     </div>
 
-    <div fxLayout="row wrap" fxLayoutAlign="space-between" *ngIf="buttonName == 'Show'">
-        <div fxFlex="100" *ngFor="let hubChild of site.child; let i=index">
+    <div fxLayout="row wrap" fxLayoutAlign="space-between" class="mt-1">
+        <!-- <div fxFlex="100" *ngFor="let hubChild of site.child; let i=index">
             <mat-card style="line-height: 2.5;">
                 <div fxLayout="row wrap" fxLayoutAlign="space-between">
                     <div fxFlex="100" fxFlex.gt-sm="33">
@@ -316,6 +313,29 @@
                     </div>
                 </div>
             </mat-card>    
+        </div> -->
+    
+        <div fxFlex="100">
+            <mat-table [dataSource]="dataSource" class="mat-elevation-z4">
+
+                <ng-container matColumnDef="siteName">
+                <mat-header-cell *matHeaderCellDef> Official Site Name </mat-header-cell>
+                <mat-cell *matCellDef="let element">{{element?.officialSiteName}} </mat-cell>
+                </ng-container>
+            
+                <ng-container matColumnDef="adminCode">
+                <mat-header-cell *matHeaderCellDef> Admin Code </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element?.adminCode}} </mat-cell>
+                </ng-container>
+            
+                <ng-container matColumnDef="hubSite">
+                <mat-header-cell *matHeaderCellDef> Hub Site </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element?.hubSite}} </mat-cell>
+                </ng-container>
+            
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+            </mat-table>
         </div>
     </div>                       
 </mat-card>

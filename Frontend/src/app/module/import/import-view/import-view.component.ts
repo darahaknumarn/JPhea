@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { SiteService } from 'app/services/site.service';
 import { AppLoaderService } from '@ecoinsoft/core-frontend/src/public-api';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-import-view',
@@ -12,8 +13,10 @@ export class ImportViewComponent implements OnInit {
   importId: number;
   siteId: number;
   site: any;
-  show = false;
-  buttonName = 'Show';
+  displayedColumns: string[] = ['siteName', 'adminCode', 'hubSite'];
+  dataSource: MatTableDataSource<{}>;
+  // show = false;
+  // buttonName = 'Show';
 
   constructor(
     private siteService: SiteService,
@@ -39,6 +42,7 @@ export class ImportViewComponent implements OnInit {
       if (res['statusCode'] === '1') {
         this.importId = res['data']?.importHistoryId
         this.site = res['data'];
+        this.dataSource = new MatTableDataSource(this.site?.child);
         this.loader.close()
       }
     }, err => this.loader.close())
@@ -50,15 +54,15 @@ export class ImportViewComponent implements OnInit {
     this.router.navigate(['/import/list'], {queryParams: {"importId": this.importId}});
   }
 
-  toggle() {
-    this.show = !this.show
+  // toggle() {
+  //   this.show = !this.show
 
-    if(this.show) {
-      this.buttonName = 'Hide';
-    }
-    else {
-      this.buttonName = 'Show';
-    }
-  }
+  //   if(this.show) {
+  //     this.buttonName = 'Hide';
+  //   }
+  //   else {
+  //     this.buttonName = 'Show';
+  //   }
+  // }
 
 }
