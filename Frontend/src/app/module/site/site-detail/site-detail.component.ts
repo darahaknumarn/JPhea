@@ -12,6 +12,8 @@ export class SiteDetailComponent implements OnInit {
 
   siteId: number;
   site: any;
+  show = false;
+  buttonName = 'Show';
 
   constructor(
     private siteService: SiteService,
@@ -35,6 +37,17 @@ export class SiteDetailComponent implements OnInit {
         this.loader.close()
       }
     }, err => this.loader.close())
+  }
+
+  toggle() {
+    this.show = !this.show
+
+    if(this.show) {
+      this.buttonName = 'Hide';
+    }
+    else {
+      this.buttonName = 'Show';
+    }
   }
 
 }

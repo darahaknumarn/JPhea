@@ -31,16 +31,16 @@ export class SiteListComponent extends AbstractGrid implements OnInit {
   getcolumn(): AppColumn[] {
     return [
       {
-        displayName: 'Site Owner', dataIndex: 'siteOwner'
-      },
-      {
         displayName: 'Admin Code', dataIndex: 'adminCode'
       },
       {
-        displayName: 'SRAN Name', dataIndex: 'sRANName'
+        displayName: 'Hub Site', dataIndex: 'hubSite'
       },
       {
-        displayName: 'BTS Name No Tect', dataIndex: 'bTSNameNoTech'
+        displayName: 'Site Name', dataIndex: 'officialSiteName'
+      },
+      {
+        displayName: 'Site Owner', dataIndex: 'siteOwner'
       },
       {
         displayName: 'Product Type', dataIndex: 'productType'
