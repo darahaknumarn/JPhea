@@ -37,7 +37,7 @@ export class SiteListComponent extends AbstractGrid implements OnInit {
         displayName: 'Hub Site', dataIndex: 'hubSite'
       },
       {
-        displayName: 'Site Name', dataIndex: 'officialSiteName'
+        displayName: 'Official Site Name', dataIndex: 'officialSiteName'
       },
       {
         displayName: 'Site Owner', dataIndex: 'siteOwner'
