@@ -1,3 +1,15 @@
 .font {
     font-weight: bold;
 }
+
+.underline-text {
+    text-decoration: underline;
+    font-weight: bold;
+    position: relative;
+    top: 10px;
+}
+
+.border {
+    background-color: #dddddd87;
+    padding: 0px 0px 0px 4px;
+}

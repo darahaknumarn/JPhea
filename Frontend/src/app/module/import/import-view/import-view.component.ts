@@ -12,6 +12,8 @@ export class ImportViewComponent implements OnInit {
   importId: number;
   siteId: number;
   site: any;
+  show = false;
+  buttonName = 'Show';
 
   constructor(
     private siteService: SiteService,
@@ -48,6 +50,15 @@ export class ImportViewComponent implements OnInit {
     this.router.navigate(['/import/list'], {queryParams: {"importId": this.importId}});
   }
 
+  toggle() {
+    this.show = !this.show
 
+    if(this.show) {
+      this.buttonName = 'Hide';
+    }
+    else {
+      this.buttonName = 'Show';
+    }
+  }
 
 }

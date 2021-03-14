@@ -8,67 +8,314 @@
 </div>
 
 <mat-card class="btn-action">
-    <div fxLayout="row" fxLayoutAlign="space-between start">
-        <!-- right side -->
-        <div fxFlex="49">
-            <div fxFlex="30" fxLayout="column">
-                <label for="ofm"><p class="font">Official Site Name</p></label> 
-                <label for="sran"><p class="font">SRAN Name</p></label> 
-                <label for="nn"><p class="font">RNC Name</p></label> 
-                <label for="bts"><p class="font">BTS Name No Tech</p></label> 
-                <label for="ac"><p class="font">Admin Code</p></label> 
-                <label for="en"><p class="font">Edotco Name</p></label> 
-                <label for="pt"><p class="font">Product Type</p></label> 
-                <label for="sc"><p class="font">Site Category</p></label>
-                <label for="pt"><p class="font">Longitude</p></label> 
-                <label for="sc"><p class="font">Latitude</p></label>
-                <label for="sc"><p class="font">IBS Site</p></label>    
-            </div>
+    <div fxLayout="row wrap" fxLayoutAlign="space-between">
+        <div fxFlex="100" style="line-height: 2.5;">
+            <!-- <mat-card style="line-height: 2.5;"> -->
+                <div fxLayout="row wrap" fxLayoutAlign="space-between">
+                    <div fxFlex="100" fxFlex.gt-sm="33">
+                        <div fxLayout="row wrap" fxLayoutAlign="space-between">
+                            <div fxFlex="100px">
+                                <strong>Admin Code</strong>
+                            </div>
+                            <div fxFlex>
+                                : <span>{{site?.adminCode}}</span>
+                            </div>
+                        </div>
+                    </div>
 
-            <div fxFlex="70" fxLayout="column">
-                <p> : {{site?.officialSiteName}}</p>
-                <p> : {{site?.sRANName}}</p>
-                <p> : {{site?.rncName}}</p>
-                <p> : {{site?.bTSNameNoTech}}</p>
-                <p> : {{site?.adminCode}}</p>
-                <p> : {{site?.edotcoName}}</p>
-                <p> : {{site?.productType}}</p>
-                <p> : {{site?.siteCategory}}</p>
-                <p> : {{site?.latitude}}</p>
-                <p> : {{site?.longitude}}</p>
-                <p> : {{site?.ibsSite}}</p>
-            </div>
-        </div>
+                    <div fxFlex="100" fxFlex.gt-sm="33">
+                        <div fxLayout="row wrap" fxLayoutAlign="space-between">
+                            <div fxFlex="100px">
+                                <strong>Hub Site</strong>
+                            </div>
+                            <div fxFlex>
+                                : <span>{{site?.hubSite}}</span>
+                            </div>
+                        </div>
+                    </div>
 
-        <!-- left side -->
-        <div fxFlex="49">
-            <div fxFlex="30" fxLayout="column">
-                <label for="ofm"><p class="font">IBS Site</p></label> 
-                <label for="sran"><p class="font">Critical Site</p></label> 
-                <label for="nn"><p class="font">VIP</p></label> 
-                <label for="bts"><p class="font">e/iMacro BBU Name</p></label> 
-                <label for="ac"><p class="font">Donner Site</p></label> 
-                <label for="en"><p class="font">e/iMacro RRU</p></label> 
-                <label for="pt"><p class="font">Subcon</p></label> 
-                <label for="sc"><p class="font">TCU</p></label>
-                <label for="pt"><p class="font">Site Owner</p></label> 
-                <label for="sc"><p class="font">Province</p></label>
-                <label for="sc"><p class="font">Area  Location</p></label>    
-            </div>
+                    <div fxFlex="100" fxFlex.gt-sm="33">
+                        <div fxLayout="row wrap" fxLayoutAlign="space-between">
+                            <div fxFlex="100px">
+                                <strong>Site Name</strong>
+                            </div>
+                            <div fxFlex>
+                                : <span>{{site?.officialSiteName}}</span>
+                            </div>
+                        </div>
+                    </div>
 
-            <div fxFlex="70" fxLayout="column">
-                <p> : {{site?.ibsSite}}</p>
-                <p> : {{site?.criticalSite}}</p>
-                <p> : {{site?.vip}}</p>
-                <p> : {{site?.e_iMacroBBUName}}</p>
-                <p> : {{site?.donnerSite}}</p>
-                <p> : {{site?.e_iMacroRRU}}</p>
-                <p> : {{site?.subcon}}</p>
-                <p> : {{site?.tcu}}</p>
-                <p> : {{site?.province}}</p>
-                <p> : {{site?.siteOwner}}</p>
-                <p> : {{site?.areaLocation}}</p>
-            </div>
+                    <div fxFlex="100" fxFlex.gt-sm="33">
+                        <div fxLayout="row wrap" fxLayoutAlign="space-between">
+                            <div fxFlex="100px">
+                                <strong>SRAN Name</strong>
+                            </div>
+                            <div fxFlex>
+                                : <span>{{site?.sRANName}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div fxFlex="100" fxFlex.gt-sm="33">
+                        <div fxLayout="row wrap" fxLayoutAlign="space-between">
+                            <div fxFlex="100px">
+                                <strong>RNC Name</strong>
+                            </div>
+                            <div fxFlex>
+                                : <span>{{site?.rncName}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div fxFlex="100" fxFlex.gt-sm="33">
+                        <div fxLayout="row wrap" fxLayoutAlign="space-between">
+                            <div fxFlex="100px">
+                                <strong>BTS Name</strong>
+                            </div>
+                            <div fxFlex>
+                                : <span>{{site?.bTSNameNoTec}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div fxFlex="100" fxFlex.gt-sm="33">
+                        <div fxLayout="row wrap" fxLayoutAlign="space-between">
+                            <div fxFlex="100px">
+                                <strong>Edotco Name</strong>
+                            </div>
+                            <div fxFlex>
+                                : <span>{{site?.edotcoName}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div fxFlex="100" fxFlex.gt-sm="33">
+                        <div fxLayout="row wrap" fxLayoutAlign="space-between">
+                            <div fxFlex="100px">
+                                <strong>Product Type</strong>
+                            </div>
+                            <div fxFlex>
+                                : <span>{{site?.productType}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div fxFlex="100" fxFlex.gt-sm="33">
+                        <div fxLayout="row wrap" fxLayoutAlign="space-between">
+                            <div fxFlex="100px">
+                                <strong>Site Category</strong>
+                            </div>
+                            <div fxFlex>
+                                : <span>{{site?.siteCategory}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div fxFlex="100" fxFlex.gt-sm="33">
+                        <div fxLayout="row wrap" fxLayoutAlign="space-between">
+                            <div fxFlex="100px">
+                                <strong>Longitude</strong>
+                            </div>
+                            <div fxFlex>
+                                : <span>{{site?.longitude}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div fxFlex="100" fxFlex.gt-sm="33">
+                        <div fxLayout="row wrap" fxLayoutAlign="space-between">
+                            <div fxFlex="100px">
+                                <strong>Latitude</strong>
+                            </div>
+                            <div fxFlex>
+                                : <span>{{site?.latitude}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div fxFlex="100" fxFlex.gt-sm="33">
+                        <div fxLayout="row wrap" fxLayoutAlign="space-between">
+                            <div fxFlex="100px">
+                                <strong>IBS Site</strong>
+                            </div>
+                            <div fxFlex>
+                                : <span>{{site?.ibsSit}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div fxLayout="row wrap" fxLayoutAlign="space-between">
+                    <div fxFlex="100" fxFlex.gt-sm="33">
+                        <div fxLayout="row wrap" fxLayoutAlign="space-between">
+                            <div fxFlex="100px">
+                                <strong>Net Eco</strong>
+                            </div>
+                            <div fxFlex>
+                                : <span style="color:blue">{{site?.netEco}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div fxFlex="100" fxFlex.gt-sm="33">
+                        <div fxLayout="row wrap" fxLayoutAlign="space-between">
+                            <div fxFlex="100px">
+                                <strong>Critical Site</strong>
+                            </div>
+                            <div fxFlex>
+                                : <span>{{site?.criticalSite}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div fxFlex="100" fxFlex.gt-sm="33">
+                        <div fxLayout="row wrap" fxLayoutAlign="space-between">
+                            <div fxFlex="100px">
+                                <strong>VIP</strong>
+                            </div>
+                            <div fxFlex>
+                                : <span>{{site?.vip}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div fxFlex="100" fxFlex.gt-sm="33">
+                        <div fxLayout="row wrap" fxLayoutAlign="space-between">
+                            <div fxFlex="100px">
+                                <strong>e/iMacro BBU</strong>
+                            </div>
+                            <div fxFlex>
+                                : <span>{{site?.e_iMacroBBUName}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div fxFlex="100" fxFlex.gt-sm="33">
+                        <div fxLayout="row wrap" fxLayoutAlign="space-between">
+                            <div fxFlex="100px">
+                                <strong>Subcon</strong>
+                            </div>
+                            <div fxFlex>
+                                : <span>{{site?.subcon}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div fxFlex="100" fxFlex.gt-sm="33">
+                        <div fxLayout="row wrap" fxLayoutAlign="space-between">
+                            <div fxFlex="100px">
+                                <strong>TCU</strong>
+                            </div>
+                            <div fxFlex>
+                                : <span>{{site?.tcu}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div fxFlex="100" fxFlex.gt-sm="33">
+                        <div fxLayout="row wrap" fxLayoutAlign="space-between">
+                            <div fxFlex="100px">
+                                <strong>Site Owner</strong>
+                            </div>
+                            <div fxFlex>
+                                : <span>{{site?.siteOwner}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div fxFlex="100" fxFlex.gt-sm="33">
+                        <div fxLayout="row wrap" fxLayoutAlign="space-between">
+                            <div fxFlex="100px">
+                                <strong>Province</strong>
+                            </div>
+                            <div fxFlex>
+                                : <span>{{site?.province}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div fxFlex="100" fxFlex.gt-sm="33">
+                        <div fxLayout="row wrap" fxLayoutAlign="space-between">
+                            <div fxFlex="100px">
+                                <strong>Area Locatio</strong>
+                            </div>
+                            <div fxFlex>
+                                : <span>{{site?.areaLocation}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div fxFlex="100" fxFlex.gt-sm="33">
+                        <div fxLayout="row wrap" fxLayoutAlign="space-between">
+                            <div fxFlex="100px">
+                                <strong>BCS IP</strong>
+                            </div>
+                            <div fxFlex>
+                                : <span>{{site?.bscIP}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <!-- </mat-card> -->
         </div>
     </div>
+
+    <div fxLayout="row wrap" class="border mt-1" fxLayoutAlign="space-between start">
+        <div fxFlex="90%">
+            <h4 class="underline-text">HUB SITE</h4>
+        </div>
+
+        <div fxFlex="10%" align="right">
+            <button mat-icon-button (click)="toggle()">
+                <div *ngIf="show">
+                    <mat-icon class="mt-05">keyboard_arrow_right</mat-icon>
+                </div>
+
+                <div *ngIf="!(show)">
+                    <mat-icon class="mt-05">keyboard_arrow_down</mat-icon>
+                </div>
+            </button>
+        </div>
+    </div>
+
+    <div fxLayout="row wrap" fxLayoutAlign="space-between" *ngIf="buttonName == 'Show'">
+        <div fxFlex="100" *ngFor="let hubChild of site.child; let i=index">
+            <mat-card style="line-height: 2.5;">
+                <div fxLayout="row wrap" fxLayoutAlign="space-between">
+                    <div fxFlex="100" fxFlex.gt-sm="33">
+                        <div fxLayout="row wrap" fxLayoutAlign="space-between">
+                            <div fxFlex="100px">
+                                <strong>Admin Code</strong>
+                            </div>
+                            <div fxFlex>
+                                : <span>{{hubChild?.adminCode}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div fxFlex="100" fxFlex.gt-sm="33">
+                        <div fxLayout="row wrap" fxLayoutAlign="space-between">
+                            <div fxFlex="100px">
+                                <strong>Hub Site</strong>
+                            </div>
+                            <div fxFlex>
+                                : <span>{{hubChild?.hubSite}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div fxFlex="100" fxFlex.gt-sm="33">
+                        <div fxLayout="row wrap" fxLayoutAlign="space-between">
+                            <div fxFlex="100px">
+                                <strong>Site Name</strong>
+                            </div>
+                            <div fxFlex>
+                                : <span>{{hubChild?.officialSiteName}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </mat-card>    
+        </div>
+    </div>                       
 </mat-card>
