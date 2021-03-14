@@ -31,7 +31,7 @@ export class ImportListComponent implements OnInit {
   pageStart = 0;
   pagelimit = 10;
   baseParams: {};
-  displayedColumns: string[] = ['SiteOwner', 'AdminCode', 'SRANName','BTSNameNoTect', 'ProductType','SiteCategory', 'Latitude', 'Longitude', 'Action'] ;
+  displayedColumns: string[] = ['AdminCode', 'HubSite', 'SiteName','SiteOwner', 'ProductType','SiteCategory', 'Latitude', 'Longitude', 'Action'] ;
 
 
   constructor
