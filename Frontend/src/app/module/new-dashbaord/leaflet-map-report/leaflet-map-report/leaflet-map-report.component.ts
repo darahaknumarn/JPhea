@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { tileLayer, latLng, circle, MapOptions, LayerGroup, marker} from 'leaflet';
 import { SiteService } from 'app/services/site.service';
+import { DashbordService } from 'app/services/dashbord.service';
 
 @Component({
   selector: 'app-leaflet-map-report',
@@ -14,12 +15,14 @@ export class LeafletMapReportComponent implements OnInit {
   mapOptions: MapOptions;
   listDataMaps: any[] = [];
 
-  constructor( private siteService: SiteService) { }
+  constructor( 
+    private siteService: SiteService,
+    private dashboardService: DashbordService) { }
 
   ngOnInit(): void {
     this.initializeMapOptions();
 
-    this.siteService.list().subscribe(res => {
+    this.dashboardService.getProjectMaps().subscribe(res => {
       // add layer for circle
       this.addLayer(res['data'])
     })
@@ -52,7 +55,13 @@ export class LeafletMapReportComponent implements OnInit {
     //populate map from map info
     for (var i in mapInfo) {
       let info = mapInfo[i];
-      let circles = circle([ info.latitude, info.longitude ], { radius: mapInfo[i].uniRan_SRAN_ID, color: "blue" }).bindPopup(info.siteOwner).openPopup()
+      const popup = '<div style="border-bottom: 1px solid rgba(255,255,255,.3); font-size: 14px;padding-bottom: 2px;margin-bottom: 2px">'
+                    + '<b>Location </b>' + ':' + info.name
+                    + '<br/><b>Total Project </b>' + ':' + info.totalProject
+                    + '<br/><b>Total Received </b>' + ':' + info.totalReceived
+                    +'</div>';
+
+      let circles = circle([ info.latitude, info.longitude ], { radius: mapInfo[i].totalProject, color: "blue" }).bindPopup(popup).openPopup()
       this.listDataMaps.push(circles)
     }
     

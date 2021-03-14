@@ -42,6 +42,10 @@ export class DashbordService extends AbstractRestService{
     return this.http.get<DataResponse>(this.getUrl()+"/projectReport", this.setParams("isFinance", isFinance))
   }
 
+  public getProjectMaps() {
+    return this.http.get<DataResponse>(this.getUrl()+"/projectMapReport")
+  }
+
   // Set params
   private setParams(key: string, value) {
     const params = {

@@ -29,7 +29,7 @@ export class BubbleChartReportComponent implements OnInit {
     this.dashboardService.getProjectByType(true).subscribe(res => {
       if (res['data']) {
         res['data'].forEach(info => {
-          this.projectTypies.push([info.totalReceived, info.projectTypeId, info.projectTypeName])
+          this.projectTypies.push([info.totalReceived, info.totalProject, info.projectTypeName])
         });
 
         this.isLoading = false;
