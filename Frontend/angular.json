@@ -19,18 +19,11 @@
             "polyfills": "src/polyfills.ts",
             "assets": [
               "src/assets",
-              "src/favicon.ico",
-              {
-                "glob": "**/*",
-                "input": "./node_modules/leaflet/dist/images",
-                "output": "leaflet/"
-              }
+              "src/favicon.ico"
             ],
             "styles": [
               "src/styles.css",
-              "src/assets/styles/app.scss",
-              "./node_modules/leaflet/dist/leaflet.css",
-              "./node_modules/leaflet-draw/dist/leaflet.draw.css"
+              "src/assets/styles/app.scss"
             ],
             "scripts": []
           },

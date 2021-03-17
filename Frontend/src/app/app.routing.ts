@@ -50,7 +50,7 @@ export const rootRouterConfig: Routes = [
       },
       {
         path: 'dashboard',
-        loadChildren: () => import('./module/new-dashbaord/new-dashbaoard.module').then(m => m.NewDashbaoardModule),
+        loadChildren: () => import('./module/dashboard/dashboard.module').then(m => m.DashboardModule),
         data: {title: 'Dashboard', breadcrumb: 'Dashboard'},
         canLoad: [CanLoadModule]
       },
