@@ -103,7 +103,6 @@ dataSource:
     username: developer
     password: 'P@ssw0rd'
     logSql: false
-    formartSql: false
 
 environments:
     development:
@@ -137,7 +136,7 @@ environments:
     production:
         dataSource:
             dbCreate: update
-            url: jdbc:mysql://127.0.0.1:3307/staging_jphea?useUnicode=yes&characterEncoding=UTF-8
+            url: jdbc:mysql://127.0.0.1:3306/staging_jphea?useUnicode=yes&characterEncoding=UTF-8
 #            url: jdbc:mysql://192.168.1.10:3306 /dev_jphea?useUnicode=yes&characterEncoding=UTF-8
 #            jndiName : java:comp/env/ProJphea
             properties:

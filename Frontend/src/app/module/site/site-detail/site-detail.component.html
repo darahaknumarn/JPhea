@@ -1,262 +1,341 @@
 <div fxLayout="row" class="ml-05 mr-05">
     <div fxFlex="50">
-      <app-breadcrumb></app-breadcrumb>
+        <app-breadcrumb></app-breadcrumb>
     </div>
     <div fxLayout="row" fxLayoutGap="8px" fxFlex="50" fxLayoutAlign="end center">
-        <button mat-raised-button [routerLink]="['/site']" routerLinkActive="router-link-active" >Back</button>
+        <button mat-raised-button [routerLink]="['/site']" routerLinkActive="router-link-active">Back</button>
     </div>
 </div>
 
 <mat-card class="btn-action">
     <div fxLayout="row wrap" fxLayoutAlign="space-between">
-        <div fxFlex="100" style="line-height: 2.5;">
-                <div fxLayout="row wrap" fxLayoutAlign="space-between">
-                    <div fxFlex="100" fxFlex.gt-sm="33">
-                        <div fxLayout="row wrap" fxLayoutAlign="space-between">
-                            <div fxFlex="100px">
-                                <strong>Official Site Name</strong>
-                            </div>
-                            <div fxFlex>
-                                : <span>{{site?.officialSiteName}}</span>
-                            </div>
-                        </div>
-                    </div>
+        <div fxFlex="100">
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title> <span class="mat-display-3" matTooltip="Official Site Name"> {{site?.officialSiteName}} </span></mat-card-title>
+                  
+                </mat-card-header>
+                <mat-card-content>
+                    <div fxLayout="row wrap">
 
-                    <div fxFlex="100" fxFlex.gt-sm="33">
-                        <div fxLayout="row wrap" fxLayoutAlign="space-between">
-                            <div fxFlex="100px">
-                                <strong>Admin Code</strong>
-                            </div>
-                            <div fxFlex>
-                                : <span>{{site?.adminCode}}</span>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div fxFlex="100" fxFlex.gt-sm="33">
-                        <div fxLayout="row wrap" fxLayoutAlign="space-between">
-                            <div fxFlex="100px">
-                                <strong>Hub Site</strong>
-                            </div>
-                            <div fxFlex>
-                                : <span>{{site?.hubSite}}</span>
-                            </div>
+                        <div>
+                            <span class="mat-subheading-1">Hub Site</span> <br>
+                            <span class="mat-subheading-1">Admin Code</span><br>
+                            <span class="mat-subheading-1">Lat,Long </span><br>
+                            <span class="mat-subheading-1">Fiber Ring Info </span><br>
+        
+                        </div>
+                        <div class="ml-1">
+                            <span class="mat-body-1">: {{site?.hubSite}}</span> <br>
+                            <span class="mat-body-1">: {{site?.adminCode}}</span> <br>
+                            <span class="mat-body-1">:{{site?.latitude}},{{site?.longitude}}</span> <br>
+                            <span class="mat-body-1">: {{site?.fiberRingInfo}}</span> <br>
+        
                         </div>
                     </div>
+                </mat-card-content>
+              
+            </mat-card>
+           
+         
 
-                    <div fxFlex="100" fxFlex.gt-sm="33">
-                        <div fxLayout="row wrap" fxLayoutAlign="space-between">
-                            <div fxFlex="100px">
-                                <strong>SRAN Name</strong>
-                            </div>
-                            <div fxFlex>
-                                : <span>{{site?.sRANName}}</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div fxFlex="100" fxFlex.gt-sm="33">
-                        <div fxLayout="row wrap" fxLayoutAlign="space-between">
-                            <div fxFlex="100px">
-                                <strong>RNC Name</strong>
-                            </div>
-                            <div fxFlex>
-                                : <span>{{site?.rncName}}</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div fxFlex="100" fxFlex.gt-sm="33">
-                        <div fxLayout="row wrap" fxLayoutAlign="space-between">
-                            <div fxFlex="100px">
-                                <strong>BTS Name</strong>
-                            </div>
-                            <div fxFlex>
-                                : <span>{{site?.bTSNameNoTec}}</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div fxFlex="100" fxFlex.gt-sm="33">
-                        <div fxLayout="row wrap" fxLayoutAlign="space-between">
-                            <div fxFlex="100px">
-                                <strong>Edotco Name</strong>
-                            </div>
-                            <div fxFlex>
-                                : <span>{{site?.edotcoName}}</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div fxFlex="100" fxFlex.gt-sm="33">
-                        <div fxLayout="row wrap" fxLayoutAlign="space-between">
-                            <div fxFlex="100px">
-                                <strong>Product Type</strong>
-                            </div>
-                            <div fxFlex>
-                                : <span>{{site?.productType}}</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div fxFlex="100" fxFlex.gt-sm="33">
-                        <div fxLayout="row wrap" fxLayoutAlign="space-between">
-                            <div fxFlex="100px">
-                                <strong>Site Category</strong>
-                            </div>
-                            <div fxFlex>
-                                : <span>{{site?.siteCategory}}</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div fxFlex="100" fxFlex.gt-sm="33">
-                        <div fxLayout="row wrap" fxLayoutAlign="space-between">
-                            <div fxFlex="100px">
-                                <strong>Longitude</strong>
-                            </div>
-                            <div fxFlex>
-                                : <span>{{site?.longitude}}</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div fxFlex="100" fxFlex.gt-sm="33">
-                        <div fxLayout="row wrap" fxLayoutAlign="space-between">
-                            <div fxFlex="100px">
-                                <strong>Latitude</strong>
-                            </div>
-                            <div fxFlex>
-                                : <span>{{site?.latitude}}</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div fxFlex="100" fxFlex.gt-sm="33">
-                        <div fxLayout="row wrap" fxLayoutAlign="space-between">
-                            <div fxFlex="100px">
-                                <strong>IBS Site</strong>
-                            </div>
-                            <div fxFlex>
-                                : <span>{{site?.ibsSit}}</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div fxLayout="row wrap" fxLayoutAlign="space-between">
-                    <div fxFlex="100" fxFlex.gt-sm="33">
-                        <div fxLayout="row wrap" fxLayoutAlign="space-between">
-                            <div fxFlex="100px">
-                                <strong>Net Eco</strong>
-                            </div>
-                            <div fxFlex>
-                                : <span style="color:blue">{{site?.netEco}}</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div fxFlex="100" fxFlex.gt-sm="33">
-                        <div fxLayout="row wrap" fxLayoutAlign="space-between">
-                            <div fxFlex="100px">
-                                <strong>Critical Site</strong>
-                            </div>
-                            <div fxFlex>
-                                : <span>{{site?.criticalSite}}</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div fxFlex="100" fxFlex.gt-sm="33">
-                        <div fxLayout="row wrap" fxLayoutAlign="space-between">
-                            <div fxFlex="100px">
-                                <strong>VIP</strong>
-                            </div>
-                            <div fxFlex>
-                                : <span>{{site?.vip}}</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div fxFlex="100" fxFlex.gt-sm="33">
-                        <div fxLayout="row wrap" fxLayoutAlign="space-between">
-                            <div fxFlex="100px">
-                                <strong>e/iMacro BBU</strong>
-                            </div>
-                            <div fxFlex>
-                                : <span>{{site?.e_iMacroBBUName}}</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div fxFlex="100" fxFlex.gt-sm="33">
-                        <div fxLayout="row wrap" fxLayoutAlign="space-between">
-                            <div fxFlex="100px">
-                                <strong>Subcon</strong>
-                            </div>
-                            <div fxFlex>
-                                : <span>{{site?.subcon}}</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div fxFlex="100" fxFlex.gt-sm="33">
-                        <div fxLayout="row wrap" fxLayoutAlign="space-between">
-                            <div fxFlex="100px">
-                                <strong>TCU</strong>
-                            </div>
-                            <div fxFlex>
-                                : <span>{{site?.tcu}}</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div fxFlex="100" fxFlex.gt-sm="33">
-                        <div fxLayout="row wrap" fxLayoutAlign="space-between">
-                            <div fxFlex="100px">
-                                <strong>Site Owner</strong>
-                            </div>
-                            <div fxFlex>
-                                : <span>{{site?.siteOwner}}</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div fxFlex="100" fxFlex.gt-sm="33">
-                        <div fxLayout="row wrap" fxLayoutAlign="space-between">
-                            <div fxFlex="100px">
-                                <strong>Province</strong>
-                            </div>
-                            <div fxFlex>
-                                : <span>{{site?.province}}</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div fxFlex="100" fxFlex.gt-sm="33">
-                        <div fxLayout="row wrap" fxLayoutAlign="space-between">
-                            <div fxFlex="100px">
-                                <strong>Area Locatio</strong>
-                            </div>
-                            <div fxFlex>
-                                : <span>{{site?.areaLocation}}</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div fxFlex="100" fxFlex.gt-sm="33">
-                        <div fxLayout="row wrap" fxLayoutAlign="space-between">
-                            <div fxFlex="100px">
-                                <strong>BCS IP</strong>
-                            </div>
-                            <div fxFlex>
-                                : <span>{{site?.bscIP}}</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
         </div>
     </div>
+
+    <!-- site detail  -->
+    <mat-accordion class="example-headers-align" multi>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Site Information
+                </mat-panel-title>
+                <mat-panel-description>
+                    For more detail about site information
+                    <mat-icon>info</mat-icon>
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <mat-form-field>
+                <mat-label>Admin Code</mat-label>
+                <input matInput readonly value="{{site?.adminCode}}">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Area  Location</mat-label>
+                <input matInput readonly value="{{site?.areaLocation}}">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>BTS Name No Tech</mat-label>
+                <input matInput readonly value="{{site?.bTSNameNoTech}}">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>BSC IP</mat-label>
+                <input matInput readonly value="{{site?.bscIP}}">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>BSC Name</mat-label>
+                <input matInput readonly value="{{site?.bscName}}">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Building Height</mat-label>
+                <input matInput readonly value="{{site?.buildingHeight}}">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Critical Site</mat-label>
+                <input matInput readonly value="{{site?.criticalSite}}">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Donner Site</mat-label>
+                <input matInput readonly value="{{site?.donnerSite}}">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>e/iMacro BBU Name</mat-label>
+                <input matInput readonly value="{{site?.e_iMacroBBUName}}">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>e/iMacro RRU</mat-label>
+                <input matInput readonly value="{{site?.e_iMacroRRU}}">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Edotco Name</mat-label>
+                <input matInput readonly value="{{site?.edotcoName}}">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Fiber Ring Info</mat-label>
+                <input matInput readonly value="{{site?.fiberRingInfo}}">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Grid</mat-label>
+                <input matInput readonly value="{{site?.grid}}">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Guard</mat-label>
+                <input matInput readonly value="{{site?.guard}}">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Guard Phnone</mat-label>
+                <input matInput readonly value="{{site?.guardPhone}}">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>GW2GIP</mat-label>
+                <input matInput readonly value="{{site?.gw2GIP}}">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>GW3GIP</mat-label>
+                <input matInput readonly value="{{site?.gw3GIP}}">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>GWOMIP</mat-label>
+                <input matInput readonly value="{{site?.gwOMIP}}">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>GWS1CIP</mat-label>
+                <input matInput readonly value="{{site?.gwS1CIP}}">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>GWS1UIP</mat-label>
+                <input matInput readonly value="{{site?.gws1UIP}}">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Hub Site</mat-label>
+                <input matInput readonly value="{{site?.hubSite}}">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>IBS Site</mat-label>
+                <input matInput readonly value="{{site?.ibsSite}}">
+            </mat-form-field>
+
+       
+
+            <mat-form-field>
+                <mat-label>Latitude</mat-label>
+                <input matInput readonly value="{{site?.latitude}}">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Longitude</mat-label>
+                <input matInput readonly value="{{site?.longitude}}">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>MMEIP(S1C)</mat-label>
+                <input matInput readonly value="{{site?.mMEIP_S1C}}">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>NetEco</mat-label>
+                <input matInput readonly value="{{site?.netEco}}">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Official Site Name</mat-label>
+                <input matInput readonly value="{{site?.officialSiteName}}">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>OMIP</mat-label>
+                <input matInput readonly value="{{site?.omIP}}">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>OMVLANID</mat-label>
+                <input matInput readonly value="{{site?.omVLANID}}">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>On air Status </mat-label>
+                <input matInput readonly value="{{site?.onAirStatus}}">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Priority categories</mat-label>
+                <input matInput readonly value="{{site?.priorityCategories}}">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Product Type</mat-label>
+                <input matInput readonly value="{{site?.productType}}">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Province</mat-label>
+                <input matInput readonly value="{{site?.province}}">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>RNCIP</mat-label>
+                <input matInput readonly value="{{site?.rncIP}}">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>RNC Name</mat-label>
+                <input matInput readonly value="{{site?.rncName}}">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>S1CIP</mat-label>
+                <input matInput readonly value="{{site?.s1CIP}}">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>S1CVLANID</mat-label>
+                <input matInput readonly value="{{site?.s1CVLANID}}">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>S1UIP</mat-label>
+                <input matInput readonly value="{{site?.s1UIP}}">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>S1UVLANID</mat-label>
+                <input matInput readonly value="{{site?.s1UVLANID}}">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>SRAN Name</mat-label>
+                <input matInput readonly value="{{site?.sRANName}}">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Site Category</mat-label>
+                <input matInput readonly value="{{site?.siteCategory}}">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Site Owner</mat-label>
+                <input matInput readonly value="{{site?.siteOwner}}">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Site Type
+                </mat-label>
+                <input matInput readonly value="{{site?.siteType}}">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Subcon</mat-label>
+                <input matInput readonly value="{{site?.subcon}}">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>TCU</mat-label>
+                <input matInput readonly value="{{site?.tcu}}">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Tower Height</mat-label>
+                <input matInput readonly value="{{site?.towerHeight}}">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Tower Type</mat-label>
+                <input matInput readonly value="{{site?.towerType}}">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>UniRan/SRAN ID</mat-label>
+                <input matInput readonly value="{{site?.uniRan_SRAN_ID}}">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>VIP</mat-label>
+                <input matInput readonly value="{{site?.vip}}">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>2GID</mat-label>
+                <input matInput readonly value="{{site?._2GID}}">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>2GIP</mat-label>
+                <input matInput readonly value="{{site?._2GIP}}">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>2GVLANID</mat-label>
+                <input matInput readonly value="{{site?._2GVLANID}}">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>3GID</mat-label>
+                <input matInput readonly value="{{site?._3GID}}">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>3GIP</mat-label>
+                <input matInput readonly value="{{site?._3GIP}}">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>3GVLANID</mat-label>
+                <input matInput readonly value="{{site?._3GVLANID}}">
+            </mat-form-field>
+
+        </mat-expansion-panel>
+    </mat-accordion>
+
 
     <div fxLayout="row wrap" fxLayoutAlign="space-between start">
         <div fxFlex="100%">
@@ -314,28 +393,28 @@
                 </div>
             </mat-card>    
         </div> -->
-    
+
         <div fxFlex="100">
             <mat-table [dataSource]="dataSource" class="mat-elevation-z4">
 
                 <ng-container matColumnDef="siteName">
-                <mat-header-cell *matHeaderCellDef> Official Site Name </mat-header-cell>
-                <mat-cell *matCellDef="let element">{{element?.officialSiteName}} </mat-cell>
+                    <mat-header-cell *matHeaderCellDef> Official Site Name </mat-header-cell>
+                    <mat-cell *matCellDef="let element">{{element?.officialSiteName}} </mat-cell>
                 </ng-container>
-            
+
                 <ng-container matColumnDef="adminCode">
-                <mat-header-cell *matHeaderCellDef> Admin Code </mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{element?.adminCode}} </mat-cell>
+                    <mat-header-cell *matHeaderCellDef> Admin Code </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element?.adminCode}} </mat-cell>
                 </ng-container>
-            
+
                 <ng-container matColumnDef="hubSite">
-                <mat-header-cell *matHeaderCellDef> Hub Site </mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{element?.hubSite}} </mat-cell>
+                    <mat-header-cell *matHeaderCellDef> Hub Site </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element?.hubSite}} </mat-cell>
                 </ng-container>
-            
+
                 <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
                 <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
             </mat-table>
         </div>
-    </div>                       
+    </div>
 </mat-card>

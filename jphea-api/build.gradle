@@ -63,7 +63,7 @@ dependencies {
     //------
     compile 'org.apache.poi:poi:3.17'
     compile 'org.apache.poi:poi-ooxml:3.17'
-    runtime "mysql:mysql-connector-java:8.0.22"
+    compile "mysql:mysql-connector-java:8.0.16"
 
     compile "tech.hanuman:core-backend:${coreBackEndVersion}"
     compile 'org.grails.plugins:excel-export:2.1'

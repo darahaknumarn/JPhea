@@ -21,7 +21,6 @@ class envImpl implements Environment {
     logError = true;
 
     pageFeature = {
-
     };
 }
 
