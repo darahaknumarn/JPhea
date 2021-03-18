@@ -134,8 +134,12 @@ class Site {
             Map<String,Site> site = new LinkedHashMap<>(data.properties)
             site.id = data.id
             site.child = Site.findAllByHubSiteAndHubSiteIsNotNull(data.hubSite).collect {
-                it.id
-                it.properties
+                Map r = [:]
+                r.id  = it.id
+                r.officialSiteName = it.officialSiteName
+                r.adminCode = it.adminCode
+                r.hubSite = it.hubSite
+                r
             }
             return site
         }

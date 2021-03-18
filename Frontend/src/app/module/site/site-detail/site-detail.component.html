@@ -341,58 +341,11 @@
         <div fxFlex="100%">
             <h5 class="underline-text">HUB SITE</h5>
         </div>
-        <!-- <div fxFlex="10%" align="right">
-            <button mat-icon-button (click)="toggle()">
-                <div *ngIf="show">
-                    <mat-icon class="mt-05">keyboard_arrow_right</mat-icon>
-                </div>
-
-                <div *ngIf="!(show)">
-                    <mat-icon class="mt-05">keyboard_arrow_down</mat-icon>
-                </div>
-            </button>
-        </div> -->
+  
     </div>
 
     <div fxLayout="row wrap" fxLayoutAlign="space-between" class="mt-1">
-        <!-- <div fxFlex="100" *ngFor="let hubChild of site.child; let i=index">
-            <mat-card style="line-height: 2.5;">
-                <div fxLayout="row wrap" fxLayoutAlign="space-between">
-                    <div fxFlex="100" fxFlex.gt-sm="33">
-                        <div fxLayout="row wrap" fxLayoutAlign="space-between">
-                            <div fxFlex="100px">
-                                <strong>Admin Code</strong>
-                            </div>
-                            <div fxFlex>
-                                : <span>{{hubChild?.adminCode}}</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div fxFlex="100" fxFlex.gt-sm="33">
-                        <div fxLayout="row wrap" fxLayoutAlign="space-between">
-                            <div fxFlex="100px">
-                                <strong>Hub Site</strong>
-                            </div>
-                            <div fxFlex>
-                                : <span>{{hubChild?.hubSite}}</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div fxFlex="100" fxFlex.gt-sm="33">
-                        <div fxLayout="row wrap" fxLayoutAlign="space-between">
-                            <div fxFlex="100px">
-                                <strong>Site Name</strong>
-                            </div>
-                            <div fxFlex>
-                                : <span>{{hubChild?.officialSiteName}}</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </mat-card>    
-        </div> -->
+ 
 
         <div fxFlex="100">
             <mat-table [dataSource]="dataSource" class="mat-elevation-z4">
@@ -410,6 +363,16 @@
                 <ng-container matColumnDef="hubSite">
                     <mat-header-cell *matHeaderCellDef> Hub Site </mat-header-cell>
                     <mat-cell *matCellDef="let element"> {{element?.hubSite}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="Action">
+                    <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> 
+
+                     
+                        <a [routerLink]="['/site/view/'+element?.id]"   routerLinkActive="active" target="_self">
+                            <mat-icon>visibility</mat-icon></a>
+                    </mat-cell>
                 </ng-container>
 
                 <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
