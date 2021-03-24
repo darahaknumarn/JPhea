@@ -11,6 +11,7 @@ import pl.touk.excel.export.WebXlsxExporter
 @Transactional(propagation = Propagation.REQUIRES_NEW)
 class FileUploadService {
     def importHistoryService
+    def loggerService
 
 
 
@@ -79,8 +80,8 @@ class FileUploadService {
                         map["${sheetheader[cell.columnIndex]}"] = value
                         break
                     default:
-                        if (cell.CELL_TYPE_BLANK && cell.getStringCellValue().trim().isEmpty()){
-                            //do nothing
+                        if (cell.CELL_TYPE_BLANK){
+                            //do nothing this cell empty
                         }else {
                             value = cell.richStringCellValue
                             map["${sheetheader[cell.columnIndex]}"] = value
@@ -108,7 +109,6 @@ class FileUploadService {
             //if contains we replace old value
             if (listAdminCode.contains(rawData['Admin Code'] as Integer)) {
                 rawDataForUpdate.add(rawData)
-
             } else {
                 rawDataForInsert.add(rawData)
             }
@@ -140,15 +140,16 @@ class FileUploadService {
         Map insertInfo = [totalInsert: 0, totalFail: 0]
 
         Site.withStatelessSession {
-//            StatelessSession session = sessionFactory.openStatelessSession()
-//            Transaction tx = session.beginTransaction()
             values.each { mapData ->
-                //bindData(new Site(), mapData,importId).save(flush:true)
-                Site.newInstance(bindData(mapData,importId)).save(flush:true)
-                insertInfo.totalInsert++
+
+                Site site = Site.newInstance(bindData(mapData,importId))
+                if (site.save(flush:true)){
+                    insertInfo.totalInsert++
+                }else {
+                    insertInfo.totalFail++
+                    loggerService.addError(this,"#### INSERT ERROR : ${site.errors.toString()} ####")
+                }
             }
-//            tx.commit()
-//            session.close()
         }
 
         return insertInfo
@@ -162,13 +163,19 @@ class FileUploadService {
         Site.withStatelessSession {
 
             sites.each {
-                it.properties=  bindData(listDataUpdate[i],importId)
-                it.save(flush:true)
-                updateInfo.totalUpdate++
+                if (listDataUpdate[i]!=null){
+                    it.properties = bindData(listDataUpdate[i],importId)
+
+                    if (it.save(flush:true)){
+                        updateInfo.totalUpdate++
+                    }
+                    else{
+                        updateInfo.totalFail++
+                        loggerService.addError(this,"#### UPDATE ERROR : ${it.errors.toString()} ####")
+                    }
+                }
                 i++
             }
-
-
         }
         return updateInfo
 

@@ -29,7 +29,7 @@ class Site {
     String guard
     String guardPhone
     String towerType
-    Double towerHeight
+    String towerHeight
     Double buildingHeight
     String siteType
     String grid
