@@ -18,7 +18,7 @@ class FileUploadController extends SimpleGenericRestfulController<Site> {
 
     @Override
     def index(PaginationCommand pagination) {
-        Integer adminCode = params.int("adminCode")
+        String adminCode = params.int("adminCode")
         Integer importHistoryId = params.int("importHistoryId")
         String officialSiteName = params.officialSiteName
         String hubSite = params.hubSite

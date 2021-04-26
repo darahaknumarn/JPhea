@@ -5,10 +5,10 @@ import grails.converters.JSON
 class Site {
     Integer id
 
-    Integer adminCode
+    String adminCode
     String officialSiteName
     String sRANName
-    String bTSNameNoTech
+    String siteName
     String edotcoName
     String productType
     String siteCategory
@@ -68,7 +68,7 @@ class Site {
 
         officialSiteName nullable: true
         sRANName nullable: true
-        bTSNameNoTech nullable: true
+        siteName nullable: true
         edotcoName nullable: true
         productType nullable: true
         siteCategory nullable: true

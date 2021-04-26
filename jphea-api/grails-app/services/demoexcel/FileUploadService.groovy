@@ -184,11 +184,11 @@ class FileUploadService {
 
 //-------------------list site------------------------------
 
-    def listSite(PaginationCommand pagination, Integer adminCode, String officialSiteName, String hubSite, Integer importHistoryId){
+    def listSite(PaginationCommand pagination, String adminCode, String officialSiteName, String hubSite, Integer importHistoryId){
         def resultList = Site.createCriteria().list (pagination.params) {
             or {
                 if (adminCode){
-                    eq("adminCode",adminCode)
+                    like("adminCode","%${adminCode}%")
                 }
                 if (officialSiteName){
                     ilike("officialSiteName","%${officialSiteName}%")
@@ -284,7 +284,7 @@ class FileUploadService {
             putCellValue(headerRow, 0, "No")
             putCellValue(headerRow, 1 ,"Official Site Name")
             putCellValue(headerRow, 2 ,"SRAN Name")
-            putCellValue(headerRow, 3 ,"BTS Name No Tech")
+            putCellValue(headerRow, 3 ,"Site Name")
             putCellValue(headerRow, 4 ,"Admin Code")
             putCellValue(headerRow, 5 ,"Edotco Name")
             putCellValue(headerRow, 6 ,"Product Type")
@@ -344,7 +344,7 @@ class FileUploadService {
 
                 putCellValue(row,1 ,it.officialSiteName?:"")
                 putCellValue(row,2 ,it.sRANName?:"")
-                putCellValue(row,3 ,it.bTSNameNoTech?:"")
+                putCellValue(row,3 ,it.siteName?:"")
                 putCellValue(row,4 ,it.adminCode?:"")
                 putCellValue(row,5 ,it.edotcoName?:"")
                 putCellValue(row,6 ,it.productType?:"")
@@ -416,7 +416,7 @@ class FileUploadService {
 
             putCellValue(headerRow, 0 ,"Official Site Name")
             putCellValue(headerRow, 1 ,"SRAN Name")
-            putCellValue(headerRow, 2 ,"BTS Name No Tech")
+            putCellValue(headerRow, 2 ,"Site Name")
             putCellValue(headerRow, 3 ,"Admin Code")
             putCellValue(headerRow, 4 ,"Edotco Name")
             putCellValue(headerRow, 5 ,"Product Type")
@@ -475,7 +475,7 @@ class FileUploadService {
 
                 putCellValue(row,0 ,it.officialSiteName?:"")
                 putCellValue(row,1 ,it.sRANName?:"")
-                putCellValue(row,2 ,it.bTSNameNoTech?:"")
+                putCellValue(row,2 ,it.siteName?:"")
                 putCellValue(row,3 ,it.adminCode?:"")
                 putCellValue(row,4 ,it.edotcoName?:"")
                 putCellValue(row,5 ,it.productType?:"")
@@ -611,7 +611,7 @@ class FileUploadService {
         obj.adminCode = data['Admin Code']
         obj.officialSiteName = data['Official Site Name']
         obj.sRANName = data['SRAN Name']
-        obj.bTSNameNoTech = data['BTS Name No Tech']
+        obj.siteName = data['Site Name']
         obj.edotcoName = data['Edotco Name']
         obj.productType = data['Product Type']
         obj.siteCategory = data['Site Category']
@@ -687,7 +687,7 @@ class FileUploadService {
         Map simpleData = [:]
         simpleData.officialSiteName = "PP338"
         simpleData.sRANName = "HSoPNH2416CCV"
-        simpleData.bTSNameNoTech = "PNH2416CCV"
+        simpleData.siteName = "PNH2416CCV"
         simpleData.adminCode = "2416"
         simpleData.edotcoName = "PP338"
         simpleData.productType = "HUAWEI_SRAN"
@@ -756,7 +756,7 @@ class FileUploadService {
                 "Admin Code",
                 "Official Site Name",
                 "SRAN Name",
-                "BTS Name No Tech",
+                "Site Name",
                 "Edotco Name",
                 "Product Type",
                 "Site Category",
