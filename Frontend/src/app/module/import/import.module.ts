@@ -8,7 +8,7 @@ import { ImportListComponent } from './import-list/import-list.component';
 import { RouterModule } from '@angular/router';
 import { ImportRoutes } from './import.routing.module';
 import { ImportViewComponent } from './import-view/import-view.component';
-import { SharedMaterialModule, SharedComponentsModule, SharedModule, SharedPipesModule } from '@ecoinsoft/core-frontend/src/public-api';
+import { SharedMaterialModule, SharedComponentsModule, SharedModule, SharedPipesModule } from '@hanumantech/core-frontend/src/public-api';
 import { DirectivesModule } from './file-drag-drop/directives.module';
 
 @NgModule({

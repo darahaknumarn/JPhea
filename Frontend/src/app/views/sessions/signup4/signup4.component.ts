@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormControl, FormBuilder, FormGroup } from '@angular/forms';
 import { CustomValidators } from 'ng2-validation';
-import { egretAnimations } from '@ecoinsoft/core-frontend/src/lib/shared/animations/egret-animations';
+import { egretAnimations } from '@hanumantech/core-frontend/src/lib/shared/animations/egret-animations';
 
 @Component({
   selector: 'app-signup4',

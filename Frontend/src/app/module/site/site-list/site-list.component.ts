@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { AbstractGrid, AppLoaderService, AppColumn } from '@ecoinsoft/core-frontend/src/public-api';
+import { AbstractGrid, AppLoaderService, AppColumn } from '@hanumantech/core-frontend/src/public-api';
 import { MatTable } from '@angular/material/table';
 import { SiteService } from 'app/services/site.service';
-import { AppConfirmService } from '@ecoinsoft/core-frontend/src/lib/shared/services/app-confirm/app-confirm.service';
+import { AppConfirmService } from '@hanumantech/core-frontend/src/lib/shared/services/app-confirm/app-confirm.service';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { HttpParams } from '@angular/common/http';
 import { ImportService } from 'app/services/import.service';
@@ -38,6 +38,8 @@ export class SiteListComponent extends AbstractGrid implements OnInit {
       },
       {
         displayName: 'Official Site Name', dataIndex: 'officialSiteName'
+      },{
+        displayName: ' Site Name', dataIndex: 'siteName'
       },
       {
         displayName: 'Site Owner', dataIndex: 'siteOwner'

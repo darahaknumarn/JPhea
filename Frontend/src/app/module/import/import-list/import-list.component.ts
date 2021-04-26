@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, EventEmitter } from '@angular/core';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
-import { AbstractGrid, AppColumn, AppLoaderService, Pagination } from '@ecoinsoft/core-frontend/src/public-api';
-import { AppConfirmService } from '@ecoinsoft/core-frontend/src/lib/shared/services/app-confirm/app-confirm.service';
+import { AbstractGrid, AppColumn, AppLoaderService, Pagination } from '@hanumantech/core-frontend/src/public-api';
+import { AppConfirmService } from '@hanumantech/core-frontend/src/lib/shared/services/app-confirm/app-confirm.service';
 import { ImportService } from 'app/services/import.service';
 import {ActivatedRoute, Router } from '@angular/router';
 import { SiteService } from 'app/services/site.service';

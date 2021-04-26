@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {FlexLayoutModule} from '@angular/flex-layout';
-import {SharedMaterialModule} from '@ecoinsoft/core-frontend/src/lib/shared/shared-material.module';
+import {SharedMaterialModule} from '@hanumantech/core-frontend/src/lib/shared/shared-material.module';
 import {MessageTemplateService} from './message-template.service';
 import {
     ErrorTemplateComponent,

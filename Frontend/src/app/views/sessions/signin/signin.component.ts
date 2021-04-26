@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 
-import { egretAnimations } from '@ecoinsoft/core-frontend/src/lib/shared/animations/egret-animations';
+import { egretAnimations } from '@hanumantech/core-frontend/src/lib/shared/animations/egret-animations';
 import { MatProgressBar } from '@angular/material/progress-bar';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AuthenticationService, Logger } from '@ecoinsoft/core-frontend/src/public-api';
+import { AuthenticationService, Logger } from '@hanumantech/core-frontend/src/public-api';
 
 
 const log = new Logger('Login');

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SiteDetailComponent } from './site-detail/site-detail.component';
 import { SiteListComponent } from './site-list/site-list.component';
-import { SharedMaterialModule, SharedComponentsModule, SharedModule, SharedPipesModule } from '@ecoinsoft/core-frontend/src/public-api';
+import { SharedMaterialModule, SharedComponentsModule, SharedModule, SharedPipesModule } from '@hanumantech/core-frontend/src/public-api';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { TranslateModule } from '@ngx-translate/core';

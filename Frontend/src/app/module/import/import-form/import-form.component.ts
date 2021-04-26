@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { ImportService } from 'app/services/import.service';
-import { AppLoaderService } from '@ecoinsoft/core-frontend/src/public-api';
+import { AppLoaderService } from '@hanumantech/core-frontend/src/public-api';
 import { DomSanitizer } from '@angular/platform-browser';
 import {saveAs} from 'file-saver';
 const EXCEL = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";

@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from "@angular/router";
-import { SharedMaterialModule } from '@ecoinsoft/core-frontend/src/lib/shared/shared-material.module';
+import { SharedMaterialModule } from '@hanumantech/core-frontend/src/lib/shared/shared-material.module';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 

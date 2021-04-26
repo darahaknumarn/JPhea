@@ -10,8 +10,8 @@
     "polyfills.ts"
   ], 
   "include": [
-    "../node_modules/@ecoinsoft/core-frontend/**/*.ts",
-    "../node_modules/@ecoinsoft/core-frontend/**/*.d.ts",
+    "../node_modules/@hanumantech/core-frontend/**/*.ts",
+    "../node_modules/@hanumantech/core-frontend/**/*.d.ts",
     "main.ts" , 
     "polyfills.ts"
   ]

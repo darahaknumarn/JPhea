@@ -10,7 +10,7 @@ import {
 
 
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService } from '@ecoinsoft/core-frontend/src/lib/shared/inmemory-db/inmemory-db.service';
+import { InMemoryDataService } from '@hanumantech/core-frontend/src/lib/shared/inmemory-db/inmemory-db.service';
 
 import { rootRouterConfig } from './app.routing';
 
@@ -19,12 +19,12 @@ import { AppComponent } from './app.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { ErrorHandlerService } from '@ecoinsoft/core-frontend/src/lib/shared/services/error-handler.service';
+import { ErrorHandlerService } from '@hanumantech/core-frontend/src/lib/shared/services/error-handler.service';
 
-import { Environment} from '@ecoinsoft/core-frontend/src/lib/environments/environment';
+import { Environment} from '@hanumantech/core-frontend/src/lib/environments/environment';
 import { environment } from 'environments/environment';
-import { CoreFrontendModule } from '@ecoinsoft/core-frontend/src/public-api';
-import {AppLoaderComponent} from '@ecoinsoft/core-frontend/src/lib/component/app-loader/app-loader.component';
+import { CoreFrontendModule } from '@hanumantech/core-frontend/src/public-api';
+import {AppLoaderComponent} from '@hanumantech/core-frontend/src/lib/component/app-loader/app-loader.component';
 import {MessageTemplateModule} from './message-template/message-template.module';
 
 // AoT requires an exported function for factories

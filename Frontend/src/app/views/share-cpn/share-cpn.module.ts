@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProfileImageComponent } from './profile-image/profile-image.component';
-import { SharedMaterialModule } from '@ecoinsoft/core-frontend/src/public-api';
+import { SharedMaterialModule } from '@hanumantech/core-frontend/src/public-api';
 
 
 import { ReactiveFormsModule } from '@angular/forms';

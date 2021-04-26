@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { SecUser } from '@ecoinsoft/core-frontend/src/public-api';
+import { SecUser } from '@hanumantech/core-frontend/src/public-api';
 
 @Component({
   selector: 'app-profile-image',

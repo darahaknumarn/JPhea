@@ -2,11 +2,11 @@ import { Component, OnInit, AfterViewInit, Renderer2 } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router, NavigationEnd, ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
 
-import { RoutePartsService } from '@ecoinsoft/core-frontend/src/lib/shared/services/route-parts.service';
-// import { ThemeService } from '@ecoinsoft/core-frontend/src/lib/shared/services/theme.service';
+import { RoutePartsService } from '@hanumantech/core-frontend/src/lib/shared/services/route-parts.service';
+// import { ThemeService } from '@hanumantech/core-frontend/src/lib/shared/services/theme.service';
 
 import { filter } from 'rxjs/operators';
-// import { LayoutService } from '@ecoinsoft/core-frontend/src/lib/shared/services/layout.service';
+// import { LayoutService } from '@hanumantech/core-frontend/src/lib/shared/services/layout.service';
 
 @Component({
   selector: 'app-root',

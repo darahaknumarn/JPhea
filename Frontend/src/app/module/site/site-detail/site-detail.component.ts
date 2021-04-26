@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SiteService } from 'app/services/site.service';
-import { AppLoaderService } from '@ecoinsoft/core-frontend/src/public-api';
+import { AppLoaderService } from '@hanumantech/core-frontend/src/public-api';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 

@@ -18,7 +18,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { ChartsModule } from 'ng2-charts';
-import { SharedModule } from '@ecoinsoft/core-frontend/src/lib/shared/shared.module';
+import { SharedModule } from '@hanumantech/core-frontend/src/lib/shared/shared.module';
 import {OthersRoutes} from './others.routing';
 import {AppBlankComponent} from './app-blank/app-blank.component';
 import {FileUploadModule} from 'ng2-file-upload';

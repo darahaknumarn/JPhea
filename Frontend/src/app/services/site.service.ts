@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AbstractRestService, HttpService } from '@ecoinsoft/core-frontend/src/public-api';
+import { AbstractRestService, HttpService } from '@hanumantech/core-frontend/src/public-api';
 import { ApiEndpoint } from 'app/model/enum/api-endpoint';
 import { HttpParams } from '@angular/common/http';
 

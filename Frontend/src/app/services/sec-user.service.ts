@@ -1,6 +1,6 @@
 import { HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AbstractRestService, DataResponse, HttpService, IRequestOptions } from '@ecoinsoft/core-frontend/src/public-api';
+import { AbstractRestService, DataResponse, HttpService, IRequestOptions } from '@hanumantech/core-frontend/src/public-api';
 import { ApiEndpoint } from 'app/model/enum/api-endpoint';
 
 @Injectable({

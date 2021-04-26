@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Environment} from '@ecoinsoft/core-frontend/src/lib/environments/environment';
+import {Environment} from '@hanumantech/core-frontend/src/lib/environments/environment';
 
 @Component({
   selector: 'app-welcome-page',

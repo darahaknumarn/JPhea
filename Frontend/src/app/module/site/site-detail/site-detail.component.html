@@ -20,17 +20,62 @@
 
 
                         <div>
-                            <span class="mat-subheading-1">Hub Site</span> <br>
-                            <span class="mat-subheading-1">Admin Code</span><br>
-                            <span class="mat-subheading-1">Lat,Long </span><br>
-                            <span class="mat-subheading-1">Fiber Ring Info </span><br>
+                            <div>
+                                <span class="mat-subheading-1"></span>
+                            </div>
+                            <div>
+                                <span class="mat-subheading-1"></span>
+                            </div>
+                            <div>
+                                <span class="mat-subheading-1"></span>
+                            </div>
+                            <div>
+                                <span class="mat-subheading-1"> </span>
+                            </div>
+                         
         
                         </div>
                         <div class="ml-1">
-                            <span class="mat-body-1">: {{site?.hubSite}}</span> <br>
-                            <span class="mat-body-1">: {{site?.adminCode}}</span> <br>
-                            <span class="mat-body-1">:{{site?.latitude}},{{site?.longitude}}</span> <br>
-                            <span class="mat-body-1">: {{site?.fiberRingInfo}}</span> <br>
+                            <div fxLayout="row"  class="mat-body-1"> 
+                                
+                                    <div width="50px" >
+                                        Hub Site :
+                                    </div>
+                                    <div>
+                                        {{site?.hubSite}}
+                                    </div>
+                            </div>
+                            <div fxLayout="row">
+                                <span class="mat-body-1">
+                                    <div width="50px">
+                                        Admin Code :
+                                    </div>
+                                    <div>
+                                        {{site?.adminCode}}
+                                    </div>
+                                     </span>
+                            </div>
+                            <div fxLayout="row" class="mat-body-1">
+                                
+                                    <div>
+                                        Lat,Long :
+                                    </div> 
+                                    <div>
+                                        {{site?.latitude}},{{site?.longitude}}
+                                    </div>
+                                  
+                            </div>
+                            <div fxLayout="row">
+                                <span class="mat-body-1">
+                                <div>
+                                    Fiber Ring Info :
+                                </div>
+                                <div>
+                                    {{site?.fiberRingInfo}}
+                                </div>
+                            </span>
+                            </div>
+                            
         
                         </div>
                     </div>
@@ -67,8 +112,8 @@
             </mat-form-field>
 
             <mat-form-field>
-                <mat-label>BTS Name No Tech</mat-label>
-                <input matInput readonly value="{{site?.bTSNameNoTech}}">
+                <mat-label>Site Name</mat-label>
+                <input matInput readonly value="{{site?.siteName}}">
             </mat-form-field>
 
             <mat-form-field>

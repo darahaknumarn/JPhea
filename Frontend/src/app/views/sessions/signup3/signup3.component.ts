@@ -1,7 +1,7 @@
 import { FormGroup, Validators } from "@angular/forms";
 import { FormBuilder } from "@angular/forms";
 import { Component, OnInit } from "@angular/core";
-import { egretAnimations } from "@ecoinsoft/core-frontend/src/lib/shared/animations/egret-animations";
+import { egretAnimations } from "@hanumantech/core-frontend/src/lib/shared/animations/egret-animations";
 
 @Component({
   selector: "app-signup3",
