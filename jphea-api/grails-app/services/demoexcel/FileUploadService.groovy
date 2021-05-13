@@ -38,7 +38,7 @@ class FileUploadService {
         //column header
         def sheetheader = []
         for (cell in sheet.getRow(0).cellIterator()) {
-            sheetheader << cell.stringCellValue
+            sheetheader << cell.stringCellValue.trim()
         }
 
 
@@ -76,7 +76,7 @@ class FileUploadService {
                         map["${sheetheader[cell.columnIndex]}"] = value
                         break
                     case 0:
-                        value = cell.numericCellValue
+                        value = cell.stringCellValue
                         map["${sheetheader[cell.columnIndex]}"] = value
                         break
                     default:
@@ -102,12 +102,12 @@ class FileUploadService {
         ArrayList<Map> rawDataForUpdate = new ArrayList<>()
         ArrayList<Map> rawDataForInsert = new ArrayList<>()
 
-        def listAdminCode = Site.findAllByAdminCodeInList(values['Admin Code'] as List<Integer>)*.adminCode
+        def listAdminCode = Site.findAllByAdminCodeInList(values['Admin Code'] as List<String>)*.adminCode
 
         values.each { rawData ->
 
             //if contains we replace old value
-            if (listAdminCode.contains(rawData['Admin Code'] as Integer)) {
+            if (listAdminCode.contains(rawData['Admin Code'] )) {
                 rawDataForUpdate.add(rawData)
             } else {
                 rawDataForInsert.add(rawData)
@@ -157,7 +157,7 @@ class FileUploadService {
     def updateRecords(ArrayList<Map> listDataUpdate,Integer importId) {
         Map updateInfo = [totalUpdate: 0, totalFail: 0]
 
-        def sites = Site.findAllByAdminCodeInList(listDataUpdate['Admin Code'] as List<Integer>)
+        def sites = Site.findAllByAdminCodeInList(listDataUpdate['Admin Code'] as List<String>)
         Integer i=0
 
         Site.withStatelessSession {
