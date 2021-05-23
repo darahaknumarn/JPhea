@@ -76,8 +76,9 @@ class FileUploadService {
                         map["${sheetheader[cell.columnIndex]}"] = value
                         break
                     case 0:
-                        value = cell.stringCellValue
-                        map["${sheetheader[cell.columnIndex]}"] = value
+                        value = cell.numericCellValue
+
+                        map["${sheetheader[cell.columnIndex]}"] = value.toString()
                         break
                     default:
                         if (cell.CELL_TYPE_BLANK){
