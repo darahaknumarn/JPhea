@@ -185,5 +185,6 @@ environments:
           password: V5-yyWDUG7=B[
 ---
 grails:
-    cors:
-        enabled: true
+  cors:
+    enabled: true
+

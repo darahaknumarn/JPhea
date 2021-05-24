@@ -4,7 +4,7 @@ import { Environment } from '@hanumantech/core-frontend/src/lib/environments/env
 class envImpl implements Environment {
   pageTitle: "Jphea";
   production = true;
-  serverUrl = 'https://hanuman.team/jphea-api-0.1';
+  serverUrl = 'https://api.hanuman.team/jphea-api-0.1';
   xApiKey = '1Y7GFfZubS6g0LSzxKfZ';
   dateFormat = 'dd-MM-yyyy';
   dateTimeFormat = 'dd-MM-yyyy HH:mm:ss a';
