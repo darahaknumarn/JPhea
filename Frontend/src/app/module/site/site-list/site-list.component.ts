@@ -73,7 +73,8 @@ export class SiteListComponent extends AbstractGrid implements OnInit {
     this.form = this.fb.group({
       adminCode: [],
       officialSiteName: [],
-      hubSite: []
+      hubSite: [],
+      siteName: []
     });
   }
 
@@ -115,7 +116,8 @@ export class SiteListComponent extends AbstractGrid implements OnInit {
     this.list(this.pagination , {
       adminCode: this.form.value.adminCode,
       officialSiteName: this.form.value.officialSiteName,
-      hubSite: this.form.value.hubSite
+      hubSite: this.form.value.hubSite,
+      siteName: this.form.value.siteName
     }); 
     
   }

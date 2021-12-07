@@ -185,7 +185,7 @@ class FileUploadService {
 
 //-------------------list site------------------------------
 
-    def listSite(PaginationCommand pagination, String adminCode, String officialSiteName, String hubSite, Integer importHistoryId){
+    def listSite(PaginationCommand pagination, String adminCode, String officialSiteName, String hubSite, Integer importHistoryId, String siteName){
         def resultList = Site.createCriteria().list (pagination.params) {
             or {
                 if (adminCode){
@@ -194,12 +194,16 @@ class FileUploadService {
                 if (officialSiteName){
                     ilike("officialSiteName","%${officialSiteName}%")
                 }
+                if (siteName){
+                    ilike("siteName","%${siteName}%")
+                }
                 if (hubSite){
                     ilike("hubSite","%${hubSite}%")
                 }
                 if (importHistoryId){
                     eq("importHistoryId",importHistoryId)
                 }
+
             }
         }
         return resultList

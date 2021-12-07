@@ -21,12 +21,12 @@ export class SiteDetailComponent implements OnInit {
   constructor(
     private siteService: SiteService,
     private loader: AppLoaderService,
-    private route: ActivatedRoute, 
-    private router : Router
+    private route: ActivatedRoute,
+    private router: Router
     ) {
 
   // override the route reuse strategy
-  this.router.routeReuseStrategy.shouldReuseRoute = function(){
+  this.router.routeReuseStrategy.shouldReuseRoute = function() {
     return false;
  }
 
@@ -44,7 +44,7 @@ export class SiteDetailComponent implements OnInit {
   ngOnInit(): void {
     this.siteId = this.route.snapshot.params['id'];
 
-    if (this.siteId){
+    if (this.siteId) {
       this.showDetails();
     }
   }
@@ -55,7 +55,7 @@ export class SiteDetailComponent implements OnInit {
       if (res['statusCode'] === '1') {
         this.site = res['data'];
         console.log(this.site?.child);
-        
+
         this.dataSource = new MatTableDataSource(this.site?.child);
         this.loader.close()
       }
@@ -72,11 +72,11 @@ export class SiteDetailComponent implements OnInit {
   //     this.buttonName = 'Show';
   //   }
   // }
-  viewSite(id){
-    this.router.navigateByUrl("/site/view/"+id)
+  viewSite(id) {
+    this.router.navigateByUrl('/site/view/' + id)
     this.siteId = id
     this.showDetails()
   }
-  
+
 
 }

@@ -22,9 +22,10 @@ class FileUploadController extends SimpleGenericRestfulController<Site> {
         Integer importHistoryId = params.int("importHistoryId")
         String officialSiteName = params.officialSiteName
         String hubSite = params.hubSite
+        String siteName = params.siteName
 
 
-        def resultList = fileUploadService.listSite(pagination, adminCode, officialSiteName, hubSite, importHistoryId)
+        def resultList = fileUploadService.listSite(pagination, adminCode, officialSiteName, hubSite, importHistoryId , siteName )
         render JSONFormat.respond(resultList) as JSON
     }
 

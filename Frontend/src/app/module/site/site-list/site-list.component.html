@@ -5,25 +5,34 @@
   <div fxFlex="98">
     <form [formGroup]="form">
       <div fxLayout="row wrap" fxLayoutGap="5px" fxLayoutAlign="end space-between">
-        
+
           <div fxFlex="100%" fxFlex.gt-sm="18%">
-            <mat-form-field class="full-width">
-              <input matInput type="text" placeholder="Admin code" name="code" formControlName="adminCode"/>
-            </mat-form-field>
+              <mat-form-field class="full-width">
+                  <input matInput type="text" placeholder="Admin code" name="code" formControlName="adminCode"/>
+              </mat-form-field>
           </div>
-    
+
           <div fxFlex="100%" fxFlex.gt-sm="18%">
-            <mat-form-field class="full-width">
-              <input matInput type="text" placeholder="Official Site name" name="siteName" formControlName="officialSiteName"/>
-            </mat-form-field>
+              <mat-form-field class="full-width">
+                  <input matInput type="text" placeholder="Hub site" name="hubName" formControlName="hubSite"/>
+              </mat-form-field>
           </div>
-    
+
           <div fxFlex="100%" fxFlex.gt-sm="18%">
-            <mat-form-field class="full-width">
-              <input matInput type="text" placeholder="Hub site" name="hubName" formControlName="hubSite"/>
-            </mat-form-field>
+              <mat-form-field class="full-width">
+                  <input matInput type="text" placeholder="Official Site name" name="officialSiteName" formControlName="officialSiteName"/>
+              </mat-form-field>
           </div>
+
+          <div fxFlex="100%" fxFlex.gt-sm="18%">
+              <mat-form-field class="full-width">
+                  <input matInput type="text" placeholder="Site name" name="siteName" formControlName="siteName"/>
+              </mat-form-field>
+          </div>
+
+
     
+
           <div>
             <button type="button" mat-raised-button color="primary" (click)="search()"><mat-icon>search</mat-icon>Search</button>
           </div>
